@@ -9,7 +9,7 @@ let checkEllipse = function (a, b, x) {
 
 
 //Animation
-let animationInterval = 250;
+let animationInterval = 450;
 let animationCounter = 0;
 let totalAnimationIterations = 200;
 
