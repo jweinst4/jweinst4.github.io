@@ -1,437 +1,330 @@
-  
-
-//creates the "Ground" terrain 
-var createGround = function() {
 
 
-      //prepares the canvas to draw the lines
-      var canvas = document.getElementById("DemoCanvas");
-      if (canvas.getContext) 
-      {
-        var context = canvas.getContext("2d");
-        var ctx = canvas.getContext("2d");
-        ctx.fillStyle = "black";
+//formula for points on ellipse
+//taken directly from https://stackoverflow.com/questions/14863188/moving-a-point-along-ellipse
+let ellipseYCoordinate = 0;
+let checkEllipse = function (a, b, x) {
+    ellipseYCoordinate = b * Math.sqrt(1 - x*x / a * a);
+}
+
+
+//Animation Timing
+let animationInterval = 100;
+
+//Star Colors, Planet Colors, Background Colors
+let landscapeColor = "black";
+let originalStarColor = "yellow";
+let starColor = originalStarColor;
+let alternateStarColor = "yellow";
+let sunColor = "yellow";
+let groundColor = "grey";
+let defaultGroundColor = "black";
+
+
+//Ground Measurements
+let startWidth = 0;
+let startHeight = 500;
+let maxGroundHeight = startHeight;
+let endWidth = 0;
+let endHeight = 0;
+let groundThickness = 5;
+let startWidthArray = [];
+let startHeightArray = [];
+let endWidthArray = [];
+let endHeightArray = [];
+let slopeArray = [];
+
+
+//Star Sizes, Planet Sizes, Canvas Sizes
+let canvasWidth = 1920;
+let canvasHeight = 1080;
+let originalStarRadius = 3;
+let starRadius = originalStarRadius;
+let originalSunRadius = 40;
+let sunRadius = originalSunRadius;
+
+
+//Starting Coordinates and Changes in Movement
+let sunStartX = 100;
+let sunStartY = 200;
+let sunStartYMin = 60;
+let originalStarStartX = 5;
+let originalStarStartY = 5;
+let starStartX = originalStarStartX;
+let starStartY = originalStarStartY;
+let starXChange = 20;
+let starYChange = 10;
+let maxStarHeight = 500;
+let sunRadiusMultiplier = 1.2
+let sunXChange = 10;
+let sunYChange = -3;
+let alternateSunYChange = -sunYChange;
+
+
+//Multipliers
+let randomXMultiplierMin = 7;
+let randomYMultiplierMin = 7;
+let randomXMultiplierMax = 13;
+let randomYMultiplierMax = 13;
+let starRadiusMultiplier = 1.4;
+let randomXMultiplier = 1;
+let randomYMultiplier = 1;
+
+
+//Counters, Arrays and Placeholders
+let initialXLocation = [];
+let initialYLocation = [];
+let numberOfStars = 0;
+let currentXLocation = [];
+let currentYLocation = [];
+let currentX1Location1 = [];
+let currentY1Location1 = [];
+let starID = 0;
+let animationCounter = 0;
+let totalAnimationIterations = 100;
+let groundStop = 0;
+let moveThingsCounter = 0;
+
+const interval = setInterval(draw, animationInterval);
+
+function draw()
+//while (animationCounter < totalAnimationIterations)
+{
+    // Stop our draw setInterval
+    if (animationCounter === totalAnimationIterations)
+        clearInterval(interval);
+
+    //debugger;
+
+    animationCounter++;
+    //prepares the canvas to draw the lines
+
+    var canvas = document.getElementById("DemoCanvas");
+    var context = canvas.getContext("2d");
+    var ctx = canvas.getContext("2d");
+
+
+    if (canvas.getContext) 
+    {
+        ctx.fillStyle = landscapeColor;
+        ctx.width = canvasWidth;
+        ctx.height = canvasHeight;
+        const context = canvas.getContext('2d');
         var backgroundColor = ctx.fillStyle;
         ctx.fillRect(0, 0, canvas.width, canvas.height);
-      //end of preparing the canvas
-      
-       
-        //variable declarations
-        //numberStops is many ups and downs, or stops, the ground has
-        var numberStops = 50;
-        var originalStartWidth = 0;
-        var originalStartHeight = (Math.round(Math.random()*100))/2;
+    }
+
+    if (animationCounter === 1)
+    {
+        //draws the sun
+        context.beginPath();
+        context.arc(sunStartX, sunStartY, sunRadius, 0, 2 * Math.PI);
+        context.fillStyle = sunColor;
+        context.strokeStyle = sunColor;
+        context.fill();
+        context.stroke();
+
+        sunStartX += sunXChange;
+        sunStartY += sunYChange;
 
 
-        //loop goes until we hit the number of stops in numberStops
-        for (var i = 0; i < numberStops; i++) 
+
+
+
+        while (startWidth < canvasWidth)
         {
-            //creates a random change in the width,
-            //and a random change in the height,
-            //for our new line to the next ground spot
-            var widthRandom = (Math.round(Math.random()*100));
-            var heightRandom = (Math.round(Math.random()*100));
 
-              
-              if (i === 0) 
-              {
-                //figures out which height to start at on the first iteration, between 300 and 700 px start-height
-                if (originalStartHeight >= 0 && originalStartHeight <= 10) {
-                    originalStartHeight = 500;
-                }
+            groundStop++;
+            randomGroundWidth = Math.floor((Math.random() * 30) + 20);
+            randomGroundHeight = Math.floor((Math.random() * 30) + 20);
 
-                      else if (originalStartHeight >= 10 && originalStartHeight <= 20) {
-                        originalStartHeight = 525;
-                      }
+            if (groundStop % 2 === 0)
+            {
+                randomGroundHeight = -randomGroundHeight;
+            }
 
-                else if (originalStartHeight >= 20 && originalStartHeight <= 30) {
-                  originalStartHeight = 550;
-                }
+            endWidth = startWidth + randomGroundWidth;
+            endHeight = startHeight + randomGroundHeight;
+            //draws the new line on the ground
 
-                      else if (originalStartHeight >= 30 && originalStartHeight <= 40) {
-                        originalStartHeight = 575;
-                      }
+            context.beginPath();
+            context.moveTo(startWidth,startHeight);
+            context.lineWidth = groundThickness;
+            context.lineTo(endWidth,endHeight);
+            context.strokeStyle = groundColor;
+            context.stroke();
+            context.lineWidth = 1;
+            context.strokeStyle = defaultGroundColor;
 
-                else if (originalStartHeight >= 40 && originalStartHeight <= 50) {
-                  originalStartHeight = 600;
-                }
+            slopeArray.push((endHeight - startHeight) / (endWidth - startWidth));
 
-                      else if (originalStartHeight >= 50 && originalStartHeight <= 60) {
-                        originalStartHeight = 300;
-                      }
-
-                else if (originalStartHeight >= 60 && originalStartHeight <= 70) {
-                  originalStartHeight = 350;
-                }
-
-                      else if (originalStartHeight >= 70 && originalStartHeight <= 80) {
-                        originalStartHeight = 400;
-                      }
-
-                else if (originalStartHeight >= 80 && originalStartHeight <= 90) {
-                  originalStartHeight = 450;
-                }
-
-                      else {
-                        originalStartHeight = 250;
-                      }
-                //end of finding out the height for the ground to start at
-                      
-                //maxGroundHeight will be figured out as we make the ground
-                //it will be the min y value of the ground, so we dont
-                //put stars on the ground
-                var maxGroundHeight = originalStartHeight;
-                var startWidth = originalStartWidth;
-                var startHeight = originalStartHeight;
-                var canvasWidth = 1920;
-                var canvasHeight = 1080;
-                var planetStrokeColor = backgroundColor;
-
-                      var groundThickness = 5;
-                      var groundColor = "yellow";
-                      var defaultGroundColor = "black";
-                
-                var planetConnectionThickness = 3;
-                var defaultConnectionColor = "white";
-          
-                
-                      //planets cant be above y-axis value of the minPlanetStartY
-                      var minPlanetStartY = 50;
-
-                //all variables related to the "sun"
-                var sunRadiusMin = 70;
-                var sunRadius = Math.max(sunRadiusMin,(Math.round(Math.random()*100)));
-                var sunStartX = (Math.round(Math.random()*1500));
-                var sunStartY = Math.max((Math.round(Math.random()*350)),minPlanetStartY);
-                var sunConnectionColor = "white";
-                var sunColor = "yellow";
-
-                      //all variables related to the "moon"
-                      var moonRadiusMin = 20;
-                      var moonRadius = Math.max(moonRadiusMin,(Math.round(Math.random()*35)));
-                      var moonStartX = (Math.round(Math.random()*1500));
-                      var moonStartY = Math.max((Math.round(Math.random()*350),minPlanetStartY));
-                      var moonConnectionColor = "white";
-                      var moonColor = "pink";
-
-                //all variables related to "planet1"
-                var planet1RadiusMin = 26;
-                var planet1Radius = Math.max(moonRadiusMin,(Math.round(Math.random()*35)));
-                var planet1StartX = (Math.round(Math.random()*1500));
-                var planet1StartY = Math.max((Math.round(Math.random()*350)),minPlanetStartY);
-                var otherConnectionColor = "white";
-                var planet1Color = "red";
-
-                      //all variables related to "planet2"
-                      var planet2RadiusMin = 17;
-                      var planet2Radius = Math.max(moonRadiusMin,(Math.round(Math.random()*35)));
-                      var planet2StartX = (Math.round(Math.random()*1500));
-                      var planet2StartY = Math.max((Math.round(Math.random()*350)),minPlanetStartY);
-                      var planet2Color = "grey";
-
-                //our new endpoint for the ground is the previous endpoint plus
-                //a random width increase or a random height increase/decrease
-                var endWidth = startWidth + widthRandom;
-                var endHeight = startHeight + heightRandom;
-
-                      //variables for the ellipse
-                      var ellipseStartXMin = 0;
-                      var ellipseStartYMin = 0;
-                      var ellipseStartAngleScalar = -2;
-                      var ellipseStartAngle = [Math.PI / 4] * ellipseStartAngleScalar;
-                      var ellipseEndAngleScalar = 0.75;
-                      var ellipseEndAngle = [Math.PI * 2] * ellipseEndAngleScalar;
-                      var rotationScalar = 4;
-                      var rotation = [Math.PI / 4] * rotationScalar;
-                      var ellipseThickness = 1  ;
+            startWidthArray.push(startWidth);
+            startHeightArray.push(startHeight);
 
 
-                          var secondEllipseStartAngleScalar = -2;
-                          var secondEllipseStartAngle = [Math.PI / 4] * ellipseStartAngleScalar;
-                          var secondEllipseEndAngleScalar = 0.5;
-                          var secondEllipseEndAngle = [Math.PI * 2] * ellipseEndAngleScalar;
+            startWidth = endWidth;
+            startHeight = endHeight;
 
-                      var ellipseStartX = sunStartX;
-                      var ellipseStartY = sunStartY;
-                      var ellipseRadiusX = 250;
-                      var ellipseRadiusY = 25;
-                      var sunRadiusMax = 20 * ellipseRadiusX;
-                      var sunRadius = Math.min(sunRadiusMax,sunRadius);
-
-                var starFillColor = "yellow";
-                var otherStarFillColor = "white";
-                var starStartY = originalStarStartY; 
-                var numStars = 9999;
-                var starMinRadius = 1;
-                var starMaxRadius = 3;
-                var originalStarRadius = 2;
-                var starRadius = originalStarRadius;
-                var originalStarStartX = 10;
-                var originalStarStartY = 5;
-                var xRandomizer = 1;
-                var yRandomizer = 1;
-                var starStartX = originalStarStartX;
-                var starStartY = originalStarStartY;
-                var whenToIncreaseX = 10;
-               
-                  //lower value means more dense stars
-                  var xStarDensity = 3;
-                  var yStarDensity = 3;
+            endWidthArray.push(endWidth);
+            endHeightArray.push(endHeight);
 
 
-  
+            if (endHeight < maxGroundHeight) {
+                maxGroundHeight = endHeight;
+            }
 
-                //draws line connecting the planets
-                //draws line connecting the sun to the moon
-                context.beginPath();
-                context.moveTo(sunStartX,sunStartY);
-                context.lineWidth = planetConnectionThickness;
-                context.lineTo(moonStartX,moonStartY );
-                context.strokeStyle = sunConnectionColor;
+            //checks to make sure our drawing is still within the canvaas
+            if (endWidth > canvasWidth) {
+                break;
+            }
+        }
+
+
+
+
+
+        for (starStartX = originalStarStartX; starStartX <= canvasWidth; starStartX += starXChange)
+        {
+            starStartY = originalStarStartY;
+
+            for (starStartY = originalStarStartY; starStartY <= maxStarHeight; starStartY += starYChange)
+            {
+                randomXMultiplier = (Math.floor(Math.random() * randomXMultiplierMax) + randomXMultiplierMin) / 10;
+                randomYMultiplier = (Math.floor(Math.random() * randomYMultiplierMax) + randomYMultiplierMin) / 10;
+                context.beginPath()
+                context.arc(starStartX * randomXMultiplier, starStartY * randomYMultiplier, starRadius, 0, 2 * Math.PI);
+                context.fillStyle = starColor;   
+                context.fill();
                 context.stroke();
-                context.lineWidth = 1;
-                context.strokeStyle = defaultConnectionColor;
 
-                      //draws line connecting the sun to planet1
-                      context.beginPath();
-                      context.moveTo(sunStartX,sunStartY);
-                      context.lineWidth = planetConnectionThickness;
-                      context.lineTo(planet1StartX,planet1StartY);
-                      context.strokeStyle = sunConnectionColor;
-                      context.stroke();
-                      context.lineWidth = 1;
-                      context.strokeStyle = defaultConnectionColor;
+                initialXLocation[starID] = starStartX * randomXMultiplier;
+                initialYLocation[starID] = starStartY * randomYMultiplier;
+                starID++;
 
-                //draws line connecting the sun to planet2
-                context.beginPath();
-                context.moveTo(sunStartX,sunStartY);
-                context.lineWidth = planetConnectionThickness;
-                context.lineTo(planet2StartX,planet2StartY);
-                context.strokeStyle = sunConnectionColor;
-                context.stroke();
-                context.lineWidth = 1;
-                context.strokeStyle = defaultConnectionColor;
+                if (starStartY * randomYMultiplier >=  maxStarHeight)
+                {
+                    starStartY = 100000;
+                }
 
-                      //draws line connecting the moon  to planet1
-                      context.beginPath();
-                      context.moveTo(moonStartX,moonStartY);
-                      context.lineWidth = planetConnectionThickness;
-                      context.lineTo(planet1StartX,planet1StartY);
-                      context.strokeStyle = moonConnectionColor;
-                      context.stroke();
-                      context.lineWidth = 1;
-                      context.strokeStyle = defaultConnectionColor;
+                if(starStartX * randomXMultiplier >= canvasWidth)
+                {
+                    starStartX = 100000;
+                    starStartY = 100000;
+                    numberOfStars = initialXLocation.length;
+                }
+            }     
+        }
 
 
-                //draws line connecting the moon to planet2
-                context.beginPath();
-                context.moveTo(moonStartX,moonStartY);
-                context.lineWidth = planetConnectionThickness;
-                context.lineTo(planet2StartX,planet2StartY);
-                context.strokeStyle = moonConnectionColor;
-                context.stroke();
-                context.lineWidth = 1;
-                context.strokeStyle = defaultConnectionColor;
-
-                      //draws line connecting planet1 to planet2
-                      context.beginPath();
-                      context.moveTo(planet1StartX,planet1StartY);
-                      context.lineWidth = planetConnectionThickness;
-                      context.lineTo(planet2StartX,planet2StartY);
-                      context.strokeStyle = otherConnectionColor;
-                      context.stroke();
-                      context.lineWidth = 1;
-                      context.strokeStyle = defaultConnectionColor;
-
-                             // draws the ellipse
-                             context.beginPath();
-                             context.lineWidth = ellipseThickness;
-                             context.ellipse(ellipseStartX, ellipseStartY, ellipseRadiusX, ellipseRadiusY, rotation, 0, Math.PI / 2);
-                             context.stroke();
-                             context.lineWidth = 1;
-
-               //draws the sun
-               context.beginPath();
-               context.arc(sunStartX, sunStartY, sunRadius, 0, 2 * Math.PI);
-               context.fillStyle = sunColor;
-               context.fill();
-               context.strokeStyle = sunColor;
-               context.stroke();
-               context.lineWidth = 1;
-
-               // draws the ellipse
-                             context.beginPath();
-                             context.lineWidth = ellipseThickness;
-                             context.ellipse(ellipseStartX, ellipseStartY, ellipseRadiusX, ellipseRadiusY, rotation, Math.PI / 2, Math.PI);
-                             context.stroke();
-                             context.lineWidth = 1;
-                            
+        currentXLocation = initialXLocation;
+        currentYLocation = initialYLocation;
 
 
-       
-                           
+    }
+    else 
 
-             
-                             
+    {       
+        numberOfStars = currentXLocation.length;
+        currentX1Location1 = [];
+        currentY1Location1 = [];
 
-          
+        if (animationCounter % 2 === 0)
+        {
+            sunRadius = originalSunRadius * sunRadiusMultiplier;
+            starRadius = originalStarRadius * starRadiusMultiplier;
+            starColor = alternateStarColor;
+        }
 
-                     //draws the moon
-                     context.beginPath();
-                     context.arc(moonStartX, moonStartY, moonRadius, 0, 2 * Math.PI);
-                     context.fillStyle = moonColor;
-                     context.strokeStyle = moonColor;
-                     context.fill();
-                     context.stroke();
+        else
+        {
+            sunRadius = originalSunRadius;
+            starRadius = originalStarRadius;
+            starColor = originalStarColor;
+        }
 
-               //draws planet1
-               context.beginPath();
-               context.arc(planet1StartX, planet1StartY, planet1Radius, 0, 2 * Math.PI);
-               context.fillStyle = planet1Color;
-               context.fill();
-               context.strokeStyle = planet1Color;
-               context.stroke();
-
-                     //draws planet2
-                     context.beginPath();
-                     context.arc(planet2StartX, planet2StartY, planet2Radius, 0, 2 * Math.PI);
-                     context.fillStyle = planet2Color;
-                     context.fill();
-                     context.strokeStyle = planet2Color;
-                     context.stroke();
-
-        
-
-                              }
-              else 
-              {
-                //the starting coordinates of the new line are the endpoints from the prior iteration
-                var startWidth = priorEndWidth;
-                var startHeight = priorEndHeight;
-
-                //the endWidth is just the startWidth plus the new x change in pixels;
-                var endWidth = startWidth + widthRandom;
-
-                //once in every 2 iterations, we want the height to go down rather than up
-                //this is to keep the ground terrain on the page, and not just increasing
-                //in height like a mountain would
-                if (i % 2 === 0) 
-                  {
-                   var endHeight = startHeight - heightRandom;
-                  }
-                  else 
-                  {
-                   var endHeight = startHeight + heightRandom;
-                  }
-              }
-                
-                  //if the endHeight is going to be smaller than the current maxGroundHeight
-                  //then the new maxGroundHeight is changed.  This is important later when
-                  //we make our stars so we dont put stars onto the ground, only into the sky
-                  if (endHeight < maxGroundHeight) 
-                  {
-                   maxGroundHeight = endHeight;
-                  }
-
-                  else 
-                  {
-                  
-                  }   
-                   
-                   //draws the new line on the ground
-                   context.beginPath();
-                   context.moveTo(startWidth,startHeight);
-                   context.lineWidth = groundThickness;
-                   context.lineTo(endWidth,endHeight);
-                   context.strokeStyle = groundColor;
-                   context.stroke();
-                   context.lineWidth = 1;
-                   context.strokeStyle = defaultGroundColor;
-
-                  var priorEndWidth = endWidth;
-                  var priorEndHeight = endHeight;
-
-                  //checks to make sure our drawing is still within the canvaas
-                  if (endWidth > canvasWidth) {
-                 
-                    break;
-                  }
-
-
-             }
-             
-                //makes a bunch of Stars and displays them
+        if ((sunStartX > canvasWidth / 2) || (sunStartY < sunStartYMin))
+        {
+            sunYChange = alternateSunYChange;
+        }
 
 
 
-                
-                //for loops keeps making stars until we create stars in
-                //the amount of numStars
-                for (var j = 0; j < numStars; j++)
-                  {
-                        //makes a random number for the x and y coordinates.  This
-                        //scalar tells us how much to the left or right of the
-                        //line the new star is
-                        var xRandomizer = [Math.floor(Math.random() * 13) + 7]/10;
-                        var yRandomizer = [Math.floor(Math.random() * 13) + 7]/10;
-                      
-                 
-                 //were iterating to see when we should move the x-coordinate of the
-                 //new stars over by xStarDensity (i.e. if we were at x =10 for
-                 //our stars, then the new x-coordinate may be the current x-coord
-                 // + xStar Density = x + 3 or x+5 or whatever
-                 if ((j % whenToIncreaseX === 0) && (j != 0)) 
 
-                 {
+        //draws the sun
 
-                   if ((starStartY * yRandomizer) > maxGroundHeight)
-                            {
-                               starStartY = originalStarStartY;
-                            }
-
-                            else {
-                              starStartY = starStartY + yStarDensity;
-                            }
-
-                   starStartX = starStartX + xStarDensity;
-                   starRadius = Math.floor(Math.random() * starMaxRadius) + starMinRadius;
-                   context.beginPath()
-                   context.arc(starStartX * xRandomizer, starStartY * yRandomizer, starRadius, 0, 2 * Math.PI);
-                   context.fillStyle = otherStarFillColor;   
-                   context.fill();
-                   context.stroke();
-                 
-                          //checks if the new y endpoint is greater than the ground height,
-                          //i.e. we dont want to place stars on the ground.  If it is greater,
-                          //then we go back to the original y-coordinate of the first placed
-                          //star
-                         
-                  }
+        //let sunStartY = checkEllipse(10, 10, sunStartX);
 
 
-                  else
-                  {
 
-                       if ((starStartY * yRandomizer) > maxGroundHeight) 
-                           {
-                             starStartY = originalStarStartY;
-                           }
-                           else
-                           {
-                              starStartY = starStartY + yStarDensity;
-                           }
-                     starRadius = Math.floor(Math.random() * starMaxRadius) + starMinRadius;
-                     context.beginPath()
-                     context.arc(starStartX * xRandomizer, starStartY * yRandomizer, starRadius, 0, 2 * Math.PI);
-                     context.fillStyle = starFillColor;
-                     context.fill();
-                     context.stroke();
-                       
-                  }
+        context.beginPath();
+        context.arc(sunStartX, sunStartY, sunRadius, 0, 2 * Math.PI);
+        context.fillStyle = sunColor;
+        context.strokeStyle = sunColor;
+        context.fill();
+        context.stroke();
 
-               }
-             }
-           }
 
-createGround();
+        sunStartX += sunXChange;
+        sunStartY += sunYChange;
 
+
+
+        for (i = 0; i < groundStop; i++)
+        {
+            context.beginPath();
+            context.moveTo(startWidthArray[i],startHeightArray[i]);
+            context.lineWidth = groundThickness;
+            context.lineTo(endWidthArray[i],endHeightArray[i]);
+            context.strokeStyle = groundColor;
+            context.stroke();
+            context.lineWidth = 1;
+            context.strokeStyle = defaultGroundColor;
+        }
+
+
+        for (let i = 0; i < numberOfStars; i++)
+        {
+
+            randomXMultiplier = (Math.floor(Math.random() * randomXMultiplierMax) + randomXMultiplierMin) / 10;
+            randomYMultiplier = (Math.floor(Math.random() * randomYMultiplierMax) + randomYMultiplierMin) / 10;
+
+            if (animationCounter % 2 === 0)
+            {
+                randomYMultiplier *= -1;
+            }
+
+            context.beginPath()
+            context.arc(currentXLocation[i] + randomXMultiplier * starXChange, currentYLocation[i] + randomYMultiplier * starYChange, starRadius, 0, 2 * Math.PI);
+            context.fillStyle = starColor;   
+            context.fill();
+            context.stroke();
+
+            currentX1Location1[i] = currentXLocation[i] + randomXMultiplier * starXChange;
+            currentY1Location1[i] = currentYLocation[i] + randomYMultiplier * starYChange;
+        }
+
+        currentXLocation = [];
+        currentYLocation = [];
+        currentXLocation = currentX1Location1;
+        currentYLocation = currentY1Location1;
+
+
+        for (starStartY = originalStarStartY; starStartY * randomYMultiplier <= maxStarHeight; starStartY += starYChange)
+        {
+            randomXMultiplier = (Math.floor(Math.random() * randomXMultiplierMax) + randomXMultiplierMin) / 10;
+            randomYMultiplier = (Math.floor(Math.random() * randomYMultiplierMax) + randomYMultiplierMin) / 10;
+
+            context.beginPath()
+            context.arc(originalStarStartX * randomXMultiplier, starStartY * randomYMultiplier, starRadius, 0, 2 * Math.PI);
+            context.fillStyle = starColor;   
+            context.fill();
+            context.stroke();
+            starID++;
+
+            currentXLocation.push(originalStarStartX * randomXMultiplier);
+            currentYLocation.push(starStartY * randomYMultiplier);
+        }
+
+    }
+
+}
