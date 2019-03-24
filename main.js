@@ -66,7 +66,7 @@ let randomYMultiplierMin = 7;
 let randomXMultiplierMax = 13;
 let randomYMultiplierMax = 13;
 let starRadiusMultiplier = 1.0;
-let sunRadiusMultiplier = 1.0;
+let sunRadiusMultiplier = 1.015;
 let randomXMultiplier = 1;
 let randomYMultiplier = 1;
 
@@ -231,14 +231,14 @@ function draw()
 
         if (animationCounter % 2 === 0)
         {
-            sunRadius = originalSunRadius * sunRadiusMultiplier;
+            sunRadius = sunRadius * sunRadiusMultiplier;
             starRadius = originalStarRadius * starRadiusMultiplier;
             starColor = alternateStarColor;
         }
 
         else
         {
-            sunRadius = originalSunRadius;
+            sunRadius = sunRadius * sunRadiusMultiplier;
             starRadius = originalStarRadius;
             starColor = originalStarColor;
         }
