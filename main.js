@@ -55,7 +55,6 @@ let starStartY = originalStarStartY;
 let starXChange = 20;
 let starYChange = 10;
 let maxStarHeight = 500;
-let sunRadiusMultiplier = 1.2
 let sunXChange = 10;
 let sunYChange = -3;
 let alternateSunYChange = -sunYChange;
@@ -66,9 +65,11 @@ let randomXMultiplierMin = 7;
 let randomYMultiplierMin = 7;
 let randomXMultiplierMax = 13;
 let randomYMultiplierMax = 13;
-let starRadiusMultiplier = 1.4;
+let starRadiusMultiplier = 1.0;
+let sunRadiusMultiplier = 1.0;
 let randomXMultiplier = 1;
 let randomYMultiplier = 1;
+
 
 
 //Counters, Arrays and Placeholders
