@@ -9,7 +9,7 @@ let checkEllipse = function (a, b, x) {
 
 
 //Animation Timing
-let animationInterval = 150;
+let animationInterval = 180;
 
 //Star Colors, Planet Colors, Background Colors
 let landscapeColor = "black";
@@ -257,17 +257,17 @@ function draw()
         //draws the sun
 
         //let sunStartY = checkEllipse(10, 10, sunStartX);
-        if (sunStartX < canvasWidth / 8)
+        if (sunStartX < canvasWidth / 10)
         {
          sunRadius *= 1.03;
         }
 
-        else if (sunStartX < canvasWidth / 6)
+        else if (sunStartX < canvasWidth / 8)
         {
         sunRadius *= 1.02;
         }
 
-        else if (sunStartX < 3 * (canvasWidth / 2))
+        else if (sunStartX < 3 * (canvasWidth / 6))
         {
         sunRadius *= 1.008;
         }
