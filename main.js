@@ -8,8 +8,18 @@ let checkEllipse = function (a, b, x) {
 }
 
 
-//Animation Timing
+//Animation
 let animationInterval = 150;
+let animationCounter = 0;
+let totalAnimationIterations = 200;
+
+//Asteroid
+let asteroidCounter = 30;
+let asteroidStartX = 0;
+let asteroidStartY = 0;
+let asteroidEndX = 0;
+let asteroidEndY = 0;
+let asteroidWidth = 5;
 
 //Star Colors, Planet Colors, Background Colors
 let landscapeColor = "black";
@@ -17,13 +27,14 @@ let originalStarColor = "yellow";
 let starColor = originalStarColor;
 let alternateStarColor = "yellow";
 let sunColor = "yellow";
-let groundColor = "grey";
-let defaultGroundColor = "black";
+let groundColor = "pink";
+let defaultGroundColor = groundColor;
+let asteroidColor = "red";
 
 
 //Ground Measurements
 let startWidth = 0;
-let startHeight = 500;
+let startHeight = 600;
 let maxGroundHeight = startHeight;
 let endWidth = 0;
 let endHeight = 0;
@@ -47,16 +58,17 @@ let sunRadius = originalSunRadius;
 //Starting Coordinates and Changes in Movement
 let sunStartX = 100;
 let sunStartY = 200;
+let sunPaddingFromTop = 30;
 let sunStartYMin = 60;
 let originalStarStartX = 5;
 let originalStarStartY = 5;
 let starStartX = originalStarStartX;
 let starStartY = originalStarStartY;
-let starXChange = 10;
+let starXChange = 8;
 let starYChange = 10;
 let maxStarHeight = 500;
-let sunXChange = 10;
-let sunYChange = -3;
+let sunXChange = 8;
+let sunYChange = -2;
 let alternateSunYChange = -sunYChange;
 
 
@@ -66,7 +78,6 @@ let randomYMultiplierMin = 7;
 let randomXMultiplierMax = 13;
 let randomYMultiplierMax = 13;
 let starRadiusMultiplier = 1.0;
-
 let sunRadiusMultiplier = 1.0;
 //default 1.015
 
@@ -84,21 +95,41 @@ let currentYLocation = [];
 let currentX1Location1 = [];
 let currentY1Location1 = [];
 let starID = 0;
-let animationCounter = 0;
-let totalAnimationIterations = 100;
 let groundStop = 0;
 let moveThingsCounter = 0;
 
+//create the Canvas
+//https://stackoverflow.com/questions/10652513/html5-dynamically-create-canvas
+    let canvas = document.createElement('canvas');
+
+    canvas.id = "DemoCanvas";
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    canvas.style.zIndex = 8;
+    canvas.style.position = "absolute";
+    canvas.style.border = "1px solid";
+
+
+    var body = document.getElementsByTagName("body")[0];
+    body.appendChild(canvas);
+
+    demoCanvas = document.getElementById("DemoCanvas");
+
+    console.log(demoCanvas);
+
+
+//sets the amount of time between each run
 const interval = setInterval(draw, animationInterval);
 
+
+//starts the Landscape
 function draw()
+
 //while (animationCounter < totalAnimationIterations)
 {
     // Stop our draw setInterval
     if (animationCounter === totalAnimationIterations)
         clearInterval(interval);
-
-    //debugger;
 
     animationCounter++;
     //prepares the canvas to draw the lines
@@ -130,10 +161,6 @@ function draw()
 
         sunStartX += sunXChange;
         sunStartY += sunYChange;
-
-
-
-
 
         while (startWidth < canvasWidth)
         {
@@ -184,9 +211,6 @@ function draw()
         }
 
 
-
-
-
         for (starStartX = originalStarStartX; starStartX <= canvasWidth; starStartX += starXChange)
         {
             starStartY = originalStarStartY;
@@ -199,6 +223,7 @@ function draw()
                 context.arc(starStartX * randomXMultiplier, starStartY * randomYMultiplier, starRadius, 0, 2 * Math.PI);
                 context.fillStyle = starColor;   
                 context.fill();
+                context.strokeStyle = "black";
                 context.stroke();
 
                 initialXLocation[starID] = starStartX * randomXMultiplier;
@@ -225,6 +250,7 @@ function draw()
 
 
     }
+
     else 
 
     {       
@@ -234,50 +260,44 @@ function draw()
 
         if (animationCounter % 2 === 0)
         {
-            sunRadius = sunRadius * sunRadiusMultiplier;
             starRadius = originalStarRadius * starRadiusMultiplier;
             starColor = alternateStarColor;
         }
 
         else
         {
-            sunRadius = sunRadius * sunRadiusMultiplier;
             starRadius = originalStarRadius;
             starColor = originalStarColor;
         }
 
-        if ((sunStartX > canvasWidth / 2) || (sunStartY < sunStartYMin))
+        sunStartYMin = sunRadius;
+        if (sunStartY < (sunStartYMin + sunPaddingFromTop))
         {
             sunYChange = alternateSunYChange;
         }
 
-
-
-
         //draws the sun
 
         //let sunStartY = checkEllipse(10, 10, sunStartX);
-        if (sunStartX < canvasWidth / 10)
+        if (sunStartX < canvasWidth / 8)
         {
-         sunRadius *= 1.03;
+         sunRadius *= 1.02;
         }
 
-        else if (sunStartX < canvasWidth / 8)
+        else if (sunStartX < canvasWidth / 6)
         {
-        sunRadius *= 1.02;
+        sunRadius *= 1.01;
         }
 
-        else if (sunStartX < 3 * (canvasWidth / 6))
-        {
-        sunRadius *= 1.008;
-        }
-
-        else
+        else if (sunStartX < 3 * (canvasWidth / 2))
         {
         sunRadius *= 1.005;
         }
 
-
+        else
+        {
+        sunRadius *= 1.002;
+        }
 
         context.beginPath();
         context.arc(sunStartX, sunStartY, sunRadius, 0, 2 * Math.PI);
@@ -285,24 +305,10 @@ function draw()
         context.strokeStyle = sunColor;
         context.fill();
         context.stroke();
-
-        
+        context.strokeStyle = "black";
 
         sunStartX += sunXChange;
         sunStartY += sunYChange;
-
-        for (i = 0; i < groundStop; i++)
-        {
-            context.beginPath();
-            context.moveTo(startWidthArray[i],startHeightArray[i]);
-            context.lineWidth = groundThickness;
-            context.lineTo(endWidthArray[i],endHeightArray[i]);
-            context.strokeStyle = groundColor;
-            context.stroke();
-            context.lineWidth = 1;
-            context.strokeStyle = defaultGroundColor;
-        }
-
 
         for (let i = 0; i < numberOfStars; i++)
         {
@@ -338,7 +344,8 @@ function draw()
 
             context.beginPath()
             context.arc(originalStarStartX * randomXMultiplier, starStartY * randomYMultiplier, starRadius, 0, 2 * Math.PI);
-            context.fillStyle = starColor;   
+            context.fillStyle = starColor;
+            context.strokeStyle = "black";   
             context.fill();
             context.stroke();
             starID++;
@@ -347,6 +354,60 @@ function draw()
             currentYLocation.push(starStartY * randomYMultiplier);
         }
 
+
+
+
+
+        for (i = 0; i < groundStop; i++)
+        {
+            context.beginPath();
+            context.moveTo(startWidthArray[i],startHeightArray[i]);
+            context.lineWidth = groundThickness;
+            context.lineTo(endWidthArray[i],endHeightArray[i]);
+            context.lineTo(0,canvasHeight);
+            context.closePath();
+            context.strokeStyle = groundColor;
+            context.stroke();
+            context.fillStyle = groundColor;
+            context.fill();
+            context.lineWidth = 1;
+            context.strokeStyle = defaultGroundColor;
+        }
+
+        if (animationCounter % asteroidCounter === 0)
+        {
+         
+            asteroidStartX = Math.floor(Math.random() * canvasWidth);
+            asteroidStartY = Math.floor(Math.random() * canvasHeight);
+            asteroidEndX = Math.floor(Math.random() * canvasWidth);
+            asteroidEndY = Math.floor(Math.random() * canvasHeight);
+            
+            context.beginPath();
+            context.moveTo(asteroidStartX,asteroidStartY);
+            context.lineWidth = asteroidWidth;
+            context.lineTo(asteroidEndX,asteroidEndY);
+            context.strokeStyle = asteroidColor;
+            context.stroke();
+            context.lineWidth = 1;
+            context.strokeStyle = asteroidColor;
+        }
+
+       
+        context.beginPath();
+        context.moveTo(10, canvasHeight - 10);
+        context.lineto(canvasWidth - 10,canvasHeight - 10);
+        context.closePath();
+        context.strokeStyle = groundColor;
+        context.stroke();
+        context.fillStyle = groundColor;
+        context.fill();
+        context.fillStyle = groundColor;
+        context.StrokeStyle = groundColor;
+
+  
+
+                
+            
     }
 
 }
