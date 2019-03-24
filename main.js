@@ -9,7 +9,7 @@ let checkEllipse = function (a, b, x) {
 
 
 //Animation Timing
-let animationInterval = 180;
+let animationInterval = 150;
 
 //Star Colors, Planet Colors, Background Colors
 let landscapeColor = "black";
