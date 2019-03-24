@@ -9,7 +9,7 @@ let checkEllipse = function (a, b, x) {
 
 
 //Animation Timing
-let animationInterval = 100;
+let animationInterval = 150;
 
 //Star Colors, Planet Colors, Background Colors
 let landscapeColor = "black";
@@ -52,7 +52,7 @@ let originalStarStartX = 5;
 let originalStarStartY = 5;
 let starStartX = originalStarStartX;
 let starStartY = originalStarStartY;
-let starXChange = 20;
+let starXChange = 10;
 let starYChange = 10;
 let maxStarHeight = 500;
 let sunXChange = 10;
@@ -66,7 +66,10 @@ let randomYMultiplierMin = 7;
 let randomXMultiplierMax = 13;
 let randomYMultiplierMax = 13;
 let starRadiusMultiplier = 1.0;
-let sunRadiusMultiplier = 1.015;
+
+let sunRadiusMultiplier = 1.0;
+//default 1.015
+
 let randomXMultiplier = 1;
 let randomYMultiplier = 1;
 
@@ -254,6 +257,25 @@ function draw()
         //draws the sun
 
         //let sunStartY = checkEllipse(10, 10, sunStartX);
+        if (sunStartX < canvasWidth / 8)
+        {
+         sunRadius *= 1.03;
+        }
+
+        else if (sunStartX < canvasWidth / 6)
+        {
+        sunRadius *= 1.02;
+        }
+
+        else if (sunStartX < 3 * (canvasWidth / 2))
+        {
+        sunRadius *= 1.008;
+        }
+
+        else
+        {
+        sunRadius *= 1.005;
+        }
 
 
 
@@ -264,11 +286,10 @@ function draw()
         context.fill();
         context.stroke();
 
+        
 
         sunStartX += sunXChange;
         sunStartY += sunYChange;
-
-
 
         for (i = 0; i < groundStop; i++)
         {
