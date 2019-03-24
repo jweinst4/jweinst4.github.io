@@ -9,7 +9,7 @@ let checkEllipse = function (a, b, x) {
 
 
 //Animation
-let animationInterval = 150;
+let animationInterval = 250;
 let animationCounter = 0;
 let totalAnimationIterations = 200;
 
@@ -64,7 +64,7 @@ let originalStarStartX = 5;
 let originalStarStartY = 5;
 let starStartX = originalStarStartX;
 let starStartY = originalStarStartY;
-let starXChange = 8;
+let starXChange = 5;
 let starYChange = 10;
 let maxStarHeight = 500;
 let sunXChange = 8;
