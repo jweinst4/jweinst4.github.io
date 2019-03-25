@@ -1,17 +1,19 @@
 
 
-//formula for points on ellipse
-//taken directly from https://stackoverflow.com/questions/14863188/moving-a-point-along-ellipse
-let ellipseYCoordinate = 0;
-let checkEllipse = function (a, b, x) {
-    ellipseYCoordinate = b * Math.sqrt(1 - x*x / a * a);
-}
-
-
 //Animation
 let animationInterval = 450;
 let animationCounter = 0;
 let totalAnimationIterations = 200;
+
+//Black Hole
+let whenToStartBlackHoleCounter = 20;
+let whenToStartBlackHoleToggle = false;
+let blackHoleStartX = Math.floor((Math.random() * 600) + 30);
+let blackHoleStartY = Math.floor((Math.random() * 300) + 100);
+let blackHoleRadiusX = 40;
+let blackHoleRadiusY = 30;
+let blackHoleIterations = 0;
+let blackHoleColor = "black";
 
 //Asteroid
 let asteroidCounter = 30;
@@ -44,7 +46,9 @@ let startHeightArray = [];
 let endWidthArray = [];
 let endHeightArray = [];
 let slopeArray = [];
-
+let lastSlope = 0;
+let yIntercept = 0;
+let lastXChange = 0;
 
 //Star Sizes, Planet Sizes, Canvas Sizes
 let canvasWidth = 1920;
@@ -98,6 +102,7 @@ let starID = 0;
 let groundStop = 0;
 let moveThingsCounter = 0;
 
+
 //create the Canvas
 //https://stackoverflow.com/questions/10652513/html5-dynamically-create-canvas
     let canvas = document.createElement('canvas');
@@ -124,8 +129,6 @@ const interval = setInterval(draw, animationInterval);
 
 //starts the Landscape
 function draw()
-
-//while (animationCounter < totalAnimationIterations)
 {
     // Stop our draw setInterval
     if (animationCounter === totalAnimationIterations)
@@ -278,7 +281,6 @@ function draw()
 
         //draws the sun
 
-        //let sunStartY = checkEllipse(10, 10, sunStartX);
         if (sunStartX < canvasWidth / 8)
         {
          sunRadius *= 1.02;
@@ -390,12 +392,17 @@ function draw()
             context.stroke();
             context.lineWidth = 1;
             context.strokeStyle = asteroidColor;
+
         }
 
-       
+        
+    
+        lastXChange = canvasWidth - startWidthArray[startWidthArray.length - 1];
+        yIntersect = lastXChange + endHeightArray[endHeightArray.length - 1];
         context.beginPath();
-        context.moveTo(10, canvasHeight - 10);
-        context.lineto(canvasWidth - 10,canvasHeight - 10);
+        context.moveTo(canvasWidth, yIntersect);
+        context.lineTo(canvasWidth,canvasHeight);
+        context.lineTo(0,canvasHeight);
         context.closePath();
         context.strokeStyle = groundColor;
         context.stroke();
@@ -403,6 +410,71 @@ function draw()
         context.fill();
         context.fillStyle = groundColor;
         context.StrokeStyle = groundColor;
+
+        if ((animationCounter % whenToStartBlackHoleCounter === 0 )|| (whenToStartBlackHoleToggle === true))
+        {
+            blackHoleIterations++;
+
+            if (blackHoleIterations < 10)
+            {
+                whenToStartBlackHoleToggle = true;
+                blackHoleRadiusX *= 1.05;
+                blackHoleRadiusY *= 1.05;
+
+                // Draw the ellipse
+                context.beginPath();
+                context.ellipse(blackHoleStartX, blackHoleStartY, blackHoleRadiusX, blackHoleRadiusY, Math.PI / 4, 0, 2 * Math.PI);
+                context.fillStyle = blackHoleColor;
+                context.fill();
+                context.strokeStyle = blackHoleColor;
+                context.stroke();
+
+                /*
+                context.beginPath();
+                context.arc(blackHoleStartX, blackHoleStartY, blackHoleRadius, 0, 2 * Math.PI);
+                context.fillStyle = blackHoleColor;
+                context.strokeStyle = "black";
+                context.fill();
+                context.stroke();
+                */
+            }
+
+            else
+            {
+                whenToStartBlackHoleToggle = true;
+                blackHoleRadiusX *= 1.05;
+                blackHoleRadiusY *= 1.05;
+
+                if (blackHoleIterations % 2 === 0) 
+                {
+                    blackHoleRadiusX *= 1.1;
+                    blackHoleRadiusY /= 1.1;
+                }
+
+                else
+                {
+                    blackHoleRadiusX /= 1.1;
+                    blackHoleRadiusY *= 1.1;
+                }
+
+                // Draw the ellipse
+                context.beginPath();
+                context.ellipse(blackHoleStartX, blackHoleStartY, blackHoleRadiusX, blackHoleRadiusY, Math.PI / 4, 0, 2 * Math.PI);
+                context.fillStyle = blackHoleColor;
+                context.fill();
+                context.strokeStyle = blackHoleColor;
+                context.stroke();
+
+                /*
+                context.beginPath();
+                context.arc(blackHoleStartX, blackHoleStartY, blackHoleRadius, 0, 2 * Math.PI);
+                context.fillStyle = blackHoleColor;
+                context.strokeStyle = "black";
+                context.fill();
+                context.stroke();
+                */
+            }
+        }
 
   
 
