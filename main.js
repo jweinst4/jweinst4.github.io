@@ -80,7 +80,7 @@ let randomYMultiplier = 1;
 
 
 //Black Hole
-let whenToStartBlackHoleCounter = 60;
+let whenToStartBlackHoleCounter = 40;
 let whenToStartBlackHoleToggle = false;
 let blackHoleStartX = Math.floor(Math.random() * (canvasWidth-100)) + 30;
 let blackHoleStartY = Math.floor(Math.random() * 500) + 30;
