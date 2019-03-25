@@ -1,12 +1,12 @@
 
 
 //Animation
-let animationInterval = 200;
+let animationInterval = 350;
 let animationCounter = 0;
 let totalAnimationIterations = 200;
 
 //Asteroid
-let asteroidCounter = 20;
+let asteroidCounter = 10;
 let asteroidStartX = 0;
 let asteroidStartY = 0;
 let asteroidEndX = 0;
@@ -86,7 +86,8 @@ let randomXMultiplier = 1;
 let randomYMultiplier = 1;
 
 //Black Hole
-let whenToStartBlackHoleCounter = 40;
+
+let whenToStartBlackHoleCounter = 50;
 let whenToStartBlackHoleToggle = false;
 let blackHoleStartX = Math.floor(Math.random() * (canvasWidth-100)) + 30;
 let blackHoleStartY = Math.floor(Math.random() * 500) + 30;
@@ -96,9 +97,20 @@ let blackHoleRadiusXMultiplier = 1.05;
 let blackHoleRadiusYMultiplier = 1.05;
 let blackHoleIterations = 0;
 let blackHoleColor = "black";
-let blackHoleRadiusXToggleMultiplier = 1.1;
-let blackHoleRadiusYToggleMultiplier = 1.5;
+let blackHoleRadiusXMinToggleMultiplier = 1.1;
+let blackHoleRadiusYMinToggleMultiplier = 1.1;
+let blackHoleRadiusXMaxToggleMultiplier = 2;
+let blackHoleRadiusYMaxToggleMultiplier = 2;
 let blackHoleIterationAlternateAction = 10;
+let blackHoleStartXMultiplier = 1.0;
+let blackHoleStartYMultiplier = 5.0;
+let blackHoleRotation = Math.PI / 2;
+let blackHoleStartAngle = Math.PI * 0;
+let blackHoleEndAngle = Math.PI * 2;
+let blackHoleRadiusAltX = 1;
+let blackHoleRadiusAltY = 1;
+let blackHoleRotationRandom = 0;
+
 
 //Counters, Arrays and Placeholders
 let initialXLocation = [];
@@ -442,7 +454,7 @@ function draw()
 
                 // Draw the ellipse
                 context.beginPath();
-                context.ellipse(blackHoleStartX, blackHoleStartY, blackHoleRadiusX, blackHoleRadiusY, Math.PI / 4, 0, 2 * Math.PI);
+                context.ellipse(blackHoleStartX, blackHoleStartY, blackHoleRadiusX, blackHoleRadiusY, Math.PI / 2, 0, 2 * Math.PI);
                 context.fillStyle = blackHoleColor;
                 context.fill();
                 context.strokeStyle = blackHoleColor;
@@ -452,24 +464,50 @@ function draw()
             else
             {
                 whenToStartBlackHoleToggle = true;
+
                 blackHoleRadiusX *= blackHoleRadiusXMultiplier;
                 blackHoleRadiusY *= blackHoleRadiusYMultiplier;
+                //blackHoleStartAngle = Math.floor(Math.random() * 360) + 1;
+                //blackHoleEndAngle = Math.floor(Math.random() * 360) + 1;
+
+                blackHoleRotationRandom = (Math.floor(Math.random() * 100) + 1) / 100;
 
                 if (blackHoleIterations % 2 === 0) 
                 {
-                    blackHoleRadiusX *= blackHoleRadiusXToggleMultiplier;
-                    blackHoleRadiusY /= blackHoleRadiusYToggleMultiplier;
+                    blackHoleRadiusAltX = 1.1;
+                    blackHoleRadiusAltY = 1.1;
                 }
 
                 else
                 {
-                    blackHoleRadiusX /= blackHoleRadiusXToggleMultiplier;
-                    blackHoleRadiusY *= blackHoleRadiusYToggleMultiplier;
+                    blackHoleRadiusAltX = 0.8;
+                    blackHoleRadiusAltY = 0.8;
                 }
 
                 // Draw the ellipse
                 context.beginPath();
-                context.ellipse(blackHoleStartX, blackHoleStartY, blackHoleRadiusX, blackHoleRadiusY, Math.PI / 4, 0, 2 * Math.PI);
+                context.ellipse(blackHoleStartX, blackHoleStartY, blackHoleRadiusX * blackHoleRadiusAltX, blackHoleRadiusY * blackHoleRadiusAltY, blackHoleRotation * blackHoleRotationRandom, blackHoleStartAngle, blackHoleEndAngle);
+                context.fillStyle = blackHoleColor;
+                context.fill();
+                context.strokeStyle = blackHoleColor;
+                context.stroke();
+
+
+                        blackHoleRotationRandom = (Math.floor(Math.random() * 100) + 1) / 100;
+
+                        // Draws the 2nd ellipse
+                        context.beginPath();
+                        context.ellipse(blackHoleStartX, blackHoleStartY, (blackHoleRadiusX * blackHoleRadiusAltX) * 1.3, (blackHoleRadiusY * blackHoleRadiusAltY) * 0.8, -blackHoleRotation * blackHoleRotationRandom, blackHoleStartAngle, blackHoleEndAngle);
+                        context.fillStyle = blackHoleColor;
+                        context.fill();
+                        context.strokeStyle = blackHoleColor;
+                        context.stroke();
+
+                blackHoleRotationRandom = (Math.floor(Math.random() * 100) + 40) / 100;
+
+                // Draws the 3rd ellipse
+                context.beginPath();
+                context.ellipse(blackHoleStartX, blackHoleStartY, (blackHoleRadiusX * blackHoleRadiusAltX) * 0.4, (blackHoleRadiusY * blackHoleRadiusAltY) * 1.9, -0.5 * blackHoleRotation * blackHoleRotationRandom, blackHoleStartAngle, blackHoleEndAngle);
                 context.fillStyle = blackHoleColor;
                 context.fill();
                 context.strokeStyle = blackHoleColor;
