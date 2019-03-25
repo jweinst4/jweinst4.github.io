@@ -5,8 +5,6 @@ let animationInterval = 450;
 let animationCounter = 0;
 let totalAnimationIterations = 200;
 
-
-
 //Asteroid
 let asteroidCounter = 30;
 let asteroidStartX = 0;
@@ -60,11 +58,11 @@ let originalStarStartX = 5;
 let originalStarStartY = 5;
 let starStartX = originalStarStartX;
 let starStartY = originalStarStartY;
-let starXChange = 5;
+let starXChange = 20;
 let starYChange = 10;
 let maxStarHeight = 500;
 let sunXChange = 8;
-let sunYChange = -2;
+let sunYChange = -5;
 let alternateSunYChange = -sunYChange;
 
 
@@ -103,6 +101,14 @@ let currentY1Location1 = [];
 let starID = 0;
 let groundStop = 0;
 let moveThingsCounter = 0;
+
+
+//logo
+let logoColor = "red";
+let logoFont = "48px Amatic SC";
+let logoText = "JSW 2019";
+let logoStartWidth = canvasWidth - 400;
+let logoStartHeight = 50;
 
 
 //create the Canvas
@@ -258,7 +264,12 @@ function draw()
 
     else 
 
-    {       
+    {   
+
+        context.fillStyle = logoColor;
+        context.font = logoFont;
+        context.fillText(logoText,logoStartWidth,logoStartHeight);
+
         numberOfStars = currentXLocation.length;
         currentX1Location1 = [];
         currentY1Location1 = [];
@@ -410,8 +421,9 @@ function draw()
         context.stroke();
         context.fillStyle = groundColor;
         context.fill();
-        context.fillStyle = groundColor;
-        context.StrokeStyle = groundColor;
+        context.fillStyle = "red";
+        context.StrokeStyle = "red";
+
 
         if ((animationCounter % whenToStartBlackHoleCounter === 0 )|| (whenToStartBlackHoleToggle === true))
         {
