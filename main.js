@@ -5,15 +5,7 @@ let animationInterval = 450;
 let animationCounter = 0;
 let totalAnimationIterations = 200;
 
-//Black Hole
-let whenToStartBlackHoleCounter = 60;
-let whenToStartBlackHoleToggle = false;
-let blackHoleStartX = Math.floor(Math.random() * 600) + 30;
-let blackHoleStartY = Math.floor(Math.random() * 500) + 30;
-let blackHoleRadiusX = 20;
-let blackHoleRadiusY = 10;
-let blackHoleIterations = 0;
-let blackHoleColor = "black";
+
 
 //Asteroid
 let asteroidCounter = 30;
@@ -88,6 +80,16 @@ let sunRadiusMultiplier = 1.0;
 let randomXMultiplier = 1;
 let randomYMultiplier = 1;
 
+
+//Black Hole
+let whenToStartBlackHoleCounter = 60;
+let whenToStartBlackHoleToggle = false;
+let blackHoleStartX = Math.floor(Math.random() * (canvasWidth-100)) + 30;
+let blackHoleStartY = Math.floor(Math.random() * 500) + 30;
+let blackHoleRadiusX = 20;
+let blackHoleRadiusY = 10;
+let blackHoleIterations = 0;
+let blackHoleColor = "black";
 
 
 //Counters, Arrays and Placeholders
