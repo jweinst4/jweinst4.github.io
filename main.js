@@ -6,12 +6,12 @@ let animationCounter = 0;
 let totalAnimationIterations = 200;
 
 //Black Hole
-let whenToStartBlackHoleCounter = 20;
+let whenToStartBlackHoleCounter = 60;
 let whenToStartBlackHoleToggle = false;
 let blackHoleStartX = Math.floor((Math.random() * 600) + 30);
 let blackHoleStartY = Math.floor((Math.random() * 300) + 100);
-let blackHoleRadiusX = 40;
-let blackHoleRadiusY = 30;
+let blackHoleRadiusX = 20;
+let blackHoleRadiusY = 10;
 let blackHoleIterations = 0;
 let blackHoleColor = "black";
 
