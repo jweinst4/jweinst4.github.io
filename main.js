@@ -8,8 +8,8 @@ let totalAnimationIterations = 200;
 //Black Hole
 let whenToStartBlackHoleCounter = 60;
 let whenToStartBlackHoleToggle = false;
-let blackHoleStartX = Math.floor((Math.random() * 600) + 30);
-let blackHoleStartY = Math.floor((Math.random() * 300) + 100);
+let blackHoleStartX = Math.floor(Math.random() * 600) + 30;
+let blackHoleStartY = Math.floor(Math.random() * 500) + 30;
 let blackHoleRadiusX = 20;
 let blackHoleRadiusY = 10;
 let blackHoleIterations = 0;
@@ -60,8 +60,8 @@ let sunRadius = originalSunRadius;
 
 
 //Starting Coordinates and Changes in Movement
-let sunStartX = 100;
-let sunStartY = 200;
+let sunStartX = Math.floor(Math.random() * 420) + 30;
+let sunStartY = Math.floor(Math.random() * 700); + 30;
 let sunPaddingFromTop = 30;
 let sunStartYMin = 60;
 let originalStarStartX = 5;
