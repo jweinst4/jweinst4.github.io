@@ -6,7 +6,7 @@ let animationCounter = 0;
 let totalAnimationIterations = 600;
 
 //Asteroid
-let asteroidCounter = 10;
+let asteroidCounter = 30;
 let asteroidStartX = 0;
 let asteroidStartY = 0;
 let asteroidEndX = 0;
@@ -51,8 +51,8 @@ let maxStarHeight = 500;
 
 //Canvas
 let landscapeColor = "black";
-let canvasWidth = 1920;
-let canvasHeight = 1080;
+let canvasWidth = window.outerWidth;
+let canvasHeight = window.outerHeight;
 
 //Ground Measurements
 let startWidth = 0;
@@ -87,9 +87,9 @@ let randomYMultiplier = 1;
 //Black Hole
 
 let blackHoleStartsPullingStars = 10;
-let whenToStartBlackHoleCounter = 15;
+let whenToStartBlackHoleCounter = 35;
 let whenToStartBlackHoleToggle = false;
-let blackHoleStartX = Math.floor(Math.random() * 1400) + 300;
+let blackHoleStartX = Math.floor(Math.random() * 1000) + 300;
 let blackHoleStartY = Math.floor(Math.random() * 600) + 150;
 let blackHoleRadiusX = 20;
 let blackHoleRadiusY = 10;
@@ -137,7 +137,7 @@ let endGameTrigger = false;
 let logoColor = "red";
 let logoFont = "48px Amatic SC";
 let logoText = "JSW 2019";
-let logoStartWidth = canvasWidth - 400;
+let logoStartWidth = canvasWidth - 340;
 let logoStartHeight = 50;
 
 //endLogo
@@ -268,6 +268,7 @@ function draw()
         for (starStartX = originalStarStartX; starStartX <= canvasWidth; starStartX += starXChange)
         {
             starStartY = originalStarStartY;
+            
 
             for (starStartY = originalStarStartY; starStartY <= maxStarHeight; starStartY += starYChange)
             {
@@ -312,7 +313,29 @@ function draw()
         if (endGameTrigger !== true)
         {
 
-        
+                   
+                    if (blackHoleIterations > blackHoleStartsPullingStars)
+                    {
+                        if (blackHoleStartX > logoStartWidth)
+                        {
+                            logoStartWidth += 5;
+                        }
+
+                        else 
+                        {
+                            logoStartWidth -= 25;
+                        }
+
+                        if (blackHoleStartY > logoStartHeight)
+                        {
+                            logoStartHeight += 25;
+                        }
+
+                        else 
+                        {
+                            logoStartHeight -= 5;
+                        }
+                    }
                     context.fillStyle = logoColor;
                     context.font = logoFont;
                     context.fillText(logoText,logoStartWidth,logoStartHeight);
@@ -369,21 +392,25 @@ function draw()
                             if (sunStartX > 3 * blackHoleStartX)
                             {
                                 sunStartX -= Math.floor(Math.random() * 30) + 10;
+                                sunRadius /= 0.9;
                             }
 
                             else if (sunStartX > 1.5 * blackHoleStartX)
                             {
                                 sunStartX -= Math.floor(Math.random() * 20) + 4;
+                                sunRadius /= 0.9;
                             }
 
                             else if (sunStartX > 1.2 * blackHoleStartX)
                             {
                                 sunStartX -= Math.floor(Math.random() * 10) + 3;
+                                sunRadius /= 0.9;
                             }
 
                             else 
                             {
                                 sunStartX -= Math.floor(Math.random() * 5) + 1;
+                                sunRadius /= 0.9;
                             }
                         }
 
@@ -397,26 +424,31 @@ function draw()
                             if (sunStartY > 3 * blackHoleStartY)
                             {
                                 sunStartY -= Math.floor(Math.random() * 30) + 10;
+                                sunRadius *= 0.9;
                             }
 
                             else if (sunStartY > 1.5 * blackHoleStartY)
                             {
                                 sunStartY -= Math.floor(Math.random() * 12) + 6;
+                                sunRadius *= 0.9;
                             }
 
                             else if (sunStartY > 1.2 * blackHoleStartY)
                             {
                                 sunStartY -= Math.floor(Math.random() * 8) + 2;
+                                sunRadius *= 0.9;
                             }
 
                             else 
                             {
                                 sunStartY -= Math.floor(Math.random() * 4) + 1;
+                                sunRadius *= 0.9;
                             }
                         }
                         else
                         {
                             sunStartY += Math.floor(Math.random() * 12) + 8;
+                            
                         }
 
                     }
@@ -511,23 +543,83 @@ function draw()
                         }
                     }
 
-                    for (i = 0; i < groundStop; i++)
-                    {
-                        context.beginPath();
-                        context.moveTo(startWidthArray[i],startHeightArray[i]);
-                        context.lineWidth = groundThickness;
-                        context.lineTo(endWidthArray[i],endHeightArray[i]);
-                        context.lineTo(0,canvasHeight);
-                        context.closePath();
-                        context.strokeStyle = groundColor;
-                        context.stroke();
-                        context.fillStyle = groundColor;
-                        context.fill();
-                        context.lineWidth = 1;
-                        context.strokeStyle = defaultGroundColor;
-                    }
+                    
+                    
+                        for (i = 0; i < groundStop; i++)
+                        {
+                            if (blackHoleIterations > (blackHoleStartsPullingStars + 10))
+                            {
+                                if (startWidthArray[i] < blackHoleStartX)
+                                {
+                                    startWidthArray[i] *= 1.4;
+                                }
 
-                    if (animationCounter % asteroidCounter === 0)
+                                else
+                                {
+                                    startWidthArray[i] *= 0.5;
+                                }
+
+                                if (startHeightArray[i] < blackHoleStartY)
+                                {
+                                    startHeightArray[i] *= 1.3;
+                                }
+
+                                else
+                                {
+                                    startHeightArray[i] *= 0.7;
+                                }
+
+
+
+                                if (endWidthArray[i] < blackHoleStartX)
+                                {
+                                    endWidthArray[i] *= 1.2;
+                                }
+
+                                else
+                                {
+                                    endWidthArray[i] *= 0.8;
+                                }
+
+                                if (endHeightArray[i] < blackHoleStartY)
+                                {
+                                    endHeightArray[i] *= 1.28;
+                                }
+
+                                else
+                                {
+                                    endHeightArray[i] -= 120;
+                                }
+                            }
+
+                            if (blackHoleIterations < (blackHoleStartsPullingStars + 16))
+                            {
+                            context.beginPath();
+                            context.moveTo(startWidthArray[i],startHeightArray[i]);
+                            context.lineWidth = groundThickness;
+                            context.lineTo(endWidthArray[i],endHeightArray[i]);
+                            context.lineTo(0,canvasHeight);
+                            context.closePath();
+                            context.strokeStyle = groundColor;
+                            context.stroke();
+                            context.fillStyle = groundColor;
+                            context.fill();
+                            context.lineWidth = 1;
+                            context.strokeStyle = defaultGroundColor;
+                            }
+
+                            else
+                            {
+
+                            }
+                            
+                        }
+
+                            
+                    
+                    
+
+                    if ((animationCounter % asteroidCounter === 0) && (blackHoleIterations < blackHoleStartsPullingStars))
                     {
                     
                         asteroidStartX = Math.floor(Math.random() * canvasWidth);
@@ -623,11 +715,15 @@ function draw()
                                 endGameTrigger = true;
                                 
 
-                                for (let numberOfDashes = 0; numberOfDashes < 4; numberOfDashes++)
+                                for (let numberOfDashes = 0; numberOfDashes < 2000; numberOfDashes++)
                                 { 
                                     
                                     for (j = 1; j <= 5; j++)
                                     {
+                                        if (j === 5)
+                                        {
+                                            debugger;
+                                        }
                                         for (i = 1; i <= 10; i++)
                                         {
                                             context.beginPath();
@@ -641,6 +737,8 @@ function draw()
                                             context.fillStyle = endLogoColor2;
                                             context.font = endLogoFont2;
                                             context.fillText(endLogoText2,endLogoStartWidth2,endLogoStartHeight2);
+
+                                            
 
                                             if (numberOfDashes === 0)
                                             {
@@ -670,7 +768,8 @@ function draw()
                             }
         }                   
     }
+    document.body.style.backgroundImage = "url('https://i.imgur.com/a6szNAT.png?1')"; 
 }
 
-                                          
+      
 
