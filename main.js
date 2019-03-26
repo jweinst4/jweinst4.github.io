@@ -1,9 +1,9 @@
 
 
 //Animation
-let animationInterval = 350;
+let animationInterval = 550;
 let animationCounter = 0;
-let totalAnimationIterations = 200;
+let totalAnimationIterations = 600;
 
 //Asteroid
 let asteroidCounter = 10;
@@ -31,7 +31,7 @@ let sunStartX = Math.floor(Math.random() * 420) + 30;
 let sunStartY = Math.floor(Math.random() * 700); + 30;
 let sunPaddingFromTop = 30;
 let sunStartYMin = 60;
-let sunXChange = 8;
+let sunXChange = 5;
 let sunYChange = -5;
 let alternateSunYChange = -sunYChange;
 
@@ -45,7 +45,7 @@ let originalStarStartX = 5;
 let originalStarStartY = 5;
 let starStartX = originalStarStartX;
 let starStartY = originalStarStartY;
-let starXChange = 20;
+let starXChange = 15;
 let starYChange = 10;
 let maxStarHeight = 500;
 
@@ -84,13 +84,13 @@ let randomYMultiplierMax = 13;
 let starRadiusMultiplier = 1.0;
 let randomXMultiplier = 1;
 let randomYMultiplier = 1;
-
 //Black Hole
 
-let whenToStartBlackHoleCounter = 50;
+let blackHoleStartsPullingStars = 10;
+let whenToStartBlackHoleCounter = 15;
 let whenToStartBlackHoleToggle = false;
-let blackHoleStartX = Math.floor(Math.random() * (canvasWidth-100)) + 30;
-let blackHoleStartY = Math.floor(Math.random() * 500) + 30;
+let blackHoleStartX = Math.floor(Math.random() * 1400) + 300;
+let blackHoleStartY = Math.floor(Math.random() * 600) + 150;
 let blackHoleRadiusX = 20;
 let blackHoleRadiusY = 10;
 let blackHoleRadiusXMultiplier = 1.05;
@@ -110,6 +110,15 @@ let blackHoleEndAngle = Math.PI * 2;
 let blackHoleRadiusAltX = 1;
 let blackHoleRadiusAltY = 1;
 let blackHoleRotationRandom = 0;
+let endGameTriggerBlackHoleIterations = 90;
+
+
+
+//Finale
+let randomFlashPointX = 0;
+let randomFlashPointY = 0;
+let explosionXChange = 0;
+let explosionYChange = 0;
 
 
 //Counters, Arrays and Placeholders
@@ -122,6 +131,7 @@ let currentX1Location1 = [];
 let currentY1Location1 = [];
 let starID = 0;
 let groundStop = 0;
+let endGameTrigger = false;
 
 //logo
 let logoColor = "red";
@@ -129,6 +139,19 @@ let logoFont = "48px Amatic SC";
 let logoText = "JSW 2019";
 let logoStartWidth = canvasWidth - 400;
 let logoStartHeight = 50;
+
+//endLogo
+let endLogoColor1 = "white";
+let endLogoColor2 = "white";
+let endLogoFont1 = "px Amatic SC";
+let endLogoText1 = "END";
+let endLogoFont2 = "48px Amatic SC";
+let endLogoText2 = "JSW 2019";
+let endLogoStartWidth1 = 500;
+let endLogoStartHeight1 = 500;
+let endLogoStartWidth2 = 500;
+let endLogoStartHeight2 = 540;
+
 
 
 //create the Canvas
@@ -180,7 +203,7 @@ function draw()
         ctx.fillRect(0, 0, canvas.width, canvas.height);
     }
 
-    if (animationCounter === 1)
+    if ((animationCounter === 1)  && (endGameTrigger !== true))
     {
         //draws the sun
         context.beginPath();
@@ -202,7 +225,7 @@ function draw()
 
             if (groundStop % 2 === 0)
             {
-                randomGroundHeight = -randomGroundHeight;
+            randomGroundHeight = -randomGroundHeight;
             }
 
             endWidth = startWidth + randomGroundWidth;
@@ -282,237 +305,372 @@ function draw()
 
     }
 
-    else 
+    else
 
     {   
 
-        context.fillStyle = logoColor;
-        context.font = logoFont;
-        context.fillText(logoText,logoStartWidth,logoStartHeight);
-
-        numberOfStars = currentXLocation.length;
-        currentX1Location1 = [];
-        currentY1Location1 = [];
-
-        if (animationCounter % 2 === 0)
+        if (endGameTrigger !== true)
         {
-            starRadius = originalStarRadius * starRadiusMultiplier;
-            starColor = alternateStarColor;
-        }
-
-        else
-        {
-            starRadius = originalStarRadius;
-            starColor = originalStarColor;
-        }
-
-        sunStartYMin = sunRadius;
-        if (sunStartY < (sunStartYMin + sunPaddingFromTop))
-        {
-            sunYChange = alternateSunYChange;
-        }
-
-        //draws the sun
-
-        if (sunStartX < canvasWidth / sunRadiusMultiplierThresholdFirst)
-        {
-         sunRadius *= sunRadiusMultiplierFirst;
-        }
-
-        else if (sunStartX < canvasWidth / sunRadiusMultiplierThresholdSecond)
-        {
-        sunRadius *= sunRadiusMultiplierSecond;
-        }
-
-        else if (sunStartX < canvasWidth / sunRadiusMultiplierThresholdThird)
-        {
-        sunRadius *= sunRadiusMultiplierThird;
-        }
-
-        else
-        {
-        sunRadius *= sunRadiusMultiplierFourth;
-        }
-
-      
-
-        context.beginPath();
-        context.arc(sunStartX, sunStartY, sunRadius, 0, 2 * Math.PI);
-        context.fillStyle = sunColor;
-        context.strokeStyle = sunColor;
-        context.fill();
-        context.stroke();
-        context.strokeStyle = "black";
-        //context.strokeStyle = "black";
-        //important that the stroke is black here
-
-        sunStartX += sunXChange;
-        sunStartY += sunYChange;
-
-        for (let i = 0; i < numberOfStars; i++)
-        {
-
-            randomXMultiplier = (Math.floor(Math.random() * randomXMultiplierMax) + randomXMultiplierMin) / 10;
-            randomYMultiplier = (Math.floor(Math.random() * randomYMultiplierMax) + randomYMultiplierMin) / 10;
-
-            if (animationCounter % 2 === 0)
-            {
-                randomYMultiplier *= -1;
-            }
-
-            context.beginPath()
-            context.arc(currentXLocation[i] + randomXMultiplier * starXChange, currentYLocation[i], starRadius, 0, 2 * Math.PI);
-            context.fillStyle = starColor;   
-            context.fill();
-            context.stroke();
-
-            currentX1Location1[i] = currentXLocation[i] + randomXMultiplier * starXChange;
-            currentY1Location1[i] = currentYLocation[i];
-        }
-
-        currentXLocation = [];
-        currentYLocation = [];
-        currentXLocation = currentX1Location1;
-        currentYLocation = currentY1Location1;
-
-        for (starStartY = originalStarStartY; starStartY * randomYMultiplier <= maxStarHeight; starStartY += starYChange)
-        {
-            randomXMultiplier = (Math.floor(Math.random() * randomXMultiplierMax) + randomXMultiplierMin) / 10;
-            randomYMultiplier = (Math.floor(Math.random() * randomYMultiplierMax) + randomYMultiplierMin) / 10;
-
-            context.beginPath()
-            context.arc(originalStarStartX * randomXMultiplier, starStartY * randomYMultiplier, starRadius, 0, 2 * Math.PI);
-            context.fillStyle = starColor;
-            context.fill();
-            context.stroke();
-            starID++;
-
-            currentXLocation.push(originalStarStartX * randomXMultiplier);
-            currentYLocation.push(starStartY * randomYMultiplier);
-        }
-
-        for (i = 0; i < groundStop; i++)
-        {
-            context.beginPath();
-            context.moveTo(startWidthArray[i],startHeightArray[i]);
-            context.lineWidth = groundThickness;
-            context.lineTo(endWidthArray[i],endHeightArray[i]);
-            context.lineTo(0,canvasHeight);
-            context.closePath();
-            context.strokeStyle = groundColor;
-            context.stroke();
-            context.fillStyle = groundColor;
-            context.fill();
-            context.lineWidth = 1;
-            context.strokeStyle = defaultGroundColor;
-        }
-
-        if (animationCounter % asteroidCounter === 0)
-        {
-         
-            asteroidStartX = Math.floor(Math.random() * canvasWidth);
-            asteroidStartY = Math.floor(Math.random() * canvasHeight);
-            asteroidEndX = Math.floor(Math.random() * canvasWidth);
-            asteroidEndY = Math.floor(Math.random() * canvasHeight);
-            
-            context.beginPath();
-            context.moveTo(asteroidStartX,asteroidStartY);
-            context.lineWidth = asteroidWidth;
-            context.lineTo(asteroidEndX,asteroidEndY);
-            context.strokeStyle = asteroidColor;
-            context.stroke();
-            context.lineWidth = 1;
-            context.strokeStyle = asteroidColor;
-
-        }
 
         
-    
-        lastXChange = canvasWidth - startWidthArray[startWidthArray.length - 1];
-        yIntersect = lastXChange + endHeightArray[endHeightArray.length - 1];
-        context.beginPath();
-        context.moveTo(canvasWidth, yIntersect);
-        context.lineTo(canvasWidth,canvasHeight);
-        context.lineTo(0,canvasHeight);
-        context.closePath();
-        context.strokeStyle = groundColor;
-        context.stroke();
-        context.fillStyle = groundColor;
-        context.fill();
+                    context.fillStyle = logoColor;
+                    context.font = logoFont;
+                    context.fillText(logoText,logoStartWidth,logoStartHeight);
 
+                    numberOfStars = currentXLocation.length;
+                    currentX1Location1 = [];
+                    currentY1Location1 = [];
 
+                    if (animationCounter % 2 === 0)
+                    {
+                        starRadius = originalStarRadius * starRadiusMultiplier;
+                        starColor = alternateStarColor;
+                    }
 
-        if ((animationCounter % whenToStartBlackHoleCounter === 0 )|| (whenToStartBlackHoleToggle === true))
-        {
-            blackHoleIterations++;
+                    else
+                    {
+                        starRadius = originalStarRadius;
+                        starColor = originalStarColor;
+                    }
 
-            if (blackHoleIterations < blackHoleIterationAlternateAction)
-            {
-                whenToStartBlackHoleToggle = true;
-                blackHoleRadiusX *= blackHoleRadiusXMultiplier;
-                blackHoleRadiusY *= blackHoleRadiusYMultiplier;
+                    sunStartYMin = sunRadius;
+                    if (sunStartY < (sunStartYMin + sunPaddingFromTop))
+                    {
+                        sunYChange = alternateSunYChange;
+                    }
 
-                // Draw the ellipse
-                context.beginPath();
-                context.ellipse(blackHoleStartX, blackHoleStartY, blackHoleRadiusX, blackHoleRadiusY, Math.PI / 2, 0, 2 * Math.PI);
-                context.fillStyle = blackHoleColor;
-                context.fill();
-                context.strokeStyle = blackHoleColor;
-                context.stroke();
-            }
+                    //draws the sun
 
-            else
-            {
-                whenToStartBlackHoleToggle = true;
+                    if (sunStartX < canvasWidth / sunRadiusMultiplierThresholdFirst)
+                    {
+                    sunRadius *= sunRadiusMultiplierFirst;
+                    }
 
-                blackHoleRadiusX *= blackHoleRadiusXMultiplier;
-                blackHoleRadiusY *= blackHoleRadiusYMultiplier;
-                //blackHoleStartAngle = Math.floor(Math.random() * 360) + 1;
-                //blackHoleEndAngle = Math.floor(Math.random() * 360) + 1;
+                    else if (sunStartX < canvasWidth / sunRadiusMultiplierThresholdSecond)
+                    {
+                    sunRadius *= sunRadiusMultiplierSecond;
+                    }
 
-                blackHoleRotationRandom = (Math.floor(Math.random() * 100) + 1) / 100;
+                    else if (sunStartX < canvasWidth / sunRadiusMultiplierThresholdThird)
+                    {
+                    sunRadius *= sunRadiusMultiplierThird;
+                    }
 
-                if (blackHoleIterations % 2 === 0) 
-                {
-                    blackHoleRadiusAltX = 1.1;
-                    blackHoleRadiusAltY = 1.1;
-                }
+                    else
+                    {
+                    sunRadius *= sunRadiusMultiplierFourth;
+                    }
 
-                else
-                {
-                    blackHoleRadiusAltX = 0.8;
-                    blackHoleRadiusAltY = 0.8;
-                }
+                
+                    if (blackHoleIterations > blackHoleStartsPullingStars)
+                    {
+                        if ((sunStartX > blackHoleStartX) && (blackHoleIterations > blackHoleStartsPullingStars))
+                        {
+                            if (sunStartX > 3 * blackHoleStartX)
+                            {
+                                sunStartX -= Math.floor(Math.random() * 30) + 10;
+                            }
 
-                // Draw the ellipse
-                context.beginPath();
-                context.ellipse(blackHoleStartX, blackHoleStartY, blackHoleRadiusX * blackHoleRadiusAltX, blackHoleRadiusY * blackHoleRadiusAltY, blackHoleRotation * blackHoleRotationRandom, blackHoleStartAngle, blackHoleEndAngle);
-                context.fillStyle = blackHoleColor;
-                context.fill();
-                context.strokeStyle = blackHoleColor;
-                context.stroke();
+                            else if (sunStartX > 1.5 * blackHoleStartX)
+                            {
+                                sunStartX -= Math.floor(Math.random() * 20) + 4;
+                            }
 
+                            else if (sunStartX > 1.2 * blackHoleStartX)
+                            {
+                                sunStartX -= Math.floor(Math.random() * 10) + 3;
+                            }
 
-                        blackHoleRotationRandom = (Math.floor(Math.random() * 100) + 1) / 100;
+                            else 
+                            {
+                                sunStartX -= Math.floor(Math.random() * 5) + 1;
+                            }
+                        }
 
-                        // Draws the 2nd ellipse
-                        context.beginPath();
-                        context.ellipse(blackHoleStartX, blackHoleStartY, (blackHoleRadiusX * blackHoleRadiusAltX) * 1.3, (blackHoleRadiusY * blackHoleRadiusAltY) * 0.8, -blackHoleRotation * blackHoleRotationRandom, blackHoleStartAngle, blackHoleEndAngle);
-                        context.fillStyle = blackHoleColor;
+                        else
+                        {
+                            sunStartX += Math.floor(Math.random() * 12) + 6;
+                        }
+
+                        if ((sunStartY > blackHoleStartY) && (blackHoleIterations > blackHoleStartsPullingStars))
+                        {
+                            if (sunStartY > 3 * blackHoleStartY)
+                            {
+                                sunStartY -= Math.floor(Math.random() * 30) + 10;
+                            }
+
+                            else if (sunStartY > 1.5 * blackHoleStartY)
+                            {
+                                sunStartY -= Math.floor(Math.random() * 12) + 6;
+                            }
+
+                            else if (sunStartY > 1.2 * blackHoleStartY)
+                            {
+                                sunStartY -= Math.floor(Math.random() * 8) + 2;
+                            }
+
+                            else 
+                            {
+                                sunStartY -= Math.floor(Math.random() * 4) + 1;
+                            }
+                        }
+                        else
+                        {
+                            sunStartY += Math.floor(Math.random() * 12) + 8;
+                        }
+
+                    }
+                    context.beginPath();
+                    context.arc(sunStartX, sunStartY, sunRadius, 0, 2 * Math.PI);
+                    context.fillStyle = sunColor;
+                    context.strokeStyle = sunColor;
+                    context.fill();
+                    context.stroke();
+                    context.strokeStyle = "black";
+                    //context.strokeStyle = "black";
+                    //important that the stroke is black here
+
+                    if (blackHoleIterations > blackHoleStartsPullingStars)
+                    {
+
+                    }
+
+                    else
+                    {
+                        sunStartX += sunXChange;
+                        sunStartY += sunYChange;
+                    }
+
+                    for (let i = 0; i < numberOfStars; i++)
+                    {
+                        randomXMultiplier = (Math.floor(Math.random() * randomXMultiplierMax) + randomXMultiplierMin) / 10;
+                        randomYMultiplier = (Math.floor(Math.random() * randomYMultiplierMax) + randomYMultiplierMin) / 10;
+
+                        if (animationCounter % 2 === 0)
+                        {
+                            randomYMultiplier *= -1;
+                        }
+
+                        if (blackHoleIterations > blackHoleStartsPullingStars)
+                        {
+                            if ((((currentXLocation[i] + randomXMultiplier * starXChange) > blackHoleStartX)) && (blackHoleIterations > blackHoleStartsPullingStars))
+                            {
+                                currentXLocation[i] -= Math.floor(Math.random() * 15) + 10;
+                                randomXMultiplier = 0;
+                            }
+                            else
+                            {
+                                currentXLocation[i] += Math.floor(Math.random() * 8) + 3;
+                            }
+
+                            if ((currentYLocation[i] > blackHoleStartY) && (blackHoleIterations > blackHoleStartsPullingStars))
+                            {
+                                currentYLocation[i] -= Math.floor(Math.random() * 15) + 10;
+                            }
+                            else
+                            {
+                                currentYLocation[i] += Math.floor(Math.random() * 8) + 3;
+                            }
+                        }
+
+                        context.beginPath()
+                        context.arc(currentXLocation[i] + randomXMultiplier * starXChange, currentYLocation[i], starRadius, 0, 2 * Math.PI);
+                        context.fillStyle = starColor;   
                         context.fill();
-                        context.strokeStyle = blackHoleColor;
                         context.stroke();
 
-                blackHoleRotationRandom = (Math.floor(Math.random() * 100) + 40) / 100;
+                        currentX1Location1[i] = currentXLocation[i] + randomXMultiplier * starXChange;
+                        currentY1Location1[i] = currentYLocation[i];
+                    }
 
-                // Draws the 3rd ellipse
-                context.beginPath();
-                context.ellipse(blackHoleStartX, blackHoleStartY, (blackHoleRadiusX * blackHoleRadiusAltX) * 0.4, (blackHoleRadiusY * blackHoleRadiusAltY) * 1.9, -0.5 * blackHoleRotation * blackHoleRotationRandom, blackHoleStartAngle, blackHoleEndAngle);
-                context.fillStyle = blackHoleColor;
-                context.fill();
-                context.strokeStyle = blackHoleColor;
-                context.stroke();
+                    currentXLocation = [];
+                    currentYLocation = [];
+                    currentXLocation = currentX1Location1;
+                    currentYLocation = currentY1Location1;
+
+                    for (starStartY = originalStarStartY; starStartY * randomYMultiplier <= maxStarHeight; starStartY += starYChange)
+                    {
+                        randomXMultiplier = (Math.floor(Math.random() * randomXMultiplierMax) + randomXMultiplierMin) / 10;
+                        randomYMultiplier = (Math.floor(Math.random() * randomYMultiplierMax) + randomYMultiplierMin) / 10;
+
+                        if (whenToStartBlackHoleToggle && (blackHoleIterations > blackHoleStartsPullingStars))
+                        {
+
+                        }
+                        else
+                        {
+                        context.beginPath()
+                        context.arc(originalStarStartX * randomXMultiplier, starStartY * randomYMultiplier, starRadius, 0, 2 * Math.PI);
+                        context.fillStyle = starColor;
+                        context.fill();
+                        context.stroke();
+                        starID++;
+
+                        currentXLocation.push(originalStarStartX * randomXMultiplier);
+                        currentYLocation.push(starStartY * randomYMultiplier);
+                        }
+                    }
+
+                    for (i = 0; i < groundStop; i++)
+                    {
+                        context.beginPath();
+                        context.moveTo(startWidthArray[i],startHeightArray[i]);
+                        context.lineWidth = groundThickness;
+                        context.lineTo(endWidthArray[i],endHeightArray[i]);
+                        context.lineTo(0,canvasHeight);
+                        context.closePath();
+                        context.strokeStyle = groundColor;
+                        context.stroke();
+                        context.fillStyle = groundColor;
+                        context.fill();
+                        context.lineWidth = 1;
+                        context.strokeStyle = defaultGroundColor;
+                    }
+
+                    if (animationCounter % asteroidCounter === 0)
+                    {
+                    
+                        asteroidStartX = Math.floor(Math.random() * canvasWidth);
+                        asteroidStartY = Math.floor(Math.random() * canvasHeight);
+                        asteroidEndX = Math.floor(Math.random() * canvasWidth);
+                        asteroidEndY = Math.floor(Math.random() * canvasHeight);
+                        
+                        context.beginPath();
+                        context.moveTo(asteroidStartX,asteroidStartY);
+                        context.lineWidth = asteroidWidth;
+                        context.lineTo(asteroidEndX,asteroidEndY);
+                        context.strokeStyle = asteroidColor;
+                        context.stroke();
+                        context.lineWidth = 1;
+                        context.strokeStyle = asteroidColor;
+
+                    }
+
+                    
+                
+                    lastXChange = canvasWidth - startWidthArray[startWidthArray.length - 1];
+                    yIntersect = lastXChange + endHeightArray[endHeightArray.length - 1];
+                    context.beginPath();
+                    context.moveTo(canvasWidth, yIntersect);
+                    context.lineTo(canvasWidth,canvasHeight);
+                    context.lineTo(0,canvasHeight);
+                    context.closePath();
+                    context.strokeStyle = groundColor;
+                    context.stroke();
+                    context.fillStyle = groundColor;
+                    context.fill();
+
+
+
+                    if ((animationCounter % whenToStartBlackHoleCounter === 0 )|| (whenToStartBlackHoleToggle === true))
+                    {
+                        blackHoleIterations++;
+
+                            whenToStartBlackHoleToggle = true;
+
+                            blackHoleRadiusX *= blackHoleRadiusXMultiplier;
+                            blackHoleRadiusY *= blackHoleRadiusYMultiplier;
+                            //blackHoleStartAngle = Math.floor(Math.random() * 360) + 1;
+                            //blackHoleEndAngle = Math.floor(Math.random() * 360) + 1;
+
+                            blackHoleRotationRandom = (Math.floor(Math.random() * 100) + 1) / 100;
+
+                            if (blackHoleIterations % 2 === 0) 
+                            {
+                                blackHoleRadiusAltX = 1.1;
+                                blackHoleRadiusAltY = 1.1;
+                            }
+
+                            else
+                            {
+                                blackHoleRadiusAltX = 0.8;
+                                blackHoleRadiusAltY = 0.8;
+                            }
+
+                            // Draw the ellipse
+                            context.beginPath();
+                            context.ellipse(blackHoleStartX, blackHoleStartY, blackHoleRadiusX * blackHoleRadiusAltX, blackHoleRadiusY * blackHoleRadiusAltY, blackHoleRotation * blackHoleRotationRandom, blackHoleStartAngle, blackHoleEndAngle);
+                            context.fillStyle = blackHoleColor;
+                            context.fill();
+                            context.strokeStyle = "lightblue";
+                            context.stroke();
+
+
+                            blackHoleRotationRandom = (Math.floor(Math.random() * 100) + 1) / 100;
+
+                            // Draws the 2nd ellipse
+                            context.beginPath();
+                            context.ellipse(blackHoleStartX, blackHoleStartY, (blackHoleRadiusX * blackHoleRadiusAltX) * 1.3, (blackHoleRadiusY * blackHoleRadiusAltY) * 0.8, -blackHoleRotation * blackHoleRotationRandom, blackHoleStartAngle, blackHoleEndAngle);
+                            context.fillStyle = blackHoleColor;
+                            context.fill();
+                            context.strokeStyle = blackHoleColor;
+                            context.stroke();
+
+
+                            blackHoleRotationRandom = (Math.floor(Math.random() * 100) + 40) / 100;
+
+                            // Draws the 3rd ellipse
+                            context.beginPath();
+                            context.ellipse(blackHoleStartX, blackHoleStartY, (blackHoleRadiusX * blackHoleRadiusAltX) * 0.4, (blackHoleRadiusY * blackHoleRadiusAltY) * 1.9, -0.5 * blackHoleRotation * blackHoleRotationRandom, blackHoleStartAngle, blackHoleEndAngle);
+                            context.fillStyle = blackHoleColor;
+                            context.fill();
+                            context.strokeStyle = blackHoleColor;
+                            context.stroke();            
             }
+                       
+                            if (blackHoleIterations > endGameTriggerBlackHoleIterations)
+                            {   
+                                endGameTrigger = true;
+                                
+
+                                for (let numberOfDashes = 0; numberOfDashes < 4; numberOfDashes++)
+                                { 
+                                    
+                                    for (j = 1; j <= 5; j++)
+                                    {
+                                        for (i = 1; i <= 10; i++)
+                                        {
+                                            context.beginPath();
+                                            context.moveTo(blackHoleStartX,blackHoleStartY);
+                                            context.lineWidth = 10;
+                                            context.lineTo(300 * i ,j * 250);
+                                            context.fillStyle = endLogoColor1;
+                                            context.font = endLogoFont1;
+                                            context.fillText(endLogoText1,endLogoStartWidth1,endLogoStartHeight1);
+
+                                            context.fillStyle = endLogoColor2;
+                                            context.font = endLogoFont2;
+                                            context.fillText(endLogoText2,endLogoStartWidth2,endLogoStartHeight2);
+
+                                            if (numberOfDashes === 0)
+                                            {
+                                            context.strokeStyle = "red";
+                                            }
+
+                                            else if (numberOfDashes === 1)
+                                            {
+                                            context.strokeStyle = "blue";   
+                                            }
+
+                                            else {
+                                            context.strokeStyle = "red";
+                                            }
+                                            
+                                            context.stroke();
+                                            context.lineWidth = 1;
+
+                                            if (numberOfDashes === 3)
+                                            {
+                                            return;
+                                            }
+                                        }
+                                    }
+                                    
+                                }
+                            }
         }                   
     }
 }
+
+                                          
+
