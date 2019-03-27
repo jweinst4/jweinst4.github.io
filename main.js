@@ -1,7 +1,7 @@
 
 
 //Animation
-let animationInterval = 550;
+let animationInterval = 500;
 let animationCounter = 0;
 let totalAnimationIterations = 600;
 
@@ -87,7 +87,7 @@ let randomYMultiplier = 1;
 //Black Hole
 
 let blackHoleStartsPullingStars = 10;
-let whenToStartBlackHoleCounter = 35;
+let whenToStartBlackHoleCounter = 30;
 let whenToStartBlackHoleToggle = false;
 let blackHoleStartX = Math.floor(Math.random() * 1000) + 300;
 let blackHoleStartY = Math.floor(Math.random() * 600) + 150;
@@ -132,6 +132,8 @@ let currentY1Location1 = [];
 let starID = 0;
 let groundStop = 0;
 let endGameTrigger = false;
+let finaleTrigger = false;
+let finaleColor = "blue";
 
 //logo
 let logoColor = "red";
@@ -143,14 +145,15 @@ let logoStartHeight = 50;
 //endLogo
 let endLogoColor1 = "white";
 let endLogoColor2 = "white";
-let endLogoFont1 = "px Amatic SC";
+let endLogoFont1 = "64px Amatic SC";
 let endLogoText1 = "END";
 let endLogoFont2 = "48px Amatic SC";
-let endLogoText2 = "JSW 2019";
+let endLogoText2 = "";
 let endLogoStartWidth1 = 500;
 let endLogoStartHeight1 = 500;
 let endLogoStartWidth2 = 500;
 let endLogoStartHeight2 = 540;
+
 
 
 
@@ -177,14 +180,13 @@ let endLogoStartHeight2 = 540;
 //sets the amount of time between each run
 const interval = setInterval(draw, animationInterval);
 
-
 //starts the Landscape
 function draw()
 {
     // Stop our draw setInterval
-    if (animationCounter === totalAnimationIterations)
+    if (animationCounter > totalAnimationIterations)
         clearInterval(interval);
-
+        
     animationCounter++;
     //prepares the canvas to draw the lines
 
@@ -336,13 +338,13 @@ function draw()
                             logoStartHeight -= 5;
                         }
                     }
-                    context.fillStyle = logoColor;
-                    context.font = logoFont;
-                    context.fillText(logoText,logoStartWidth,logoStartHeight);
+                        context.fillStyle = logoColor;
+                        context.font = logoFont;
+                        context.fillText(logoText,logoStartWidth,logoStartHeight);
 
-                    numberOfStars = currentXLocation.length;
-                    currentX1Location1 = [];
-                    currentY1Location1 = [];
+                        numberOfStars = currentXLocation.length;
+                        currentX1Location1 = [];
+                        currentY1Location1 = [];
 
                     if (animationCounter % 2 === 0)
                     {
@@ -708,68 +710,67 @@ function draw()
                             context.fill();
                             context.strokeStyle = blackHoleColor;
                             context.stroke();            
-            }
-                       
+            
+
                             if (blackHoleIterations > endGameTriggerBlackHoleIterations)
-                            {   
-                                endGameTrigger = true;
-                                
-
-                                for (let numberOfDashes = 0; numberOfDashes < 2000; numberOfDashes++)
-                                { 
-                                    
-                                    for (j = 1; j <= 5; j++)
-                                    {
-                                        if (j === 5)
-                                        {
-                                            debugger;
-                                        }
-                                        for (i = 1; i <= 10; i++)
-                                        {
-                                            context.beginPath();
-                                            context.moveTo(blackHoleStartX,blackHoleStartY);
-                                            context.lineWidth = 10;
-                                            context.lineTo(300 * i ,j * 250);
-                                            context.fillStyle = endLogoColor1;
-                                            context.font = endLogoFont1;
-                                            context.fillText(endLogoText1,endLogoStartWidth1,endLogoStartHeight1);
-
-                                            context.fillStyle = endLogoColor2;
-                                            context.font = endLogoFont2;
-                                            context.fillText(endLogoText2,endLogoStartWidth2,endLogoStartHeight2);
-
-                                            
-
-                                            if (numberOfDashes === 0)
-                                            {
-                                            context.strokeStyle = "red";
-                                            }
-
-                                            else if (numberOfDashes === 1)
-                                            {
-                                            context.strokeStyle = "blue";   
-                                            }
-
-                                            else {
-                                            context.strokeStyle = "red";
-                                            }
-                                            
-                                            context.stroke();
-                                            context.lineWidth = 1;
-
-                                            if (numberOfDashes === 3)
-                                            {
-                                            return;
-                                            }
-                                        }
-                                    }
-                                    
-                                }
-                            }
-        }                   
-    }
-    document.body.style.backgroundImage = "url('https://i.imgur.com/a6szNAT.png?1')"; 
+                            {  
+                                debugger;
+                                endGameFlash();
+                                finaleTrigger = true;
+                                animationCounter += 99999;
+                            } 
+                }                   
+            }
+        }
 }
 
-      
+
+//let animationInterval2 = 1000;
+//let interval2 = setInterval(endGameFlash, animationInterval2);
+//let endGameFlashAnimationCounter = 0;
+//let totalEndGameFlashAnimationCounter = 3;
+
+canvas = document.getElementById("DemoCanvas");
+context = canvas.getContext("2d");
+ctx = canvas.getContext("2d");
+
+
+
+
+function endGameFlash()
+{
+    /*
+    if (endGameFlashAnimationCounter === totalEndGameFlashAnimationCounter + 1000)
+    clearInterval(interval2);
+    */
+    
+    //endGameFlashAnimationCounter++;
+    //if (finaleTrigger)
+    //{
+        for (let j = 1; j <= 5; j++)
+        {
+            for (let i = 1; i <= 10; i++)
+            {
+                context.beginPath();
+                context.moveTo(blackHoleStartX,blackHoleStartY);
+                context.lineWidth = 10;
+                context.lineTo(300 * i ,j * 250);
+                context.strokeStyle = finaleColor;
+                context.fillStyle = endLogoColor1;
+                context.font = endLogoFont1;
+                context.fillText(endLogoText1,endLogoStartWidth1,endLogoStartHeight1);
+
+                context.fillStyle = endLogoColor2;
+                context.font = endLogoFont2;
+                context.fillText(endLogoText2,endLogoStartWidth2,endLogoStartHeight2);                         
+                context.stroke();
+                context.lineWidth = 1;
+            }
+        } 
+    //}
+}
+
+
+
+
 
