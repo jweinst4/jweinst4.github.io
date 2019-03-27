@@ -139,7 +139,7 @@ let finaleColor = "blue";
 let logoColor = "red";
 let logoFont = "48px Amatic SC";
 let logoText = "JSW 2019";
-let logoStartWidth = canvasWidth - 340;
+let logoStartWidth = canvasWidth - 320;
 let logoStartHeight = 50;
 
 //endLogo
