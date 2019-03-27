@@ -151,8 +151,8 @@ let endLogoFont2 = "24px Amatic SC";
 let endLogoText2 = "2019";
 let endLogoStartWidth1 = 500;
 let endLogoStartHeight1 = 500;
-let endLogoStartWidth2 = 530;
-let endLogoStartHeight2 = 530;
+let endLogoStartWidth2 = 535;
+let endLogoStartHeight2 = 530;  
 
 
 
