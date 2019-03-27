@@ -2,6 +2,9 @@
 
 //Animation
 let animationInterval = 500;
+//default 500
+
+
 let animationCounter = 0;
 let totalAnimationIterations = 600;
 
@@ -97,8 +100,8 @@ let blackHoleRadiusXMultiplier = 1.05;
 let blackHoleRadiusYMultiplier = 1.05;
 let blackHoleIterations = 0;
 let blackHoleColor = "black";
-let blackHoleRadiusXMinToggleMultiplier = 1.1;
-let blackHoleRadiusYMinToggleMultiplier = 1.1;
+let blackHoleRadiusXMinToggleMultiplier = 1.2;
+let blackHoleRadiusYMinToggleMultiplier = 1.2;
 let blackHoleRadiusXMaxToggleMultiplier = 2;
 let blackHoleRadiusYMaxToggleMultiplier = 2;
 let blackHoleIterationAlternateAction = 10;
@@ -119,6 +122,7 @@ let randomFlashPointX = 0;
 let randomFlashPointY = 0;
 let explosionXChange = 0;
 let explosionYChange = 0;
+
 
 
 //Counters, Arrays and Placeholders
@@ -489,21 +493,32 @@ function draw()
                         {
                             if ((((currentXLocation[i] + randomXMultiplier * starXChange) > blackHoleStartX)) && (blackHoleIterations > blackHoleStartsPullingStars))
                             {
-                                currentXLocation[i] -= Math.floor(Math.random() * 15) + 10;
-                                randomXMultiplier = 0;
+                                
+                                currentXLocation[i] -= Math.floor(Math.random() * 20) + 6;
+                                currentXLocation[i] *= 1;
+
+                                //default 15 and 10
                             }
                             else
                             {
-                                currentXLocation[i] += Math.floor(Math.random() * 8) + 3;
+                                currentXLocation[i] += (Math.floor(Math.random() * 6) + 3);
+                                currentXLocation[i] *= 1;
+                                
+                                //default 8 and 3
                             }
 
                             if ((currentYLocation[i] > blackHoleStartY) && (blackHoleIterations > blackHoleStartsPullingStars))
                             {
-                                currentYLocation[i] -= Math.floor(Math.random() * 15) + 10;
+                                currentYLocation[i] -= Math.floor(Math.random() * 4) + 2;
+                                currentYLocation[i] *= 1;
+
+                                //default 15 and 10
                             }
                             else
                             {
-                                currentYLocation[i] += Math.floor(Math.random() * 8) + 3;
+                                currentYLocation[i] += (Math.floor(Math.random() * 2) + 1);
+                                currentYLocation[i] *= 1;
+                                //default 8 and 3
                             }
                         }
 
@@ -512,9 +527,9 @@ function draw()
                         context.fillStyle = starColor;   
                         context.fill();
                         context.stroke();
-
+                    
                         currentX1Location1[i] = currentXLocation[i] + randomXMultiplier * starXChange;
-                        currentY1Location1[i] = currentYLocation[i];
+                        currentY1Location1[i] = currentYLocation[i];    
                     }
 
                     currentXLocation = [];
@@ -715,8 +730,8 @@ function draw()
                             if (blackHoleIterations > endGameTriggerBlackHoleIterations)
                             {  
                                 debugger;
-                                endGameFlash();
                                 finaleTrigger = true;
+                                endGameFlash();
                                 animationCounter += 99999;
                             } 
                 }                   
@@ -725,10 +740,11 @@ function draw()
 }
 
 
-//let animationInterval2 = 1000;
-//let interval2 = setInterval(endGameFlash, animationInterval2);
-//let endGameFlashAnimationCounter = 0;
-//let totalEndGameFlashAnimationCounter = 3;
+let animationInterval2 = 500;
+let interval2 = setInterval(endGameFlash, animationInterval2);
+let endGameFlashAnimationCounter = 0;
+let totalEndGameFlashAnimationCounter = 3;
+let dashMultiplier = 0.01;
 
 canvas = document.getElementById("DemoCanvas");
 context = canvas.getContext("2d");
@@ -739,35 +755,58 @@ ctx = canvas.getContext("2d");
 
 function endGameFlash()
 {
-    /*
+    
     if (endGameFlashAnimationCounter === totalEndGameFlashAnimationCounter + 1000)
     clearInterval(interval2);
-    */
     
-    //endGameFlashAnimationCounter++;
-    //if (finaleTrigger)
-    //{
-        for (let j = -5; j <= 5; j++)
+    
+    endGameFlashAnimationCounter++;
+    if (finaleTrigger)
+    {
+       
+        for (let k = 0; k < 5; k++)
         {
-            for (let i = -5; i <= 10; i++)
+            context.fillStyle = landscapeColor;
+            context.width = canvasWidth;
+            context.height = canvasHeight;
+            context = canvas.getContext('2d');
+            context.fillRect(0, 0, canvas.width, canvas.height);
+        
+                    
+                    
+        
+            for (let j = -5; j <= 5; j++)
             {
-                context.beginPath();
-                context.moveTo(blackHoleStartX,blackHoleStartY);
-                context.lineWidth = 10;
-                context.lineTo(300 * i ,j * 250);
-                context.strokeStyle = finaleColor;
-                context.fillStyle = endLogoColor1;
-                context.font = endLogoFont1;
-                context.fillText(endLogoText1,endLogoStartWidth1,endLogoStartHeight1);
 
-                context.fillStyle = endLogoColor2;
-                context.font = endLogoFont2;
-                context.fillText(endLogoText2,endLogoStartWidth2,endLogoStartHeight2);                         
-                context.stroke();
-                context.lineWidth = 1;
-            }
-        } 
-    //}
+    
+
+
+                for (let i = -5; i <= 5; i++)
+                {
+                    
+
+
+                    dashMultiplier = (Math.floor(Math.random() * 15) + 5) / 10;
+                    context.beginPath();
+                    context.moveTo(blackHoleStartX,blackHoleStartY);
+                    context.lineWidth = 10;
+                    context.lineTo(300 * i * dashMultiplier ,j * 250 * dashMultiplier);
+                    context.strokeStyle = finaleColor;
+                    context.fillStyle = endLogoColor1;
+                    context.font = endLogoFont1;
+                    context.fillText(endLogoText1,endLogoStartWidth1,endLogoStartHeight1);
+
+                    context.fillStyle = endLogoColor2;
+                    context.font = endLogoFont2;
+                    context.fillText(endLogoText2,endLogoStartWidth2,endLogoStartHeight2);                         
+                    context.stroke();
+                    context.lineWidth = 1;
+
+                    dashMultiplier *= 1.1;
+                }
+            } 
+        }
+    }
 }
 
 
