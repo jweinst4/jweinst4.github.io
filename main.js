@@ -146,13 +146,13 @@ let logoStartHeight = 50;
 let endLogoColor1 = "white";
 let endLogoColor2 = "white";
 let endLogoFont1 = "64px Amatic SC";
-let endLogoText1 = "END";
-let endLogoFont2 = "48px Amatic SC";
-let endLogoText2 = "";
+let endLogoText1 = "JSW";
+let endLogoFont2 = "24px Amatic SC";
+let endLogoText2 = "2019";
 let endLogoStartWidth1 = 500;
 let endLogoStartHeight1 = 500;
-let endLogoStartWidth2 = 500;
-let endLogoStartHeight2 = 540;
+let endLogoStartWidth2 = 530;
+let endLogoStartHeight2 = 530;
 
 
 
@@ -747,9 +747,9 @@ function endGameFlash()
     //endGameFlashAnimationCounter++;
     //if (finaleTrigger)
     //{
-        for (let j = 1; j <= 5; j++)
+        for (let j = -5; j <= 5; j++)
         {
-            for (let i = 1; i <= 10; i++)
+            for (let i = -5; i <= 10; i++)
             {
                 context.beginPath();
                 context.moveTo(blackHoleStartX,blackHoleStartY);
