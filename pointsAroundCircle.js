@@ -137,14 +137,15 @@ let colorStop3 = 0;
 let firstStop = 0;
 let lastStop = 0;
 let gradient = "";
+let object1Rotation = - Math.PI / 4;
 
 //object 2
-let hObject2 = 150;
-let kObject2 = 150;
-let rObject2 = 50;
+let hObject2 = 50;
+let kObject2 = 50;
+let rObject2 = 20;
 let thetaObject2 = 0;
-let object2NumberOfSteps = 20;
-let object2StepIncrementer = Math.floor(numberOfSteps / object1NumberOfSteps);
+let object2NumberOfSteps = 40;
+let object2StepIncrementer = Math.floor(numberOfSteps2 / object2NumberOfSteps);
 let object2Index = 0;
 let xObject2 = 0;
 let uObject2 = 0;
@@ -170,6 +171,7 @@ let colorStop32 = 0;
 let firstStop2 = 0;
 let lastStop2 = 0;
 let gradient2 = "";
+let object2Rotation = Math.PI / 4;
 
 function movingObject () 
 {
@@ -299,7 +301,7 @@ function movingObject ()
         // ctx.closePath();
 
         ctx.beginPath();
-        ctx.ellipse(object1StartX, object1StartY, object1Radius * 1.5,object1Radius * 0.5,0,0,Math.PI * 2);
+        ctx.ellipse(object1StartX, object1StartY, object1Radius * 1.5,object1Radius * 0.5,object1Rotation,0,Math.PI * 2);
         ctx.fillStyle = gradient;
         ctx.strokeStyle = gradient;
         debugger;
@@ -445,7 +447,7 @@ function movingObject2 ()
         // ctx.closePath();
 
         ctx.beginPath();
-        ctx.ellipse(object2StartX, object2StartY, object2Radius * 1.5,object2Radius * 0.5,0,0,Math.PI * 2);
+        ctx.ellipse(object2StartX, object2StartY, object2Radius * 1.5,object2Radius * 0.5,object2Rotation,0,Math.PI * 2);
         ctx.fillStyle = gradient2;
         ctx.strokeStyle = gradient2;
         ctx.fill();
