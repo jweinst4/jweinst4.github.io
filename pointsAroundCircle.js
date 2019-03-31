@@ -1,25 +1,22 @@
 
+
+
+
 let canvas = document.createElement('canvas');
 
 canvas.id = "DemoCanvas";
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+canvas.width = window.outerWidth;
+canvas.height = window.outerHeight;
 canvas.style.zIndex = 8;
 canvas.style.position = "absolute";
 canvas.style.border = "1px solid";
-
 
 var body = document.getElementsByTagName("body")[0];
 body.appendChild(canvas);
 
 let ctx = canvas.getContext("2d");
-
-
-              
 let circleCounter = 0;
-
 let numberOfSteps = 360;
-
 
 let h = 450;
 let k = 250;
@@ -29,16 +26,12 @@ let currentSpotX = [];
 let currentSpotY = [];
 let currentIndex = 0;
 
-
 for (let i = 0; i < numberOfSteps; i++)
 {
   circleCounter++;
     
         //https://www.mathopenref.com/coordcirclealgorithm.html
-
-
         let step = 2 * Math.PI / numberOfSteps;  // see note 1
-    
 
         ctx.beginPath();  //tell canvas to start a set of lines
 
@@ -112,7 +105,7 @@ function movingObject ()
     object1Radius /= 1.3;
   }
 
-  
+
   if (object1StartY < currentSpotY[((object1Index % 360))])
   {
     object1Radius *= 1.3;
@@ -148,73 +141,106 @@ function movingObject ()
     {
 
     }
+
         colorStop1 = Math.random();
         colorStop2 = Math.random();
         colorStop3 = Math.random();
-      debugger;
+      
         firstStop = Math.max(colorStop1,colorStop2,colorStop3);
         //lastStop = Math.max(colorStop1,colorStop2,colorStop3);
 
         //https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/createRadialGradient
           
-          gradient = ctx.createRadialGradient(object1StartX + 0, object1StartY + 0, object1Radius * 0.3, object1StartX + 0, object1StartY + 0, object1Radius * 0.7);
+        gradient = ctx.createRadialGradient(object1StartX + 0, object1StartY + 0, object1Radius * 0.3, object1StartX + 0, object1StartY + 0, object1Radius);
+        gradient.addColorStop(0, "red");
+        gradient.addColorStop(0.9, "yellow");
+
+/*
+        if (animationCounter % 4 === 0)
+        {
+          startAngleMultiplier = 0;
+          endAngleMultiplier = 2;
+        }
+        else if (animationCounter % 4 === 1)
+        {
+          startAngleMultiplier = 0;
+          endAngleMultiplier = 2;
+          gradient = ctx.createRadialGradient(object1StartX, object1StartY, object1Radius * 0.3, object1StartX, object1StartY, object1Radius * 0.7);
           gradient.addColorStop(0, "blue");
           gradient.addColorStop(0.25, "red");
-/*
-          if (animationCounter % 4 === 0)
-          {
-            startAngleMultiplier = 0;
-            endAngleMultiplier = 2;
-          }
-          else if (animationCounter % 4 === 1)
-          {
-            startAngleMultiplier = 0;
-            endAngleMultiplier = 2;
-            gradient = ctx.createRadialGradient(object1StartX, object1StartY, object1Radius * 0.3, object1StartX, object1StartY, object1Radius * 0.7);
-            gradient.addColorStop(0, "blue");
-            gradient.addColorStop(0.25, "red");
-          }
-          else if (animationCounter % 4 === 2)
-          {
-            startAngleMultiplier = 0;
-            endAngleMultiplier = 2;
-            gradient = ctx.createRadialGradient(object1StartX, object1StartY, object1Radius * 0.3, object1StartX, object1StartY, object1Radius * 0.7);
-            gradient.addColorStop(0, "blue");
-            gradient.addColorStop(0.5, "red");
-          }
-          else
-          {
-            startAngleMultiplier = 0;
-            endAngleMultiplier = 2;
-            gradient = ctx.createRadialGradient(object1StartX, object1StartY, object1Radius * 0.3, object1StartX, object1StartY, object1Radius * 0.7);
-            gradient.addColorStop(0, "blue");
-            gradient.addColorStop(0.75, "red");
-          }
-          */
+        }
+        else if (animationCounter % 4 === 2)
+        {
+          startAngleMultiplier = 0;
+          endAngleMultiplier = 2;
+          gradient = ctx.createRadialGradient(object1StartX, object1StartY, object1Radius * 0.3, object1StartX, object1StartY, object1Radius * 0.7);
+          gradient.addColorStop(0, "blue");
+          gradient.addColorStop(0.5, "red");
+        }
+        else
+        {
+          startAngleMultiplier = 0;
+          endAngleMultiplier = 2;
+          gradient = ctx.createRadialGradient(object1StartX, object1StartY, object1Radius * 0.3, object1StartX, object1StartY, object1Radius * 0.7);
+          gradient.addColorStop(0, "blue");
+          gradient.addColorStop(0.75, "red");
+        }
+*/
+        startAngle = startAngleMultiplier * Math.PI;
+        endAngle = endAngleMultiplier * Math.PI;
 
-          startAngle = startAngleMultiplier * Math.PI;
-          endAngle = endAngleMultiplier * Math.PI;
-          
-          ctx.beginPath();
-          ctx.arc(object1StartX, object1StartY, object1Radius, startAngle, endAngle);
-          ctx.fillStyle = gradient;
-          ctx.strokeStyle = gradient;
-          ctx.fill();
-          ctx.stroke();
-          ctx.fillStyle = "white";
-          ctx.strokeStyle = "white";
+     
+   
+        
+        ctx.beginPath();
+        ctx.arc(object1StartX, object1StartY, object1Radius, startAngle, endAngle);
+        ctx.fillStyle = gradient;
+        ctx.strokeStyle = gradient;
+        ctx.fill();
+        ctx.stroke();
+        ctx.fillStyle = "white";
+        ctx.strokeStyle = "white";
+        ctx.closePath();
+        
+        // let gradient2 = ctx.createRadialGradient(object1StartX + 0, object1StartY + 0, object1Radius * 0.3, object1StartX + 0, object1StartY + 0, object1Radius);
+        // gradient2.addColorStop(0, "black");
+        // gradient2.addColorStop(1, "white");
+        // ctx.fillStyle = gradient2;
+        // ellipse(object1StartX, object1StartY, 100, 60);
+      
+
+
+
+        // ctx.transform(1.5,0,0,0.5,1,1);
+        // ctx.beginPath();
+        // ctx.arc(object1StartX, object1StartY, object1Radius, startAngle, endAngle);
+        // ctx.fillStyle = gradient;
+        // ctx.strokeStyle = gradient;
+        // ctx.fill();
+        // ctx.stroke();
+        // ctx.fillStyle = "white";
+        // ctx.strokeStyle = "white";
+        // ctx.closePath();
+
+        ctx.beginPath();
+        ctx.ellipse(object1StartX, object1StartY, object1Radius * 1.5,object1Radius * 0.5,0,0,Math.PI * 2);
+        ctx.fillStyle = gradient;
+        ctx.strokeStyle = gradient;
+        ctx.fill();
+        ctx.stroke();
+        ctx.fillStyle = "white";
+        ctx.strokeStyle = "white";
+        ctx.closePath();
 
         object1Index += object1StepIncrementer;
-      
-      if (animationCounter >= object1NumberOfSteps)
-      {
-        animationCounter = 0;
-        totalRotations++;
-        debugger;  
-      }
-            
+    
+        if (animationCounter >= object1NumberOfSteps)
+        {
+          animationCounter = 0;
+          totalRotations++;
+          debugger;  
+        }    
 }
-
 
 const interval = setInterval(draw, animationInterval);
 
@@ -233,4 +259,3 @@ function draw()
     i = 1000;
   }
 }
-
