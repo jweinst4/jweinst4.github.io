@@ -299,7 +299,11 @@ function movingObject ()
         // ctx.fillStyle = "white";
         // ctx.strokeStyle = "white";
         // ctx.closePath();
-
+        if (animationCounter % 5 === 0)
+        {
+        object1Rotation *= -1;
+        }
+      
         ctx.beginPath();
         ctx.ellipse(object1StartX, object1StartY, object1Radius * 1.5,object1Radius * 0.5,object1Rotation,0,Math.PI * 2);
         ctx.fillStyle = gradient;
@@ -445,6 +449,11 @@ function movingObject2 ()
         // ctx.fillStyle = "white";
         // ctx.strokeStyle = "white";
         // ctx.closePath();
+        if (animationCounter2 % 5 === 0)
+        {
+        object2Rotation *= -1;
+        }
+
 
         ctx.beginPath();
         ctx.ellipse(object2StartX, object2StartY, object2Radius * 1.5,object2Radius * 0.5,object2Rotation,0,Math.PI * 2);
@@ -471,6 +480,7 @@ const interval = setInterval(draw, animationInterval);
 function draw()
 {
   animationCounter++;
+
 
   // Stop our draw setInterval
   if (animationCounter > totalAnimationIterations)
