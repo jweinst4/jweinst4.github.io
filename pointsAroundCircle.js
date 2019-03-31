@@ -72,7 +72,7 @@ let kObject1 = 150;
 let rObject1 = 50;
 let thetaObject1 = 0;
 let object1NumberOfSteps = 20;
-let object1StepIncrementer = numberOfSteps / object1NumberOfSteps;
+let object1StepIncrementer = Math.floor(numberOfSteps / object1NumberOfSteps);
 let object1Index = 0;
 let xObject1 = 0;
 let uObject1 = 0;
@@ -86,8 +86,19 @@ let i = 0;
 let totalRotations = 0;
 let totalRotationLimit = 100;
 let animationCounter = 0;
-let animationInterval = 200;
+let animationInterval = 600;
 let totalAnimationIterations = 10000;
+let rotationCounter = 0;
+let startAngle = 0;
+let endAngle = 0;
+let startAngleMultiplier = 0;
+let endAngleMultiplier = 2;
+let colorStop1 = 0;
+let colorStop2 = 0;
+let colorStop3 = 0;
+let firstStop = 0;
+let lastStop = 0;
+let gradient = "";
 
 function movingObject () 
 {
@@ -129,25 +140,63 @@ function movingObject ()
       ctx.fillStyle = "white";
       ctx.strokeStyle = "white";
       */
-      ctx.fillStyle = "black";
-      ctx.strokeStyle = "black";
+      ctx.fillStyle = "white";
+      ctx.strokeStyle = "white";
       ctx.fillRect(0, 0, 1000, 1000);
     }
     else
     {
 
     }
+        colorStop1 = Math.random();
+        colorStop2 = Math.random();
+        colorStop3 = Math.random();
+      debugger;
+        firstStop = Math.max(colorStop1,colorStop2,colorStop3);
+        //lastStop = Math.max(colorStop1,colorStop2,colorStop3);
 
         //https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/createRadialGradient
-          let gradient = ctx.createRadialGradient(object1StartX, object1StartY, object1Radius * 0.3, object1StartX, object1StartY, object1Radius * 0.7);
-          gradient.addColorStop(0, "salmon");
-          gradient.addColorStop(.3, "lightpink");
-          gradient.addColorStop(.6, "aqua");
-          gradient.addColorStop(.9, "skyblue");
-          gradient.addColorStop(1, "lightcyan");
+          
+          gradient = ctx.createRadialGradient(object1StartX + 0, object1StartY + 0, object1Radius * 0.3, object1StartX + 0, object1StartY + 0, object1Radius * 0.7);
+          gradient.addColorStop(0, "blue");
+          gradient.addColorStop(0.25, "red");
+/*
+          if (animationCounter % 4 === 0)
+          {
+            startAngleMultiplier = 0;
+            endAngleMultiplier = 2;
+          }
+          else if (animationCounter % 4 === 1)
+          {
+            startAngleMultiplier = 0;
+            endAngleMultiplier = 2;
+            gradient = ctx.createRadialGradient(object1StartX, object1StartY, object1Radius * 0.3, object1StartX, object1StartY, object1Radius * 0.7);
+            gradient.addColorStop(0, "blue");
+            gradient.addColorStop(0.25, "red");
+          }
+          else if (animationCounter % 4 === 2)
+          {
+            startAngleMultiplier = 0;
+            endAngleMultiplier = 2;
+            gradient = ctx.createRadialGradient(object1StartX, object1StartY, object1Radius * 0.3, object1StartX, object1StartY, object1Radius * 0.7);
+            gradient.addColorStop(0, "blue");
+            gradient.addColorStop(0.5, "red");
+          }
+          else
+          {
+            startAngleMultiplier = 0;
+            endAngleMultiplier = 2;
+            gradient = ctx.createRadialGradient(object1StartX, object1StartY, object1Radius * 0.3, object1StartX, object1StartY, object1Radius * 0.7);
+            gradient.addColorStop(0, "blue");
+            gradient.addColorStop(0.75, "red");
+          }
+          */
 
+          startAngle = startAngleMultiplier * Math.PI;
+          endAngle = endAngleMultiplier * Math.PI;
+          
           ctx.beginPath();
-          ctx.arc(object1StartX, object1StartY, object1Radius, 0, 2 * Math.PI);
+          ctx.arc(object1StartX, object1StartY, object1Radius, startAngle, endAngle);
           ctx.fillStyle = gradient;
           ctx.strokeStyle = gradient;
           ctx.fill();
