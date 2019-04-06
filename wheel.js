@@ -14,14 +14,7 @@ $ ( () =>
     randomIterations = Math.floor(randomIterations);
     // $(".circle").css("transform","rotate(" + degrees + ")");
 
-    let $canvas = $("<canvas    >");
-    $canvas.css("width","10px");
-    $canvas.css("height","60px");
-    $canvas.css("background","red");
-    $canvas.css("margin-left","49%");
-    $canvas.css("margin-top","120px");
-    $canvas.css("position","absolute");
-    $canvas.css("z-index","0");
+   
     let $circle = $(".circle");
     let animationInterval = 200;
     $("body").append($canvas);
