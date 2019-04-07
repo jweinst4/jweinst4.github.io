@@ -6,6 +6,11 @@
     let arrayX2 = [];
     let arrayTime = [];
 
+    let correctClip = ["#hitOrMiss","#thatsCorrect","#scubaSquad","#sneaky"];
+    let incorrectClip = ["#itsFrustrating","#imSorryDave","#byeFelicia"];
+    let victoryClip = ["#iWonDaMoney"];
+
+
 
 let rotateWheel = () =>
 {
@@ -441,6 +446,13 @@ $( () =>
             $currentBox.css("background","lightblue");
             prizeMoney += (currentLetterValue * correctGuessesThisTurn);
 
+            if (correctGuessCounter !== currentAnswerLength)
+            {
+                let randomCorrectClipLength = correctClip.length;
+                let randomCorrectClipIndex = Math.floor(Math.random() * (randomCorrectClipLength));
+                $(`audio${correctClip[randomCorrectClipIndex]}`)[0].play()
+            }
+
             if (currentPlayer === "player1")
             {
                 firstPlayerArray[0] += prizeMoney;
@@ -458,6 +470,11 @@ $( () =>
             prizeMoney += (currentLetterValue * correctGuessesThisTurn);
             $currentBox.css("opacity",0.5);
             $currentBox.css("background","lightgreen");
+
+
+            let randomIncorrectClipLength = incorrectClip.length;
+            let randomIncorrectClipIndex = Math.floor(Math.random() * (randomIncorrectClipLength));
+            $(`audio${incorrectClip[randomIncorrectClipIndex]}`)[0].play()
 
             if (currentPlayer === "player1")
             {
@@ -477,7 +494,11 @@ $( () =>
 
         if (correctGuessCounter === currentAnswerLength)
         {
+            let randomVictoryClipLength = victoryClip.length;
+            let randomVictoryClipIndex = Math.floor(Math.random() * (randomVictoryClipLength));
+            $(`audio${victoryClip[randomVictoryClipIndex]}`)[0].play()
             alert("You solved the puzzle.  Here's an extra $500!");
+
             if (currentPlayer === "player1")
             {
                 firstPlayerArray[0] += 500;
