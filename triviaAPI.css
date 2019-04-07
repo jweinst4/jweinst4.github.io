@@ -1,6 +1,6 @@
 
 .board {
-    width: 50%;
+    width: 80%;
     margin: 0 auto;
     height: 300px;
     background:lightblue;
@@ -35,11 +35,43 @@ body {
 .spaceBox {
     width: 70px;
     height: 70px;
+    font-size: 24px;
     display: flex;
     margin: 1px;
-    padding-top: 5px;
     background:lightblue;
+    line-height: 50px;
     z-index: 5;
     border: 0px solid black;
-    flex-wrap: wrap;
+    border-radius: 10%;
+    align-items: center;
+    justify-content: center;
+}
+
+.letterInputArea {
+    width: 50%;
+    margin: 0 auto;
+    height: 300px;
+    background:red;
+    display: flex;
+    border: 2px solid black;
+    border-radius: 2%;
+    align-items: center;
+justify-content: center;
+flex-wrap: wrap;
+    
+}
+
+.letterBox {
+    width: 30px;
+    height: 30px;
+    font-size: 12px;
+    display: flex;
+    margin: 1px;
+    background: blue;
+    line-height: 30px;
+    z-index: 5;
+    border: 2px solid black;
+    border-radius: 10%;
+    align-items: center;
+    justify-content: center;
 }

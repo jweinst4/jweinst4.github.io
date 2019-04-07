@@ -6,7 +6,7 @@ let randomTopic = Math.random();
 
 if (randomTopic < .5)
 {
-    randomTopic = 1;
+    randomTopic = 2;
 }
 else
 {
@@ -113,9 +113,11 @@ let runTrivia = () =>
         {
             for (let i = 0; i < (data2.results[0].correct_answer.length); i++)
             {
-                if ((data2.results[0].correct_answer[i] === ".") || (data2.results[0].correct_answer[i] === "'") || (data2.results[0].correct_answer[i] === ";") || (data2.results[0].correct_answer[i] === ":"))
+                //if the answer has a period or quotation mark or colon or semicolon it finds a new one
+                if ((data2.results[0].correct_answer[i] === ".") || (data2.results[0].correct_answer[i] === "'") || (data2.results[0].correct_answer[i] === ";") || (data2.results[0].correct_answer[i] === ":")|| (data2.results[0].correct_answer[i] === "1")|| (data2.results[0].correct_answer[i] === "2")|| (data2.results[0].correct_answer[i] === "3")|| (data2.results[0].correct_answer[i] === "4")|| (data2.results[0].correct_answer[i] === "5")|| (data2.results[0].correct_answer[i] === "6")|| (data2.results[0].correct_answer[i] === "7")|| (data2.results[0].correct_answer[i] === "8")|| (data2.results[0].correct_answer[i] === "9")|| (data2.results[0].correct_answer[i] === "0"))
                 {
                     runTrivia();
+                    
                     return;
                 }
                 else
@@ -126,6 +128,7 @@ let runTrivia = () =>
 
             for (let i = 0; i < data2.results.length; i++)
             {
+                
                 let $li2 = $("<li>").text(data2.results[i].question)
                 let $li3 = $("<li>").text(data2.results[i].correct_answer)
                 $("body").append($li2);
@@ -133,10 +136,11 @@ let runTrivia = () =>
                 currentQuestionArray[0] = data2.results[i].question;
                 currentAnswerArray[0] = data2.results[i].correct_answer;
             }
-
             currentAnswerLength = currentAnswerArray[0].length;
             updateBoard();
         });
+
+        
 }
 
 let runMovie = () =>
@@ -197,6 +201,8 @@ let runMovie = () =>
             questionArray.push($li3.text());
             answerArray.push($li7.text());
             console.log(data3);
+    
+            // for ()
         })
 }
 
@@ -209,27 +215,62 @@ let updateBoard = () =>
     {
         if ((currentAnswerArray[0][i]) === " ")
         {
-            $spaceBox = $("<div>").attr("class","spaceBox");
+            $spaceBox = $("<div>").attr("class","spaceBox")
+            $spaceBox.css("color","lightblue");
             $spaceBox.text(currentAnswerArray[0][i].toUpperCase());
             $($board).append($spaceBox);
             
         }
         else
         {
+            let currentAnswerLetter = (currentAnswerArray[0][i])
             $answerBox = $("<div>").attr("class","answerBox");
+            $answerBox.addClass(currentAnswerLetter);
             $answerBox.text(currentAnswerArray[0][i].toUpperCase());
+            $answerBox.css("color","pink");
             $($board).append($answerBox);
+            
         }
-
     }
+
+    createLetterButtons();
+
+    $( () =>
+{ 
+    $(".letterBox").on("click", (event) =>
+    {         
+       let $currentBox = $(event.currentTarget);
+       let $currentBoxText = $currentBox.text();
+       console.log($currentBoxText);
+       debugger;
+       let correctGuess = false;
+       
+         for (let i =0; i < currentAnswerLength; i++)
+         {
+            if (currentAnswerArray[0][i].toUpperCase() === $currentBoxText)
+            {
+                let targetAnswerBox = currentAnswerArray[0][i]
+                let $targetAnswerBox = $(`.${targetAnswerBox}`)
+                $targetAnswerBox.css("background","green");
+                correctGuess = true;
+            }
+        }
+        if (correctGuess)
+        {
+
+        }
+        else
+        {
+            alert("no, next players turn")
+        }
+    });
+});
 }
 
 $( () =>
 { 
-    $("button").on("click", (event) =>
-    {
-        debugger;
-                
+    $("#button5").on("click", (event) =>
+    {           
         if (randomTopic === 0)
         {
             //randomMovieNumber();
@@ -250,3 +291,67 @@ $( () =>
 
     });
 });
+
+let createLetterButtons = () =>
+{
+    let $letterInputArea = $("<div class = 'letterInputArea'></div>");
+
+    let $letterA = $("<button id = 'letterA' class = 'letterBox'>A</button>");
+    let $letterB = $("<button id = 'letterB' class = 'letterBox'>B</button>");
+    let $letterC = $("<button id = 'letterC' class = 'letterBox'>C</button>");
+    let $letterD = $("<button id = 'letterD' class = 'letterBox'>D</button>");
+    let $letterE = $("<button id = 'letterE' class = 'letterBox'>E</button>");
+    let $letterF = $("<button id = 'letterF' class = 'letterBox'>F</button>");
+    let $letterG = $("<button id = 'letterG' class = 'letterBox'>G</button>");
+    let $letterH = $("<button id = 'letterH' class = 'letterBox'>H</button>");
+    let $letterI = $("<button id = 'letterI' class = 'letterBox'>I</button>");
+    let $letterJ = $("<button id = 'letterJ' class = 'letterBox'>J</button>");
+    let $letterK = $("<button id = 'letterK' class = 'letterBox'>K</button>");
+    let $letterL = $("<button id = 'letterL' class = 'letterBox'>L</button>");
+    let $letterM = $("<button id = 'letterM' class = 'letterBox'>M</button>");
+    let $letterN = $("<button id = 'letterN' class = 'letterBox'>N</button>");
+    let $letterO = $("<button id = 'letterO' class = 'letterBox'>O</button>");
+    let $letterP = $("<button id = 'letterP' class = 'letterBox'>P</button>");
+    let $letterQ = $("<button id = 'letterQ' class = 'letterBox'>Q</button>");
+    let $letterR = $("<button id = 'letterR' class = 'letterBox'>R</button>");
+    let $letterS = $("<button id = 'letterS' class = 'letterBox'>S</button>");
+    let $letterT = $("<button id = 'letterT' class = 'letterBox'>T</button>");
+    let $letterU = $("<button id = 'letterU' class = 'letterBox'>U</button>");
+    let $letterV = $("<button id = 'letterV' class = 'letterBox'>V</button>");
+    let $letterW = $("<button id = 'letterW' class = 'letterBox'>W</button>");
+    let $letterX = $("<button id = 'letterX' class = 'letterBox'>X</button>");
+    let $letterY = $("<button id = 'letterY' class = 'letterBox'>Y</button>");
+    let $letterZ = $("<button id = 'letterZ' class = 'letterBox'>Z</button>");
+
+    $($letterInputArea).append($letterA);
+    $($letterInputArea).append($letterB);
+    $($letterInputArea).append($letterC);
+    $($letterInputArea).append($letterD);
+    $($letterInputArea).append($letterE);
+    $($letterInputArea).append($letterF);
+    $($letterInputArea).append($letterG);
+    $($letterInputArea).append($letterH);
+    $($letterInputArea).append($letterI);
+    $($letterInputArea).append($letterJ);
+    $($letterInputArea).append($letterK);
+    $($letterInputArea).append($letterL);
+    $($letterInputArea).append($letterM);
+    $($letterInputArea).append($letterN);
+    $($letterInputArea).append($letterO);
+    $($letterInputArea).append($letterP);
+    $($letterInputArea).append($letterQ);
+    $($letterInputArea).append($letterR);
+    $($letterInputArea).append($letterS);
+    $($letterInputArea).append($letterT);
+    $($letterInputArea).append($letterU);
+    $($letterInputArea).append($letterV);
+    $($letterInputArea).append($letterW);
+    $($letterInputArea).append($letterX);
+    $($letterInputArea).append($letterY);
+    $($letterInputArea).append($letterZ);  
+
+    $("body").append($letterInputArea);
+}
+
+
+
