@@ -1,0 +1,72 @@
+<?xml version="1.0" standalone="no" ?>
+<!DOCTYPE project PUBLIC "-//audacityproject-1.3.0//DTD//EN" "http://audacity.sourceforge.net/xml/audacityproject-1.3.0.dtd" >
+<project xmlns="http://audacity.sourceforge.net/xml/" projname="Beerfest Frustrating Puppet_data" version="1.3.0" audacityversion="2.3.1" sel0="32.6230000000" sel1="35.9230000000" vpos="0" h="0.0000000000" zoom="32.1886303561" rate="44100.0" snapto="off" selectionformat="hh:mm:ss + milliseconds" frequencyformat="Hz" bandwidthformat="octaves">
+	<tags>
+		<tag name="compatible_brands" value="isommp42"/>
+		<tag name="Software" value="Lavf57.56.101"/>
+		<tag name="minor_version" value="0"/>
+		<tag name="major_brand" value="mp42"/>
+	</tags>
+	<wavetrack name="Beerfest Frustrating Puppet" channel="0" linked="1" mute="0" solo="0" height="150" minimized="0" isSelected="1" rate="44100" gain="1.0" pan="0.0" colorindex="0">
+		<waveclip offset="0.00000000" colorindex="0">
+			<sequence maxsamples="262144" sampleformat="262159" numsamples="2070144">
+				<waveblock start="0">
+					<simpleblockfile filename="eff1fcbc.au" len="262144" min="-0.222155" max="0.266198" rms="0.016692"/>
+				</waveblock>
+				<waveblock start="262144">
+					<simpleblockfile filename="eff1f04f.au" len="262144" min="-0.327406" max="0.322699" rms="0.020626"/>
+				</waveblock>
+				<waveblock start="524288">
+					<simpleblockfile filename="eff1f7e6.au" len="262144" min="-0.235839" max="0.222649" rms="0.035084"/>
+				</waveblock>
+				<waveblock start="786432">
+					<simpleblockfile filename="eff1ff8a.au" len="262144" min="-0.160544" max="0.210836" rms="0.032545"/>
+				</waveblock>
+				<waveblock start="1048576">
+					<simpleblockfile filename="eff1fa26.au" len="262144" min="-0.2025" max="0.274148" rms="0.027261"/>
+				</waveblock>
+				<waveblock start="1310720">
+					<simpleblockfile filename="eff1f5cd.au" len="262144" min="-0.197111" max="0.181434" rms="0.015166"/>
+				</waveblock>
+				<waveblock start="1572864">
+					<simpleblockfile filename="eff1ff3a.au" len="262144" min="-0.397335" max="0.423387" rms="0.03396"/>
+				</waveblock>
+				<waveblock start="1835008">
+					<simpleblockfile filename="eff1fde7.au" len="235136" min="-0.305385" max="0.29959" rms="0.021188"/>
+				</waveblock>
+			</sequence>
+			<envelope numpoints="0"/>
+		</waveclip>
+	</wavetrack>
+	<wavetrack name="Beerfest Frustrating Puppet" channel="1" linked="0" mute="0" solo="0" height="150" minimized="0" isSelected="1" rate="44100" gain="1.0" pan="0.0" colorindex="0">
+		<waveclip offset="0.00000000" colorindex="0">
+			<sequence maxsamples="262144" sampleformat="262159" numsamples="2070144">
+				<waveblock start="0">
+					<simpleblockfile filename="eff1f7f6.au" len="262144" min="-0.222737" max="0.264287" rms="0.017782"/>
+				</waveblock>
+				<waveblock start="262144">
+					<simpleblockfile filename="eff1f4d1.au" len="262144" min="-0.315498" max="0.325015" rms="0.020635"/>
+				</waveblock>
+				<waveblock start="524288">
+					<simpleblockfile filename="eff1f1ea.au" len="262144" min="-0.235969" max="0.224995" rms="0.035092"/>
+				</waveblock>
+				<waveblock start="786432">
+					<simpleblockfile filename="eff1f5b4.au" len="262144" min="-0.161406" max="0.208914" rms="0.032548"/>
+				</waveblock>
+				<waveblock start="1048576">
+					<simpleblockfile filename="eff1f8b1.au" len="262144" min="-0.203179" max="0.275659" rms="0.027249"/>
+				</waveblock>
+				<waveblock start="1310720">
+					<simpleblockfile filename="eff1f927.au" len="262144" min="-0.190943" max="0.177836" rms="0.015191"/>
+				</waveblock>
+				<waveblock start="1572864">
+					<simpleblockfile filename="eff1fb4b.au" len="262144" min="-0.397808" max="0.426736" rms="0.03396"/>
+				</waveblock>
+				<waveblock start="1835008">
+					<simpleblockfile filename="eff1fee7.au" len="235136" min="-0.305857" max="0.299012" rms="0.021222"/>
+				</waveblock>
+			</sequence>
+			<envelope numpoints="0"/>
+		</waveclip>
+	</wavetrack>
+</project>

@@ -6,11 +6,9 @@
     let arrayX2 = [];
     let arrayTime = [];
 
-    let correctClip = ["#hitOrMiss","#thatsCorrect","#scubaSquad","#sneaky"];
-    let incorrectClip = ["#itsFrustrating","#imSorryDave","#byeFelicia"];
+    let correctClip = ["#hitOrMiss","#thatsCorrect","#scubaSquad","#sneaky","#myNameIs","#nibbHigh"];
+    let incorrectClip = ["#itsFrustrating","#imSorryDave","#byeFelicia","#noPoints","#cantReadGood","#mockYea","#wontGetFined","#burgundy","#strangeWilderness"];
     let victoryClip = ["#iWonDaMoney"];
-
-
 
 let rotateWheel = () =>
 {
@@ -450,6 +448,7 @@ $( () =>
             {
                 let randomCorrectClipLength = correctClip.length;
                 let randomCorrectClipIndex = Math.floor(Math.random() * (randomCorrectClipLength));
+                debugger;
                 $(`audio${correctClip[randomCorrectClipIndex]}`)[0].play()
             }
 
@@ -474,6 +473,8 @@ $( () =>
 
             let randomIncorrectClipLength = incorrectClip.length;
             let randomIncorrectClipIndex = Math.floor(Math.random() * (randomIncorrectClipLength));
+
+            debugger;   
             $(`audio${incorrectClip[randomIncorrectClipIndex]}`)[0].play()
 
             if (currentPlayer === "player1")

@@ -1,0 +1,58 @@
+<?xml version="1.0" standalone="no" ?>
+<!DOCTYPE project PUBLIC "-//audacityproject-1.3.0//DTD//EN" "http://audacity.sourceforge.net/xml/audacityproject-1.3.0.dtd" >
+<project xmlns="http://audacity.sourceforge.net/xml/" projname="smart_data" version="1.3.0" audacityversion="2.3.1" sel0="2.2990000000" sel1="5.5990000000" vpos="0" h="0.0000000000" zoom="75.2219114786" rate="11025.0" snapto="off" selectionformat="hh:mm:ss + milliseconds" frequencyformat="Hz" bandwidthformat="octaves">
+	<tags>
+		<tag name="compatible_brands" value="isommp42"/>
+		<tag name="Software" value="Lavf57.56.101"/>
+		<tag name="minor_version" value="0"/>
+		<tag name="major_brand" value="mp42"/>
+	</tags>
+	<wavetrack name="smart" channel="2" linked="0" mute="0" solo="0" height="150" minimized="0" isSelected="0" rate="11025" gain="1.0" pan="0.0" colorindex="0">
+		<waveclip offset="0.00000000" colorindex="0">
+			<sequence maxsamples="262144" sampleformat="262159" numsamples="69120">
+				<waveblock start="0">
+					<simpleblockfile filename="eff1fce2.au" len="69120" min="-0.750047" max="0.781909" rms="0.13814"/>
+				</waveblock>
+			</sequence>
+			<envelope numpoints="0"/>
+		</waveclip>
+	</wavetrack>
+	<wavetrack name="Hit Or Miss, I Guess They Never Miss HUH - Sound Effect" channel="0" linked="1" mute="0" solo="0" height="150" minimized="0" isSelected="0" rate="44100" gain="1.0" pan="0.0" colorindex="0">
+		<waveclip offset="0.00000000" colorindex="0">
+			<sequence maxsamples="262144" sampleformat="262159" numsamples="888192">
+				<waveblock start="0">
+					<simpleblockfile filename="eff1ff60.au" len="262144" min="-0.955129" max="0.970059" rms="0.273976"/>
+				</waveblock>
+				<waveblock start="262144">
+					<simpleblockfile filename="eff1f482.au" len="262144" min="-0.947191" max="0.949281" rms="0.301733"/>
+				</waveblock>
+				<waveblock start="524288">
+					<simpleblockfile filename="eff1f433.au" len="262144" min="-0.938954" max="0.929535" rms="0.217546"/>
+				</waveblock>
+				<waveblock start="786432">
+					<simpleblockfile filename="eff1fc01.au" len="101760" min="0.0" max="0.0" rms="0.0"/>
+				</waveblock>
+			</sequence>
+			<envelope numpoints="0"/>
+		</waveclip>
+	</wavetrack>
+	<wavetrack name="Hit Or Miss, I Guess They Never Miss HUH - Sound Effect" channel="1" linked="0" mute="0" solo="0" height="150" minimized="0" isSelected="0" rate="44100" gain="1.0" pan="0.0" colorindex="0">
+		<waveclip offset="0.00000000" colorindex="0">
+			<sequence maxsamples="262144" sampleformat="262159" numsamples="888192">
+				<waveblock start="0">
+					<simpleblockfile filename="eff1f706.au" len="262144" min="-0.962127" max="0.992268" rms="0.276314"/>
+				</waveblock>
+				<waveblock start="262144">
+					<simpleblockfile filename="eff1fa30.au" len="262144" min="-0.931671" max="0.935692" rms="0.302138"/>
+				</waveblock>
+				<waveblock start="524288">
+					<simpleblockfile filename="eff1f692.au" len="262144" min="-0.983485" max="0.947318" rms="0.21948"/>
+				</waveblock>
+				<waveblock start="786432">
+					<simpleblockfile filename="eff1f87e.au" len="101760" min="0.0" max="0.0" rms="0.0"/>
+				</waveblock>
+			</sequence>
+			<envelope numpoints="0"/>
+		</waveclip>
+	</wavetrack>
+</project>
