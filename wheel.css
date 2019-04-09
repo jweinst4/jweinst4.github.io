@@ -284,3 +284,78 @@ flex-wrap: wrap;
   justify-content: center;
 }
 
+#firstPlayerPrizePopUpArea {
+  width: 150px;
+  height: 150px;
+  font-size: 36px;
+  display: flex;
+  margin: 1px;
+  margin-left: 250px;
+  margin-top: 100px;
+  background: lightblue;
+  line-height: 50px;
+  z-index: 3;
+  border-radius: 10%;
+  align-items: center;
+  justify-content: center;
+}
+
+#secondPlayerPrizePopUpArea {
+  width: 150px;
+  height: 150px;
+  font-size: 36px;
+  display: flex;
+  margin: 1px;
+  margin-left: 1250px;
+  background: lightblue;
+  line-height: 50px;
+  z-index: 3;
+  border-radius: 10%;
+  align-items: center;
+  justify-content: center;
+}
+
+#firstPlayerSpinArea {
+  width: 550px;
+  height: 50px;
+  font-size: 36px;
+  display: flex;
+  margin: 1px;
+  background:lightblue;
+  margin-left: 50px;
+  line-height: 50px;
+  margin-top: -200px;
+  z-index: 3;
+  align-items: center;
+  justify-content: center;
+}
+
+#secondPlayerSpinArea {
+  width: 550px;
+  height: 50px;
+  font-size: 36px;
+  display: flex;
+  margin: 1px;
+  margin-left: 1000px;
+  margin-top: -200px;
+  background: lightblue;
+  line-height: 50px;
+  z-index: 3;
+  align-items: center;
+  justify-content: center;
+}
+
+.spinWheel {
+  width: 200px;
+  height: 100px;
+  background: pink;
+  font-size: 24px;
+  margin-right: 20px;
+}
+
+.solvePuzzle {
+  width: 200px;
+  height: 100px;
+  background: red;
+  font-size: 24px;
+}
