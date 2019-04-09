@@ -1,18 +1,56 @@
+let winner = 0;   
+let arrayID = [];
+let arrayX = [];
+let arrayID2 = [];
+let arrayX2 = [];
+let arrayTime = [];
+let lettersGuessed = [];
+let correctLettersGuessed = [];
+let spaceBoxCounter = 0;
+let firstPlayerArray = [0];
+let secondPlayerArray = [0];
+let currentPlayer = "player1";
+let otherPlayer = "player2";
+let currentRound = 0;
+let eachRoundBackgroundColor = ["lightblue","lightyellow","brown","orange","silver","gold","aqua"]
 
-    let winner = 0;   
-    let arrayID = [];
-    let arrayX = [];
-    let arrayID2 = [];
-    let arrayX2 = [];
-    let arrayTime = [];
-    let lettersGuessed = [];
-    let correctLettersGuessed = [];
+let correctClip = ["#hitOrMiss","#thatsCorrect","#scubaSquad","#sneaky","#nibbHigh","#heyListen","#lightUpTheEyes","#brainBusters","#aintFirst","#itsEasy","#memberBerry","#youDaBest"];
 
-    let correctClip = ["#hitOrMiss","#thatsCorrect","#scubaSquad","#sneaky","#nibbHigh","#heyListen","#lightUpTheEyes","#brainBusters","#aintFirst","#itsEasy","#memberBerry","#youDaBest"];
+let incorrectClip = ["#itsFrustrating","#imSorryDave","#byeFelicia","#noPoints","#wontGetFined","#burgundy","#strangeWilderness","#spareSomeCutter","#purgeSiren","#bloodSportScream","#soSayWeAll","#wario"];
 
-    let incorrectClip = ["#itsFrustrating","#imSorryDave","#byeFelicia","#noPoints","#wontGetFined","#burgundy","#strangeWilderness","#spareSomeCutter","#purgeSiren","#bloodSportScream","#soSayWeAll","#wario"];
+let victoryClip = ["#iWonDaMoney","#johnnyDramaVictory","#iWin"];
 
-    let victoryClip = ["#iWonDaMoney","#johnnyDramaVictory","#iWin"];
+let nextRound = () =>
+{
+currentRound++;
+$("body").css("background",eachRoundBackgroundColor[currentRound]);
+$("#firstPlayerPrizePopUpArea").css("background",eachRoundBackgroundColor[currentRound]);
+$("#secondPlayerPrizePopUpArea").css("background",eachRoundBackgroundColor[currentRound]);
+$("#firstPlayerSpinArea").css("background",eachRoundBackgroundColor[currentRound]);
+$("#secondPlayerSpinArea").css("background",eachRoundBackgroundColor[currentRound]);
+$(".spaceBox").css("background",eachRoundBackgroundColor[currentRound]);
+$currentBox = "";
+$currentBoxText = "";
+correctGuess = false;
+arrayID = [];
+arrayID2 = [];
+arrayX = [];
+arrayX2 = [];
+correctGuessCounter = 0;
+correctLettersGuessed = [];
+currentAnswerArray = [];
+currentAnswerLength = 0;
+currentLetterValue = 200;
+currentQuestionArray = [];
+lettersGuessed = [];
+$(".board").remove();
+$(".letterInputArea").remove();
+$(".letterBox").remove();
+$(".spinWheel").remove();
+$(".solvePuzzle").remove();
+
+spaceBoxCounter = 0;
+}
 
 let rotateWheel = () =>
 {
@@ -393,6 +431,7 @@ let updateBoard = () =>
             $spaceBox.css("color","lightblue");
             $spaceBox.text(currentAnswerArray[0][i].toUpperCase());
             $($board).append($spaceBox);
+            spaceBoxCounter++;
             
         }
         else
@@ -412,12 +451,10 @@ let updateBoard = () =>
 
 
 //STEP 7
-let currentPlayer = "player1";
-let otherPlayer = "player2";
-let firstPlayerPrizeMoney = 0;
-let secondPlayerPrizeMoney = 0;
-let firstPlayerArray = [0];
-let secondPlayerArray = [0];
+
+
+
+
 
 
 //after we get a valid q&a, create the board, and create the letterInputArea, we wait for the user to click one of the letterInputArea buttons
@@ -461,7 +498,7 @@ $( () =>
             $currentBox.css("background","lightblue");
             prizeMoney += (currentLetterValue * correctGuessesThisTurn);
 
-            if (correctGuessCounter !== currentAnswerLength)
+            if ((correctGuessCounter + spaceBoxCounter) !== currentAnswerLength)
             {
                 let randomCorrectClipLength = correctClip.length;
                 let randomCorrectClipIndex = Math.floor(Math.random() * (randomCorrectClipLength));
@@ -538,7 +575,7 @@ $( () =>
     
         }
         $(".spinWheel").prop("disabled",false);
-        if (correctGuessCounter === currentAnswerLength)
+        if ((correctGuessCounter + spaceBoxCounter) === currentAnswerLength)
         {
 
             let $prizePopUp = $("<div>").attr("class","prizePopUp")
@@ -567,8 +604,9 @@ $( () =>
                 secondPlayerArray[0] += 500;
                 $(".secondPlayer").text(`Player 2 - $${secondPlayerArray[0]}`);
             }
-           
-            return;
+            
+           nextRound();
+   
         }
 
 

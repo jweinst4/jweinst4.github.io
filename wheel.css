@@ -1,109 +1,109 @@
 .circle {
-    position: relative;
-    border: 1px solid black;
-    padding: 0;
-    margin: 1em auto;
-    width: 25em;
-    height: 25em;
-    border-radius: 50%;
-    list-style: none;
-    overflow: hidden;
-    transform: rotate(15deg);
-    z-index: -1;
-    margin-top: -250px;
-  }
-  li {
-    overflow: hidden;
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 50%;
-    height: 50%;
-    transform-origin: 0% 100%;
-  }
-  
-  .text {
-    position: absolute;
-    left: -100%;
-    width: 200%;
-    height: 200%;
-    font-size: 48px;
-    text-align: center;
-    transform: skewY(60deg) rotate(15deg);
-    padding-top: 20px;
-  }
-  li:first-child {
-    transform: rotate(0deg) skewY(-60deg);
-  }
-  li:nth-child(2) {
-    transform: rotate(30deg) skewY(-60deg);
-  }
-  li:nth-child(3) {
-    transform: rotate(60deg) skewY(-60deg);
-  }
-  li:nth-child(4) {
-    transform: rotate(90deg) skewY(-60deg);
-  }
-  li:nth-child(5) {
-    transform: rotate(120deg) skewY(-60deg);
-  }
-  li:nth-child(6) {
-    transform: rotate(150deg) skewY(-60deg);
-  }
-  li:nth-child(7) {
-    transform: rotate(180deg) skewY(-60deg);
-  }
-  li:nth-child(8) {
-    transform: rotate(210deg) skewY(-60deg);
-  }
-  li:nth-child(9) {
-    transform: rotate(240deg) skewY(-60deg);
-  }
-  li:nth-child(10) {
-    transform: rotate(270deg) skewY(-60deg);
-  }
-  li:nth-child(11) {
-    transform: rotate(300deg) skewY(-60deg);
-  }
-  li:nth-child(12) {
-    transform: rotate(330deg) skewY(-60deg);
-  }
-  li:first-child .text {
-    background: green;
-  }
-  li:nth-child(2) .text {
-    background: tomato;
-  }
-  li:nth-child(3) .text {
-    background: aqua;
-  }
-  li:nth-child(4) .text {
-    background: yellow;
-  }
-  li:nth-child(5) .text {
-    background: orange;
-  }
-  li:nth-child(6) .text {
-    background: purple;
-  }
-  li:nth-child(7) .text {
-    background: cyan;
-  }
-  li:nth-child(8) .text {
-    background: brown;
-  }
-  li:nth-child(9) .text {
-    background: gray;
-  }
-  li:nth-child(10) .text {
-    background: pink;
-  }
-  li:nth-child(11) .text {
-    background: maroon;
-  }
-  li:nth-child(12) .text {
-    background: gold;
-  }
+  position: relative;
+  border: 1px solid black;
+  padding: 0;
+  margin: 1em auto;
+  width: 25em;
+  height: 25em;
+  border-radius: 50%;
+  list-style: none;
+  overflow: hidden;
+  transform: rotate(15deg);
+  z-index: -1;
+  margin-top: -250px;
+}
+li {
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 50%;
+  height: 50%;
+  transform-origin: 0% 100%;
+}
+
+.text {
+  position: absolute;
+  left: -100%;
+  width: 200%;
+  height: 200%;
+  font-size: 48px;
+  text-align: center;
+  transform: skewY(60deg) rotate(15deg);
+  padding-top: 20px;
+}
+li:first-child {
+  transform: rotate(0deg) skewY(-60deg);
+}
+li:nth-child(2) {
+  transform: rotate(30deg) skewY(-60deg);
+}
+li:nth-child(3) {
+  transform: rotate(60deg) skewY(-60deg);
+}
+li:nth-child(4) {
+  transform: rotate(90deg) skewY(-60deg);
+}
+li:nth-child(5) {
+  transform: rotate(120deg) skewY(-60deg);
+}
+li:nth-child(6) {
+  transform: rotate(150deg) skewY(-60deg);
+}
+li:nth-child(7) {
+  transform: rotate(180deg) skewY(-60deg);
+}
+li:nth-child(8) {
+  transform: rotate(210deg) skewY(-60deg);
+}
+li:nth-child(9) {
+  transform: rotate(240deg) skewY(-60deg);
+}
+li:nth-child(10) {
+  transform: rotate(270deg) skewY(-60deg);
+}
+li:nth-child(11) {
+  transform: rotate(300deg) skewY(-60deg);
+}
+li:nth-child(12) {
+  transform: rotate(330deg) skewY(-60deg);
+}
+li:first-child .text {
+  background: green;
+}
+li:nth-child(2) .text {
+  background: tomato;
+}
+li:nth-child(3) .text {
+  background: aqua;
+}
+li:nth-child(4) .text {
+  background: yellow;
+}
+li:nth-child(5) .text {
+  background: orange;
+}
+li:nth-child(6) .text {
+  background: purple;
+}
+li:nth-child(7) .text {
+  background: cyan;
+}
+li:nth-child(8) .text {
+  background: brown;
+}
+li:nth-child(9) .text {
+  background: gray;
+}
+li:nth-child(10) .text {
+  background: pink;
+}
+li:nth-child(11) .text {
+  background: maroon;
+}
+li:nth-child(12) .text {
+  background: gold;
+}
 
 ul
 {
@@ -112,89 +112,89 @@ display: flex;
 
 .footer
 {
-  position: absolute;
-  background: pink;
-  display:flex;
-  flex-direction: row;
-  bottom: 0px;
-  width: 100%;
-  height: 150px;
-  opacity: 1;
-  z-index: 5;
+position: absolute;
+background: pink;
+display:flex;
+flex-direction: row;
+bottom: 0px;
+width: 100%;
+height: 150px;
+opacity: 1;
+z-index: 5;
 }
 
 .row
 {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  width: 100%;
+display: flex;
+flex-direction: row;
+flex-wrap: wrap;
+width: 100%;
 }
 
 .column {
-  display: flex;
-  flex-direction: column;
-  flex-basis: 100%;
-  flex-wrap: wrap;  
-  flex: 1;
+display: flex;
+flex-direction: column;
+flex-basis: 100%;
+flex-wrap: wrap;  
+flex: 1;
 }
 
 .firstPlayer
 {
-  display: flex;
-  flex-direction: column;
-  flex-basis: 100%;
-  flex: 1;
-  background: lightgreen;
-  font-size: 24px;
-  margin:  0 auto;
-  width: 250px;
-  border: 3px solid black;
-  border-radius: 20%;
-  text-align: center;
-  line-height: 150px;
+display: flex;
+flex-direction: column;
+flex-basis: 100%;
+flex: 1;
+background: lightgreen;
+font-size: 24px;
+margin:  0 auto;
+width: 250px;
+border: 3px solid black;
+border-radius: 20%;
+text-align: center;
+line-height: 150px;
 }
 
 .secondPlayer
 {
-  display: flex;
-  flex-direction: column;
-  flex-basis: 100%;
-  flex: 1;
-  
-  font-size: 24px;
-  margin:  0 auto;
-  width: 250px;
-  border: 3px solid black;
-  border-radius: 20%;
-  text-align: center;
-  line-height: 150px;
+display: flex;
+flex-direction: column;
+flex-basis: 100%;
+flex: 1;
+
+font-size: 24px;
+margin:  0 auto;
+width: 250px;
+border: 3px solid black;
+border-radius: 20%;
+text-align: center;
+line-height: 150px;
 }
 
 .thirdPlayer
 {
-  background: pink;
-  position: absolute;
-  bottom: 75px;
-  width: 15%;
-  height: 100px;
-  opacity: 1;
-  z-index: 5;
-  line-height: 100px;
-  display: flex;
-  border: 5px solid black;
-  border-radius: 20%;
-  
+background: pink;
+position: absolute;
+bottom: 75px;
+width: 15%;
+height: 100px;
+opacity: 1;
+z-index: 5;
+line-height: 100px;
+display: flex;
+border: 5px solid black;
+border-radius: 20%;
+
 }
 
 canvas {
-  width: 10px;
-  height: 0px;
-  background: red;
-  margin-left: 49%;
-  margin-top: 10px;
-  position: absolute;
-  z-index: 8;
+width: 10px;
+height: 0px;
+background: red;
+margin-left: 49%;
+margin-top: 10px;
+position: absolute;
+z-index: 8;
 }
 /* 
 let $canvas = $("<canvas    >");
@@ -208,154 +208,151 @@ $canvas.css("z-index","0"); */
 
 
 .board {
-  width: 80%;
-  margin: 0 auto;
-  height: 200px;
-  background:lightblue;
-  display: flex;
-  border: 2px solid black;
-  border-radius: 2%;
-  align-items: center;
+width: 80%;
+margin: 0 auto;
+height: 200px;
+display: flex;
+border: 2px solid black;
+border-radius: 2%;
+align-items: center;
 justify-content: center;
 flex-wrap: wrap;
-  
 }
 
 body {
-  background: lightblue;
+background: lightblue;
 }
 
 .answerBox {
-  width: 70px;
-  height: 70px;
-  font-size: 24px;
-  display: flex;
-  margin: 1px;
-  background: pink;
-  line-height: 50px;
-  z-index: 3;
-  border: 2px solid black;
-  border-radius: 10%;
-  align-items: center;
-  justify-content: center;
+width: 100px;
+height: 100px;
+font-size: 24px;
+display: flex;
+margin: 1px;
+background-color: pink;
+line-height: 100px;
+z-index: 3;
+border: 2px solid black;
+border-radius: 10%;
+align-items: center;
+justify-content: center;
 }
 
 .spaceBox {
-  width: 70px;
-  height: 70px;
-  font-size: 24px;
-  display: flex;
-  margin: 1px;
-  background:lightblue;
-  line-height: 50px;
-  z-index: 3;
-  border: 0px solid black;
-  border-radius: 10%;
-  align-items: center;
-  justify-content: center;
+width: 70px;
+height: 70px;
+font-size: 24px;
+display: flex;
+margin: 1px;
+line-height: 50px;
+z-index: 3;
+border: 0px solid black;
+border-radius: 10%;
+align-items: center;
+justify-content: center;
 }
 
 .letterInputArea {
-  width: 60%;
-  margin: 0 auto;
-  height: 200px;
-  background: lightblue;
-  display: flex;
-  border: 2px solid black;
-  border-radius: 2%;
-  align-items: center;
-justify-content: center;
-flex-wrap: wrap;
-  
+width: 60%;
+margin: 0 auto;
+height: 200px;
+flex-grow: 1;
+background: lightblue;
+display: flex;
+border: 2px solid black;
+border-radius: 2%;
+align-items: center;
+justify-content: center; 
+flex-wrap: wrap; 
 }
 
 .letterBox {
-  width: 50px;
-  height: 50px;
-  font-size: 22px;
-  display: flex;
-  margin: 1px;
-  background: pink;
-  line-height: 50px;
-  z-index: 3;
-  border: 2px solid black;
-  border-radius: 10%;
-  align-items: center;
-  justify-content: center;
+width: 70px;
+height: 70px;
+font-size: 22px;
+display: flex;
+margin: 1px;
+background: pink;
+line-height: 70px;
+z-index: 3;
+border: 2px solid black;
+border-radius: 10%;
+align-items: center;
+justify-content: center;
 }
 
 #firstPlayerPrizePopUpArea {
-  width: 150px;
-  height: 150px;
-  font-size: 36px;
-  display: flex;
-  margin: 1px;
-  margin-left: 250px;
-  margin-top: 100px;
-  background: lightblue;
-  line-height: 50px;
-  z-index: 3;
-  border-radius: 10%;
-  align-items: center;
-  justify-content: center;
+width: 150px;
+height: 150px;
+font-size: 36px;
+display: flex;
+margin: 1px;
+margin-left: 250px;
+margin-top: 100px;
+background: lightblue;
+line-height: 50px;
+z-index: 3;
+border-radius: 10%;
+align-items: center;
+justify-content: center;
 }
 
 #secondPlayerPrizePopUpArea {
-  width: 150px;
-  height: 150px;
-  font-size: 36px;
-  display: flex;
-  margin: 1px;
-  margin-left: 1250px;
-  background: lightblue;
-  line-height: 50px;
-  z-index: 3;
-  border-radius: 10%;
-  align-items: center;
-  justify-content: center;
+width: 150px;
+height: 150px;
+font-size: 36px;
+display: flex;
+margin: 1px;
+margin-left: 1250px;
+background:lightblue;
+line-height: 50px;
+z-index: 3;
+border-radius: 10%;
+align-items: center;
+justify-content: center;
 }
 
 #firstPlayerSpinArea {
-  width: 550px;
-  height: 50px;
-  font-size: 36px;
-  display: flex;
-  margin: 1px;
-  background:lightblue;
-  margin-left: 50px;
-  line-height: 50px;
-  margin-top: -200px;
-  z-index: 3;
-  align-items: center;
-  justify-content: center;
+width: 550px;
+height: 50px;
+font-size: 36px;
+display: flex;
+margin: 1px;
+background:lightblue;
+margin-left: 50px;
+line-height: 50px;
+margin-top: -200px;
+z-index: 3;
+align-items: center;
+justify-content: center;
 }
 
 #secondPlayerSpinArea {
-  width: 550px;
-  height: 50px;
-  font-size: 36px;
-  display: flex;
-  margin: 1px;
-  margin-left: 1000px;
-  margin-top: -200px;
-  background: lightblue;
-  line-height: 50px;
-  z-index: 3;
-  align-items: center;
-  justify-content: center;
+width: 550px;
+height: 50px;
+font-size: 36px;
+display: flex;
+margin: 1px;
+margin-left: 1000px;
+margin-top: -200px;
+background: lightblue;
+line-height: 50px;
+z-index: 3;
+align-items: center;
+justify-content: center;
 }
 
 .spinWheel {
-  width: 200px;
-  height: 100px;
-  background: pink;
-  font-size: 24px;
-  margin-right: 20px;
+width: 200px;
+height: 100px;
+background: pink;
+font-size: 24px;
+margin-right: 20px;
 }
 
 .solvePuzzle {
-  width: 200px;
-  height: 100px;
-  background: red;
-  font-size: 24px;
+width: 200px;
+height: 100px;
+background: red;
+font-size: 24px;
 }
