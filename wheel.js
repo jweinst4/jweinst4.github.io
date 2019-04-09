@@ -253,7 +253,7 @@ let runTrivia = () =>
             for (let i = 0; i < (data2.results[0].correct_answer.length); i++)
             {
                 //if the answer has a period or quotation mark or colon or semicolon it finds a new one
-                if ((data2.results[0].correct_answer[i] === ".") || (data2.results[0].correct_answer[i] === "'") || (data2.results[0].correct_answer[i] === ";") || (data2.results[0].correct_answer[i] === ":")|| (data2.results[0].correct_answer[i] === "!")|| (data2.results[0].correct_answer[i] === "1")|| (data2.results[0].correct_answer[i] === "2")|| (data2.results[0].correct_answer[i] === "3")|| (data2.results[0].correct_answer[i] === "4")|| (data2.results[0].correct_answer[i] === "5")|| (data2.results[0].correct_answer[i] === "6")|| (data2.results[0].correct_answer[i] === "7")|| (data2.results[0].correct_answer[i] === "8")|| (data2.results[0].correct_answer[i] === "9")|| (data2.results[0].correct_answer[i] === "0"))
+                if ((data2.results[0].correct_answer[i] === ".") || (data2.results[0].correct_answer[i] === "'") || (data2.results[0].correct_answer[i] === ";") || (data2.results[0].correct_answer[i] === ":")|| (data2.results[0].correct_answer[i] === "!")|| (data2.results[0].correct_answer[i] === "1")|| (data2.results[0].correct_answer[i] === "2")|| (data2.results[0].correct_answer[i] === "3")|| (data2.results[0].correct_answer[i] === "4")|| (data2.results[0].correct_answer[i] === "5")|| (data2.results[0].correct_answer[i] === "6")|| (data2.results[0].correct_answer[i] === "7")|| (data2.results[0].correct_answer[i] === "8")|| (data2.results[0].correct_answer[i] === "9")|| (data2.results[0].correct_answer[i] === "0")  || (data2.results[0].correct_answer[i] === "-"))
                 {
                     //STEP 3
                     
@@ -268,23 +268,23 @@ let runTrivia = () =>
                 }
             }
 
-            for (let i = 0; i < (data2.results[0].question.length); i++)
-            {
-                //if the answer has a period or quotation mark or colon or semicolon it finds a new one
-                if ((data2.results[0].question[i] === ".") || (data2.results[0].question[i] === ";") || (data2.results[0].question[i] === ":")|| (data2.results[0].question[i] === "!") || (data2.results[0].question[i] === "1")|| (data2.results[0].question[i] === "2")|| (data2.results[0].question[i] === "3")|| (data2.results[0].question[i] === "4")|| (data2.results[0].question[i] === "5")|| (data2.results[0].question[i] === "6")|| (data2.results[0].question[i] === "7")|| (data2.results[0].question[i] === "8")|| (data2.results[0].question[i] === "9")|| (data2.results[0].question[i] === "0"))
-                {
-                    //STEP 3
+            // for (let i = 0; i < (data2.results[0].question.length); i++)
+            // {
+            //     //if the answer has a period or quotation mark or colon or semicolon it finds a new one
+            //     if ((data2.results[0].question[i] === ".") || (data2.results[0].question[i] === ";") || (data2.results[0].question[i] === ":")|| (data2.results[0].question[i] === "!") || (data2.results[0].question[i] === "1")|| (data2.results[0].question[i] === "2")|| (data2.results[0].question[i] === "3")|| (data2.results[0].question[i] === "4")|| (data2.results[0].question[i] === "5")|| (data2.results[0].question[i] === "6")|| (data2.results[0].question[i] === "7")|| (data2.results[0].question[i] === "8")|| (data2.results[0].question[i] === "9")|| (data2.results[0].question[i] === "0"))
+            //     {
+            //         //STEP 3
                     
-                    //if any of the characters above are in the answer, runTrivia again until we find a valid q&A
-                    runTrivia();
-                    return;
-                }
-                else
-                {
-                    //STEP 3
-                    //if the q&a is valid, we do nothing and continue below without running runTrivia again
-                }
-            }
+            //         //if any of the characters above are in the answer, runTrivia again until we find a valid q&A
+            //         runTrivia();
+            //         return;
+            //     }
+            //     else
+            //     {
+            //         //STEP 3
+            //         //if the q&a is valid, we do nothing and continue below without running runTrivia again
+            //     }
+            // }
             //STEP 4
 
             //  WILL REMOVE AFTER TESTING.
@@ -437,12 +437,6 @@ $( () =>
        //we set the correctGuess to false, until the user clicks a letter that is in the answer
        let correctGuess = false;
        let correctGuessesThisTurn = 0;
-       let solvePuzzlePromptString = "";
-
-       for (let i = 0; i < currentAnswerLength; i++)
-         {
-            solvePuzzlePromptString += "*";
-         }
        
         //after the user clicks a letter, we loop through the number of characters in the answer to see if any of them are the letter of the clicked button
          for (let i = 0; i < currentAnswerLength; i++)
@@ -452,12 +446,6 @@ $( () =>
                 //if the answer includes the letter that was clicked, make the box show up green and change the correctGuess to true
                 debugger;
                
-                // solvePuzzlePromptString.replace(10th haracter with E)
-                let newS = solvePuzzlePromptString;
-                let newSChar = solvePuzzlePromptString.replace("*","e");
-                console.log(newS);
-                console.log(newSChar);
-                console.log(solvePuzzlePromptString);
                 let targetAnswerBox = currentAnswerArray[0][i];
                 let $targetAnswerBox = $(`.${targetAnswerBox}`)
                 $targetAnswerBox.css("background","green");     
@@ -718,21 +706,7 @@ let createLetterButtons = () =>
 let solvePuzzle = () =>
 {
     
-    // for (let i = 0; i < correctLettersGuessed.length; i++)
-    // {
-    //     for (let j = 0; j < currentAnswerLength; j++)
-    //      {
-    //          if (currentAnswerArray[0][j].toUpperCase() === correctLettersGuessed[i])
-    //          {
-    //              solvePuzzlePromptString += correctLettersGuessed[i];
-    //          }
-    //          else
-    //          {
-    //             solvePuzzlePromptString += "-";
-    //          }
-    //      }
-    // }
-    alert(solvePuzzlePromptString);
+    alert();
     return;
 }
 
