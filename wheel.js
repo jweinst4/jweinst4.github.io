@@ -12,7 +12,8 @@ let secondPlayerArray = [0];
 let currentPlayer = "player1";
 let otherPlayer = "player2";
 let currentRound = 0;
-let eachRoundBackgroundColor = ["lightblue","lightyellow","brown","orange","silver","gold","aqua"]
+let eachRoundBackgroundColor = ["lightblue","lightyellow","brown","orange","silver","gold","aqua"];
+let solvePuzzleString = "";
 
 let correctClip = ["#hitOrMiss","#thatsCorrect","#scubaSquad","#sneaky","#nibbHigh","#heyListen","#lightUpTheEyes","#brainBusters","#aintFirst","#itsEasy","#memberBerry","#youDaBest"];
 
@@ -22,34 +23,36 @@ let victoryClip = ["#iWonDaMoney","#johnnyDramaVictory","#iWin"];
 
 let nextRound = () =>
 {
-currentRound++;
-$("body").css("background",eachRoundBackgroundColor[currentRound]);
-$("#firstPlayerPrizePopUpArea").css("background",eachRoundBackgroundColor[currentRound]);
-$("#secondPlayerPrizePopUpArea").css("background",eachRoundBackgroundColor[currentRound]);
-$("#firstPlayerSpinArea").css("background",eachRoundBackgroundColor[currentRound]);
-$("#secondPlayerSpinArea").css("background",eachRoundBackgroundColor[currentRound]);
-$(".spaceBox").css("background",eachRoundBackgroundColor[currentRound]);
-$currentBox = "";
-$currentBoxText = "";
-correctGuess = false;
-arrayID = [];
-arrayID2 = [];
-arrayX = [];
-arrayX2 = [];
-correctGuessCounter = 0;
-correctLettersGuessed = [];
-currentAnswerArray = [];
-currentAnswerLength = 0;
-currentLetterValue = 200;
-currentQuestionArray = [];
-lettersGuessed = [];
-$(".board").remove();
-$(".letterInputArea").remove();
-$(".letterBox").remove();
-$(".spinWheel").remove();
-$(".solvePuzzle").remove();
+    currentRound++;
+    $("body").css("background",eachRoundBackgroundColor[currentRound]);
+    $("#firstPlayerPrizePopUpArea").css("background",eachRoundBackgroundColor[currentRound]);
+    $("#secondPlayerPrizePopUpArea").css("background",eachRoundBackgroundColor[currentRound]);
+    $("#firstPlayerSpinArea").css("background",eachRoundBackgroundColor[currentRound]);
+    $("#secondPlayerSpinArea").css("background",eachRoundBackgroundColor[currentRound]);
+    $(".spaceBox").css("background",eachRoundBackgroundColor[currentRound]);
+    $(".letterInputArea").css("background",eachRoundBackgroundColor[currentRound]);
+    $currentBox = "";
+    $currentBoxText = "";
+    correctGuess = false;
+    arrayID = [];
+    arrayID2 = [];
+    arrayX = [];
+    arrayX2 = [];
+    correctGuessCounter = 0;
+    correctLettersGuessed = [];
+    currentAnswerArray = [];
+    currentAnswerLength = 0;
+    currentLetterValue = 200;
+    currentQuestionArray = [];
+    lettersGuessed = [];
+    $(".board").remove();
+    $(".letterInputArea").remove();
+    $(".letterBox").remove();
+    $(".spinWheel").remove();
+    $(".solvePuzzle").remove();
 
-spaceBoxCounter = 0;
+    spaceBoxCounter = 0;
+    solvePuzzleString = "";
 }
 
 let rotateWheel = () =>
@@ -62,13 +65,11 @@ let rotateWheel = () =>
         $(currentBoxToDeactivate).prop("disabled",true);
     }
     
-
     let randomIterations = Math.floor(Math.random() * 35);
     randomIterations += 35;
     randomIterations = Math.floor(randomIterations);
     // $(".circle").css("transform","rotate(" + degrees + ")");
 
-   
     let $circle = $(".circle");
     let animationInterval = 200;
 
@@ -195,7 +196,6 @@ let prizeMoneyPrior = 0;
 //gets random movie
 let randomMovieNumber = () =>
 {
-
     let imdbRandom = String(Math.floor(Math.random() * 6999999));
 
     if (imdbRandom.length === 1)
@@ -228,7 +228,6 @@ let randomMovieNumber = () =>
     }
     imdbID += imdbRandom;
 }
-
 
 let runStarWars = () =>
 {
@@ -266,11 +265,7 @@ let runStarWars = () =>
 
             //updates the board to have the correct number of spaces and letters as the answer
             updateBoard();
-
-
-        });
-
-        
+        });       
 }
 
 //  STEP 2
@@ -329,8 +324,7 @@ let runTrivia = () =>
 
             //make an <li> for the valid question and valid answer, and append both li's to the body.  We then push the q&a to a currentQuestionArray and a currentAnswerArray. 
             for (let i = 0; i < data2.results.length; i++)
-            {
-                
+            {          
                 let $li2 = $("<li>").text(data2.results[i].question)
                 let $li3 = $("<li>").text(data2.results[i].correct_answer)
                 //$("body").append($li2);
@@ -344,14 +338,11 @@ let runTrivia = () =>
             //after we get our valid question and answer, we create the board since we now know how many letters and spaces are in the q&a
             currentAnswerLength = currentAnswerArray[0].length;
             updateBoard();
-        });
-
-        
+        });       
 }
 
 let runMovie = () =>
 {
-
     $.ajax(
         {   
             url: "http://www.omdbapi.com/?apikey=29372440&i=" + imdbID,
@@ -371,8 +362,7 @@ let runMovie = () =>
             let typeMovie = data3.Type;
             let country = data3.Country;
             let rated = data3.Rated;
-            
-            
+                  
             if ((typeMovie === "movie") && (country === "USA") && (rating > 7.0) && (rated!== "N/A") && (year > 2000))
             {
             
@@ -407,8 +397,6 @@ let runMovie = () =>
             questionArray.push($li3.text());
             answerArray.push($li7.text());
             console.log(data3);
-    
-            // for ()
         })
 }
 
@@ -421,7 +409,6 @@ let updateBoard = () =>
     let $board = $("<div>").attr("class","board");
     $("#boardRow").append($board);
     
-
     //for each character in the answer, if its a space, color it one way and give it one class, if its a letter, color it a different way and give it a different class
     for (let i = 0; i < currentAnswerLength; i++)
     {
@@ -431,8 +418,7 @@ let updateBoard = () =>
             $spaceBox.css("color","lightblue");
             $spaceBox.text(currentAnswerArray[0][i].toUpperCase());
             $($board).append($spaceBox);
-            spaceBoxCounter++;
-            
+            spaceBoxCounter++;   
         }
         else
         {
@@ -449,13 +435,7 @@ let updateBoard = () =>
     //after we create the board, we create the buttons with each letter of the alphabet that the user can touch to guess the next letter
     createLetterButtons();
 
-
 //STEP 7
-
-
-
-
-
 
 //after we get a valid q&a, create the board, and create the letterInputArea, we wait for the user to click one of the letterInputArea buttons
 $( () =>
@@ -463,7 +443,6 @@ $( () =>
     
     $(".letterBox").on("click", (event) =>
     {   
-     
        //the $currentBox is the button that was clicked, and the letter text is the next variable       
        let $currentBox = $(event.currentTarget);
        let $currentBoxText = $currentBox.text();
@@ -481,7 +460,7 @@ $( () =>
             if (currentAnswerArray[0][i].toUpperCase() === $currentBoxText)
             {
                 //if the answer includes the letter that was clicked, make the box show up green and change the correctGuess to true
-                debugger;
+      
                
                 let targetAnswerBox = currentAnswerArray[0][i];
                 let $targetAnswerBox = $(`.${targetAnswerBox}`)
@@ -541,9 +520,6 @@ $( () =>
             let randomIncorrectClipLength = incorrectClip.length;
             let randomIncorrectClipIndex = Math.floor(Math.random() * (randomIncorrectClipLength));
 
-            
-
-            
             $(`audio${incorrectClip[randomIncorrectClipIndex]}`)[0].play()
 
             if (currentPlayer === "player1")
@@ -603,33 +579,82 @@ $( () =>
             {
                 secondPlayerArray[0] += 500;
                 $(".secondPlayer").text(`Player 2 - $${secondPlayerArray[0]}`);
-            }
-            
+            } 
            nextRound();
-   
         }
 
+        $( () =>
+        { 
+            $(".spinWheel").on("click", (event) =>
+            { 
+                $(".spinWheel").prop("disabled",true);
+                rotateWheel();
+            });
+        });
 
-$( () =>
-{ 
-  
-    $(".spinWheel").on("click", (event) =>
-    { 
-        $(".spinWheel").prop("disabled",true);
-        rotateWheel();
-    });
-});
-
-$( () =>
-{ 
-    $(".solvePuzzle").on("click", (event) =>
-    { 
-        solvePuzzle();
-    });
-});
+        $( () =>
+        { 
+            $(".solvePuzzle").on("click", (event) =>
+            { 
+                debugger;
+                console.log("puzzle");
+                solvePuzzleString = "";
+        
+                for (let i = 0; i < currentAnswerLength; i++)
+                {
+                    let correctCounter = false;
+            
+                    for (let j = 0; j < correctLettersGuessed.length; j++)
+                    {
+                        if (currentAnswerArray[0][i].toUpperCase() === correctLettersGuessed[j])
+                        {
+                        solvePuzzleString += correctLettersGuessed[j];
+                        correctCounter = true;  
+                        }
+        
+                        else if (currentAnswerArray[0][i] === " ")
+                        {
+                        solvePuzzleString += " ";
+                        }
+        
+                        else if (((j + 1) === correctLettersGuessed.length) && (correctCounter === false))
+                        {
+                            solvePuzzleString += "-";
+                        }    
+                        
+                        else
+                        {
+        
+                        }
+                    }
+                }
+        
+                let $form = $(".form");
+                $($form).appendTo("#firstPlayerSpinArea")
+                $form.show();
+        
+                $form.attr("placeholder",solvePuzzleString);
+                let correctAnswer = currentAnswerArray[0].toUpperCase()
+        
+                $(".form").submit(function()
+                {
+                    let inputText = $("#inputText");
+                    if (correctAnswer === inputText.val())
+                    {
+                        alert("you got it right!");
+                    }
+                    else
+                    {  
+                        alert("you got it wrong");
+                    }
+                })   
+            });
+        });
     });
 });
 }
+
+
 
 //  STEP 1
 
@@ -741,12 +766,6 @@ let createLetterButtons = () =>
     //now everything is complete, we wait for letterInputArea buttons to be clicked.
 }
 
-let solvePuzzle = () =>
-{
-    
-    alert();
-    return;
-}
 
 
 

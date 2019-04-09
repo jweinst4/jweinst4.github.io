@@ -257,7 +257,6 @@ width: 60%;
 margin: 0 auto;
 height: 200px;
 flex-grow: 1;
-background: lightblue;
 display: flex;
 border: 2px solid black;
 border-radius: 2%;
@@ -355,4 +354,10 @@ width: 200px;
 height: 100px;
 background: red;
 font-size: 24px;
+}
+
+.form {
+  display: none;
+  font-size: 36px; 
+  width: 200px; 
 }
