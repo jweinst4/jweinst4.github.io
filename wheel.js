@@ -53,16 +53,17 @@ let nextRound = () =>
 
     spaceBoxCounter = 0;
     solvePuzzleString = "";
+    
 }
 
 let rotateWheel = () =>
 {
-    $(".letterBox").prop("disabled",false);
+    //$(".letterBox").prop("disabled",false);
 
     for (let i = 0; i < lettersGuessed.length; i++)
     {
         let currentBoxToDeactivate = "#letter" + lettersGuessed[i];
-        $(currentBoxToDeactivate).prop("disabled",true);
+        //$(currentBoxToDeactivate).prop("disabled",true);
     }
     
     let randomIterations = Math.floor(Math.random() * 15);
@@ -213,7 +214,7 @@ let runTrivia = () =>
                     //if the q&a is valid, we do nothing and continue below without running runTrivia again
                 }
             }
-            console.log(data2.results); 
+
             //make an <li> for the valid question and valid answer, and append both li's to the body.  We then push the q&a to a currentQuestionArray and a currentAnswerArray. 
             for (let i = 0; i < data2.results.length; i++)
             {          
@@ -228,6 +229,8 @@ let runTrivia = () =>
             updateBoard();
         });       
 }
+
+
 
 //STEP 5
 
@@ -270,12 +273,16 @@ let updateBoard = () =>
 $( () =>
 { 
     
+    
     $(".letterBox").on("click", (event) =>
     {   
+        
        //the $currentBox is the button that was clicked, and the letter text is the next variable       
        let $currentBox = $(event.currentTarget);
        let $currentBoxText = $currentBox.text();
-       $currentBox.prop("disabled",true)
+       $currentBox.prop("disabled",true);
+       $(".spinWheel").prop("disabled",false);
+       $(".solvePuzzle").prop("disabled",false);
        $(".letterBox").prop("disabled",true);
        lettersGuessed.push($currentBoxText);
 
@@ -379,7 +386,7 @@ $( () =>
             }
     
         }
-        $(".spinWheel").prop("disabled",false);
+        //$(".spinWheel").prop("disabled",false);
         if ((correctGuessCounter + spaceBoxCounter) === currentAnswerLength)
         {
 
@@ -412,22 +419,14 @@ $( () =>
            nextRound();
         }
 
-        $( () =>
-        { 
-            $(".spinWheel").on("click", (event) =>
-            { 
-                totalDegrees = 0;
-                $(".spinWheel").prop("disabled",true);
-                rotateWheel();
-            });
-        });
+        
 
         $( () =>
         { 
             $(".solvePuzzle").on("click", (event) =>
             { 
                 debugger;
-                console.log("puzzle");
+  
                 solvePuzzleString = "";
         
                 for (let i = 0; i < currentAnswerLength; i++)
@@ -488,12 +487,11 @@ $( () =>
 
 //  STEP 1
 
-//when the user clicks the button, if the random number is a 0, get a  q&a from the movie API, if its a 1, get a q&a from the star wars API, if its a 3, get it from the trivia API.
 $( () =>
 { 
     $("#button5").on("click", (event) =>
     {          
-            rotateWheel();
+            //rotateWheel();
             runTrivia();
     });
 });
@@ -570,10 +568,22 @@ let createLetterButtons = () =>
 
     $("#letterInputAreaRow").append($letterInputArea);
 
+    
+    $(".spinWheel").on("click", (event) =>
+    { 
+        debugger;
+        $(".letterBox").prop("disabled",false);
+        $(".spinWheel").prop("disabled",true);
+        $(".solvePuzzle").prop("disabled",true);
+        rotateWheel();
+    });
+
     //STEP 7
 
     //now everything is complete, we wait for letterInputArea buttons to be clicked.
 }
+
+
 
 
 
