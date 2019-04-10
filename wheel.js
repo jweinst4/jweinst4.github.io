@@ -267,220 +267,220 @@ let updateBoard = () =>
     //after we create the board, we create the buttons with each letter of the alphabet that the user can touch to guess the next letter
     createLetterButtons();
 
-//STEP 7
+    //STEP 7
 
-//after we get a valid q&a, create the board, and create the letterInputArea, we wait for the user to click one of the letterInputArea buttons
-$( () =>
-{ 
-    
-    
-    $(".letterBox").on("click", (event) =>
-    {   
+    //after we get a valid q&a, create the board, and create the letterInputArea, we wait for the user to click one of the letterInputArea buttons
+    $( () =>
+    { 
         
-       //the $currentBox is the button that was clicked, and the letter text is the next variable       
-       let $currentBox = $(event.currentTarget);
-       let $currentBoxText = $currentBox.text();
-       $currentBox.prop("disabled",true);
-       $(".spinWheel").prop("disabled",false);
-       $(".solvePuzzle").prop("disabled",false);
-       $(".letterBox").prop("disabled",true);
-       lettersGuessed.push($currentBoxText);
-
-       //we set the correctGuess to false, until the user clicks a letter that is in the answer
-       let correctGuess = false;
-       let correctGuessesThisTurn = 0;
-       
-        //after the user clicks a letter, we loop through the number of characters in the answer to see if any of them are the letter of the clicked button
-         for (let i = 0; i < currentAnswerLength; i++)
-         {
-            if (currentAnswerArray[0][i].toUpperCase() === $currentBoxText)
-            {
-                //if the answer includes the letter that was clicked, make the box show up green and change the correctGuess to true
-      
-               
-                let targetAnswerBox = currentAnswerArray[0][i];
-                let $targetAnswerBox = $(`.${targetAnswerBox}`)
-                $targetAnswerBox.css("background","green");     
-                correctGuess = true;
-                correctGuessCounter++;
-                correctGuessesThisTurn++;
-            }
-        }
-        if (correctGuess)
-        {
-            correctLettersGuessed.push($currentBoxText);
-            $currentBox.css("opacity",0.5);
-            $currentBox.css("background","lightblue");
-            prizeMoney += (currentLetterValue * correctGuessesThisTurn);
-
-            if ((correctGuessCounter + spaceBoxCounter) !== currentAnswerLength)
-            {
-                let randomCorrectClipLength = correctClip.length;
-                let randomCorrectClipIndex = Math.floor(Math.random() * (randomCorrectClipLength));
-       
-                $(`audio${correctClip[randomCorrectClipIndex]}`)[0].play()
-            }
-
-            if (currentPlayer === "player1")
-            {
-                firstPlayerArray[0] += prizeMoney;
-               
-                $(".firstPlayer").text(`Player 1 - $${firstPlayerArray[0]}`);
-                let $prizePopUp = $("<div>").attr("class","prizePopUp")
-                $prizePopUp.text("+$" + prizeMoney);
-                $prizePopUp.css("color","green");
-      
-                $("#firstPlayerPrizePopUpArea").append($prizePopUp);
-                $prizePopUp.show(1).delay(1000).hide(1);      
-            }
-            else
-            {
-                secondPlayerArray[0] += prizeMoney;
-                $(".secondPlayer").text(`Player 2 - $${secondPlayerArray[0]}`);
-                let $prizePopUp = $("<div>").attr("class","prizePopUp");
-                $prizePopUp.text("+$" + prizeMoney);
-                $prizePopUp.css("color","green");
-                $("#secondPlayerPrizePopUpArea").append($prizePopUp);
-                $prizePopUp.show(1).delay(1000).hide(1); 
-            }
-            prizeMoney = 0;
-
-        }
-        else
-        {
-            prizeMoney += (currentLetterValue * correctGuessesThisTurn);
-            $currentBox.css("opacity",0.5);
-            $currentBox.css("background","lightgreen");
-
-
-            let randomIncorrectClipLength = incorrectClip.length;
-            let randomIncorrectClipIndex = Math.floor(Math.random() * (randomIncorrectClipLength));
-
-            $(`audio${incorrectClip[randomIncorrectClipIndex]}`)[0].play()
-
-            if (currentPlayer === "player1")
-            {
-                currentPlayer = "player2";
-                otherPlayer = "player1";
-                $(".secondPlayer").css("background","lightgreen");
-                $(".firstPlayer").css("background","pink");
-
-                let $prizePopUp = $("<div>").attr("class","prizePopUp")
-                $prizePopUp.text("+$" + prizeMoney);
-                $prizePopUp.css("color","red");
-                $("#firstPlayerPrizePopUpArea").append($prizePopUp);
-                $prizePopUp.show(1).delay(1000).hide(1);
-            }
-            else
-            {
-                currentPlayer = "player1";
-                otherPlayer = "player2"; 
-                $(".firstPlayer").css("background","lightgreen");
-                $(".secondPlayer").css("background","pink");
-
-                let $prizePopUp = $("<div>").attr("class","prizePopUp")
-                $prizePopUp.text("+$" + prizeMoney);
-                $prizePopUp.css("color","red");
-                $("#secondPlayerPrizePopUpArea").append($prizePopUp);
-                $prizePopUp.show(1).delay(1000).hide(1);
-            }
-    
-        }
-        //$(".spinWheel").prop("disabled",false);
-        if ((correctGuessCounter + spaceBoxCounter) === currentAnswerLength)
-        {
-
-            let $prizePopUp = $("<div>").attr("class","prizePopUp")
-            $prizePopUp.text("+$500");
-            $prizePopUp.css("width","50px");
-            $prizePopUp.css("height","50px");
-            $prizePopUp.css("background","lightblue");
-            $prizePopUp.css("font-size","24px");
-            $prizePopUp.css("color","green");
-            $("body").append($prizePopUp);
-            $prizePopUp.show(1).delay(1000).hide(1);
-
-            let randomVictoryClipLength = victoryClip.length;
-            let randomVictoryClipIndex = Math.floor(Math.random() * (randomVictoryClipLength));
-            $(`audio${victoryClip[randomVictoryClipIndex]}`)[0].play()
-            alert("You solved the puzzle.  Here's an extra $500!");
-
-            if (currentPlayer === "player1")
-            {
-                firstPlayerArray[0] += 500;
-                $(".firstPlayer").text(`Player 1 - $${firstPlayerArray[0]}`);
-                
-            }
-            else
-            {
-                secondPlayerArray[0] += 500;
-                $(".secondPlayer").text(`Player 2 - $${secondPlayerArray[0]}`);
-            } 
-           nextRound();
-        }
-
         
-
-        $( () =>
-        { 
-            $(".solvePuzzle").on("click", (event) =>
-            { 
-                debugger;
-  
-                solvePuzzleString = "";
-        
-                for (let i = 0; i < currentAnswerLength; i++)
-                {
-                    let correctCounter = false;
+        $(".letterBox").on("click", (event) =>
+        {   
             
-                    for (let j = 0; j < correctLettersGuessed.length; j++)
-                    {
-                        if (currentAnswerArray[0][i].toUpperCase() === correctLettersGuessed[j])
-                        {
-                        solvePuzzleString += correctLettersGuessed[j];
-                        correctCounter = true;  
-                        }
+        //the $currentBox is the button that was clicked, and the letter text is the next variable       
+        let $currentBox = $(event.currentTarget);
+        let $currentBoxText = $currentBox.text();
+        $currentBox.prop("disabled",true);
+        $(".spinWheel").prop("disabled",false);
+        $(".solvePuzzle").prop("disabled",false);
+        $(".letterBox").prop("disabled",true);
+        lettersGuessed.push($currentBoxText);
+
+        //we set the correctGuess to false, until the user clicks a letter that is in the answer
+        let correctGuess = false;
+        let correctGuessesThisTurn = 0;
         
-                        else if (currentAnswerArray[0][i] === " ")
-                        {
-                        solvePuzzleString += " ";
-                        }
+            //after the user clicks a letter, we loop through the number of characters in the answer to see if any of them are the letter of the clicked button
+            for (let i = 0; i < currentAnswerLength; i++)
+            {
+                if (currentAnswerArray[0][i].toUpperCase() === $currentBoxText)
+                {
+                    //if the answer includes the letter that was clicked, make the box show up green and change the correctGuess to true
         
-                        else if (((j + 1) === correctLettersGuessed.length) && (correctCounter === false))
-                        {
-                            solvePuzzleString += "-";
-                        }    
-                        
-                        else
-                        {
+                
+                    let targetAnswerBox = currentAnswerArray[0][i];
+                    let $targetAnswerBox = $(`.${targetAnswerBox}`)
+                    $targetAnswerBox.css("background","green");     
+                    correctGuess = true;
+                    correctGuessCounter++;
+                    correctGuessesThisTurn++;
+                }
+            }
+            if (correctGuess)
+            {
+                correctLettersGuessed.push($currentBoxText);
+                $currentBox.css("opacity",0.5);
+                $currentBox.css("background","lightblue");
+                prizeMoney += (currentLetterValue * correctGuessesThisTurn);
+
+                if ((correctGuessCounter + spaceBoxCounter) !== currentAnswerLength)
+                {
+                    let randomCorrectClipLength = correctClip.length;
+                    let randomCorrectClipIndex = Math.floor(Math.random() * (randomCorrectClipLength));
         
-                        }
-                    }
+                    $(`audio${correctClip[randomCorrectClipIndex]}`)[0].play()
+                }
+
+                if (currentPlayer === "player1")
+                {
+                    firstPlayerArray[0] += prizeMoney;
+                
+                    $(".firstPlayer").text(`Player 1 - $${firstPlayerArray[0]}`);
+                    let $prizePopUp = $("<div>").attr("class","prizePopUp")
+                    $prizePopUp.text("+$" + prizeMoney);
+                    $prizePopUp.css("color","green");
+        
+                    $("#firstPlayerPrizePopUpArea").append($prizePopUp);
+                    $prizePopUp.show(1).delay(1000).hide(1);      
+                }
+                else
+                {
+                    secondPlayerArray[0] += prizeMoney;
+                    $(".secondPlayer").text(`Player 2 - $${secondPlayerArray[0]}`);
+                    let $prizePopUp = $("<div>").attr("class","prizePopUp");
+                    $prizePopUp.text("+$" + prizeMoney);
+                    $prizePopUp.css("color","green");
+                    $("#secondPlayerPrizePopUpArea").append($prizePopUp);
+                    $prizePopUp.show(1).delay(1000).hide(1); 
+                }
+                prizeMoney = 0;
+
+            }
+            else
+            {
+                prizeMoney += (currentLetterValue * correctGuessesThisTurn);
+                $currentBox.css("opacity",0.5);
+                $currentBox.css("background","lightgreen");
+
+
+                let randomIncorrectClipLength = incorrectClip.length;
+                let randomIncorrectClipIndex = Math.floor(Math.random() * (randomIncorrectClipLength));
+
+                $(`audio${incorrectClip[randomIncorrectClipIndex]}`)[0].play()
+
+                if (currentPlayer === "player1")
+                {
+                    currentPlayer = "player2";
+                    otherPlayer = "player1";
+                    $(".secondPlayer").css("background","lightgreen");
+                    $(".firstPlayer").css("background","pink");
+
+                    let $prizePopUp = $("<div>").attr("class","prizePopUp")
+                    $prizePopUp.text("+$" + prizeMoney);
+                    $prizePopUp.css("color","red");
+                    $("#firstPlayerPrizePopUpArea").append($prizePopUp);
+                    $prizePopUp.show(1).delay(1000).hide(1);
+                }
+                else
+                {
+                    currentPlayer = "player1";
+                    otherPlayer = "player2"; 
+                    $(".firstPlayer").css("background","lightgreen");
+                    $(".secondPlayer").css("background","pink");
+
+                    let $prizePopUp = $("<div>").attr("class","prizePopUp")
+                    $prizePopUp.text("+$" + prizeMoney);
+                    $prizePopUp.css("color","red");
+                    $("#secondPlayerPrizePopUpArea").append($prizePopUp);
+                    $prizePopUp.show(1).delay(1000).hide(1);
                 }
         
-                let $form = $(".form");
-                $($form).appendTo("#firstPlayerSpinArea")
-                $form.show();
-        
-                $form.attr("placeholder",solvePuzzleString);
-                let correctAnswer = currentAnswerArray[0].toUpperCase()
-        
-                $(".form").submit(function()
+            }
+            //$(".spinWheel").prop("disabled",false);
+            if ((correctGuessCounter + spaceBoxCounter) === currentAnswerLength)
+            {
+
+                let $prizePopUp = $("<div>").attr("class","prizePopUp")
+                $prizePopUp.text("+$500");
+                $prizePopUp.css("width","50px");
+                $prizePopUp.css("height","50px");
+                $prizePopUp.css("background","lightblue");
+                $prizePopUp.css("font-size","24px");
+                $prizePopUp.css("color","green");
+                $("body").append($prizePopUp);
+                $prizePopUp.show(1).delay(1000).hide(1);
+
+                let randomVictoryClipLength = victoryClip.length;
+                let randomVictoryClipIndex = Math.floor(Math.random() * (randomVictoryClipLength));
+                $(`audio${victoryClip[randomVictoryClipIndex]}`)[0].play()
+                alert("You solved the puzzle.  Here's an extra $500!");
+
+                if (currentPlayer === "player1")
                 {
-                    let inputText = $("#inputText");
-                    if (correctAnswer === inputText.val())
+                    firstPlayerArray[0] += 500;
+                    $(".firstPlayer").text(`Player 1 - $${firstPlayerArray[0]}`);
+                    
+                }
+                else
+                {
+                    secondPlayerArray[0] += 500;
+                    $(".secondPlayer").text(`Player 2 - $${secondPlayerArray[0]}`);
+                } 
+            nextRound();
+            }
+
+            
+
+            $( () =>
+            { 
+                $(".solvePuzzle").on("click", (event) =>
+                { 
+                    debugger;
+    
+                    solvePuzzleString = "";
+            
+                    for (let i = 0; i < currentAnswerLength; i++)
                     {
-                        alert("you got it right!");
+                        let correctCounter = false;
+                
+                        for (let j = 0; j < correctLettersGuessed.length; j++)
+                        {
+                            if (currentAnswerArray[0][i].toUpperCase() === correctLettersGuessed[j])
+                            {
+                            solvePuzzleString += correctLettersGuessed[j];
+                            correctCounter = true;  
+                            }
+            
+                            else if (currentAnswerArray[0][i] === " ")
+                            {
+                            solvePuzzleString += " ";
+                            }
+            
+                            else if (((j + 1) === correctLettersGuessed.length) && (correctCounter === false))
+                            {
+                                solvePuzzleString += "-";
+                            }    
+                            
+                            else
+                            {
+            
+                            }
+                        }
                     }
-                    else
-                    {  
-                        alert("you got it wrong");
-                    }
-                })   
+            
+                    let $form = $(".form");
+                    $($form).appendTo("#firstPlayerSpinArea")
+                    $form.show();
+            
+                    $form.attr("placeholder",solvePuzzleString);
+                    let correctAnswer = currentAnswerArray[0].toUpperCase()
+            
+                    $(".form").submit(function()
+                    {
+                        let inputText = $("#inputText");
+                        if (correctAnswer === inputText.val())
+                        {
+                            alert("you got it right!");
+                        }
+                        else
+                        {  
+                            alert("you got it wrong");
+                        }
+                    })   
+                });
             });
         });
     });
-});
 }
 
 
@@ -491,8 +491,10 @@ $( () =>
 { 
     $("#button5").on("click", (event) =>
     {          
-            //rotateWheel();
+            debugger;
+            $("#button5").prop("disabled",true);
             runTrivia();
+            
     });
 });
 
@@ -558,7 +560,9 @@ let createLetterButtons = () =>
     $($letterInputArea).append($letterW);
     $($letterInputArea).append($letterX);
     $($letterInputArea).append($letterY);
-    $($letterInputArea).append($letterZ);  
+    $($letterInputArea).append($letterZ);
+    
+    //$(".letterBox").prop("disabled",true);
 
     $("#firstPlayerSpinArea").append($spinWheel); 
     $("#firstPlayerSpinArea").append($solvePuzzle);
