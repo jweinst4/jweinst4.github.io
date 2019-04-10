@@ -1,4 +1,3 @@
-
 let arrayID = [];
 let arrayX = [];
 let arrayID2 = [];
@@ -13,7 +12,6 @@ let currentPlayer = "player1";
 let otherPlayer = "player2";
 let currentRound = 0;
 let solvePuzzleString = "";
-
 
 
 //https://www.w3resource.com/javascript-exercises/javascript-array-exercise-17.php
@@ -50,19 +48,14 @@ function shuffle(arra1) {
 
 //https://picclick.com/Beautiful-Vintage-Lake-Mountains-Landscape-Oil-Painting-152432073829.html
 
-//
+//https://www.google.com/search?rlz=1C5CHFA_enUS839US839&biw=1120&bih=611&tbm=isch&sa=1&ei=NPCtXNz_CKGD5wKd9I-QDg&q=beautiful+hand+painting+landscape+sky+free&oq=beautiful+hand+painting+landscape+sky+free&gs_l=img.3...26613.27296..27457...0.0..0.261.701.1j2j1......1....1..gws-wiz-img.IvuO7Fc5Ey8#imgrc=frzP-PQo6vyukM:
 
 let url1 = "url('images/landscape1.jpg')";
 let url2 = "url('images/landscape2.jpg')";
-let url3 = "url('images/landscape8.jpg')";
-let url4 = "url('images/landscape9.jpg')";
-let url5 = "url('images/landscape10.jpg')";
 let url6 = "url('images/landscape6.jpg')";
 let url7 = "url('images/landscape7.jpg')";
-let url8 = "url('images/landscape11.jpg')";
-let url9 = "url('images/landscape12.jpg')";
 
-let backgroundImage = [url1,url2,url3,url4,url5,url6,url7,url8,url9];
+let backgroundImage = [url1,url2,url6,url7];
 let eachRoundBackgroundColor = shuffle(backgroundImage);
 
 let correctClip = ["#hitOrMiss","#thatsCorrect","#scubaSquad","#sneaky","#nibbHigh","#heyListen","#lightUpTheEyes","#brainBusters","#aintFirst","#itsEasy","#memberBerry","#youDaBest","#tfueBitCoin"];
@@ -76,6 +69,12 @@ let nextRound = () =>
     currentRound++;
 
     $("#button5").prop("disabled",false);
+
+    $("#topic").text("");
+
+    $(".form").hide();
+
+    $(".circle").hide();
 
     $("body").css("background",eachRoundBackgroundColor[currentRound]);
     $("body").css("background-size","cover");
@@ -91,6 +90,7 @@ let nextRound = () =>
     $(".solvePuzzle").remove();
 
     $currentBox = "";
+    correctAnswer = "";
     $currentBoxText = "";
     correctGuess = false;
     arrayID = [];
@@ -106,6 +106,7 @@ let nextRound = () =>
     lettersGuessed = [];
     spaceBoxCounter = 0;
     solvePuzzleString = "";
+    data2.results[0] = [];
 }
 
 let rotateWheel = () =>
@@ -189,6 +190,15 @@ let rotateWheel = () =>
         $circle.css("transform",rotateString); 
         }     
     }
+
+    let getX = () => 
+    {
+
+    }
+
+    setTimeout(getX,250);
+
+    getX();
 };
 
 let currentAnswerLength = 0;
@@ -213,7 +223,7 @@ let runTrivia = () =>
         }
         }).done(function(data2) 
         {
-            if ((data2.results[0].correct_answer.length > 20) || (data2.results[0].type === "boolean"))
+            if ((data2.results[0].correct_answer.length > 20) || (data2.results[0].type === "boolean")  || (data2.results[0].difficulty !== "easy"))
             {
                 runTrivia();
                 return;
@@ -232,13 +242,26 @@ let runTrivia = () =>
                 }
             }
 
+            for (let i = 0; i < (data2.results[0].question.length); i++)
+            {
+                if ((data2.results[0].question[i] === ":") || (data2.results[0].question[i] === "-") || (data2.results[0].question[i] === "@")  || (data2.results[0].question[i] === "#")  || (data2.results[0].question[i] === "$")  || (data2.results[0].question[i] === "%")  || (data2.results[0].question[i] === "^")  || (data2.results[0].question[i] === "&")  || (data2.results[0].question[i] === "*")  || (data2.results[0].question[i] === "(")  || (data2.results[0].question[i] === ")")  || (data2.results[0].question[i] === "_")  || (data2.results[0].question[i] === "+")  || (data2.results[0].question[i] === "="))
+                {
+                    runTrivia();
+                    return;
+                }
+                else
+                {
+                
+                }
+            }
+
             for (let i = 0; i < data2.results.length; i++)
             {          
                 currentQuestionArray[0] = data2.results[i].question;
                 currentAnswerArray[0] = data2.results[i].correct_answer;
             }
-
             currentAnswerLength = currentAnswerArray[0].length;
+            $(".circle").show();
             updateBoard();
         });       
 }
@@ -247,6 +270,10 @@ let updateBoard = () =>
 {
     let $board = $("<div>").attr("class","board");
     $("#boardRow").append($board);
+
+    let $topic = $("<div>").attr("id","topic");
+    $topic.text(currentQuestionArray[0]);
+    $("#topic").append($topic);
     
     for (let i = 0; i < currentAnswerLength; i++)
     {
@@ -319,9 +346,13 @@ let updateBoard = () =>
 
                 $("#spinWheel1").prop("disabled",false);
                 $("#solvePuzzle1").prop("disabled",false); 
+                $("#spinWheel1").css("background","lightgreen");
+                $("#solvePuzzle1").css("background","lightgreen"); 
 
                 $("#spinWheel2").prop("disabled",true);
-                $("#solvePuzzle2").prop("disabled",true);    
+                $("#solvePuzzle2").prop("disabled",true);
+                $("#spinWheel2").css("background","pink");
+                $("#solvePuzzle2").css("background","pink");  
             
                 $(".firstPlayer").text(`Player 1 - $${firstPlayerArray[0]}`);
                 let $prizePopUp = $("<div>").attr("class","prizePopUp")
@@ -336,10 +367,14 @@ let updateBoard = () =>
                 secondPlayerArray[0] += prizeMoney;
 
                 $("#spinWheel2").prop("disabled",false);
-                $("#solvePuzzle2").prop("disabled",false); 
+                $("#solvePuzzle2").prop("disabled",false);
+                $("#spinWheel2").css("background","lightgreen");
+                $("#solvePuzzle2").css("background","lightgreen"); 
 
                 $("#spinWheel1").prop("disabled",true);
-                $("#solvePuzzle1").prop("disabled",true);     
+                $("#solvePuzzle1").prop("disabled",true);
+                $("#spinWheel1").css("background","pink");
+                $("#solvePuzzle1").css("background","pink");     
 
                 $(".secondPlayer").text(`Player 2 - $${secondPlayerArray[0]}`);
                 let $prizePopUp = $("<div>").attr("class","prizePopUp");
@@ -349,7 +384,6 @@ let updateBoard = () =>
                 $prizePopUp.show(1).delay(1000).hide(1); 
             }
             prizeMoney = 0;
-
         }
         else
         {
@@ -369,9 +403,13 @@ let updateBoard = () =>
 
                 $("#spinWheel2").prop("disabled",false);
                 $("#solvePuzzle2").prop("disabled",false);
+                $("#spinWheel2").css("background","lightgreen");
+                $("#solvePuzzle2").css("background","lightgreen"); 
 
                 $("#spinWheel1").prop("disabled",true);
                 $("#solvePuzzle1").prop("disabled",true);
+                $("#spinWheel1").css("background","pink");
+                $("#solvePuzzle1").css("background","pink"); 
                 
                 $(".secondPlayer").css("background","lightgreen");
                 $(".firstPlayer").css("background","pink");
@@ -388,10 +426,14 @@ let updateBoard = () =>
                 otherPlayer = "player2"; 
 
                 $("#spinWheel1").prop("disabled",false);
-                $("#solvePuzzle1").prop("disabled",false); 
+                $("#solvePuzzle1").prop("disabled",false);
+                $("#spinWheel1").css("background","lightgreen");
+                $("#solvePuzzle1").css("background","lightgreen");  
                 
                 $("#spinWheel2").prop("disabled",true);
                 $("#solvePuzzle2").prop("disabled",true);
+                $("#spinWheel2").css("background","pink");
+                $("#solvePuzzle2").css("background","pink"); 
 
                 $(".firstPlayer").css("background","lightgreen");
                 $(".secondPlayer").css("background","pink");
@@ -402,7 +444,6 @@ let updateBoard = () =>
                 $("#secondPlayerPrizePopUpArea").append($prizePopUp);
                 $prizePopUp.show(1).delay(1000).hide(1);
             }
-    
         }
         
         if ((correctGuessCounter + spaceBoxCounter) === currentAnswerLength)
@@ -436,62 +477,9 @@ let updateBoard = () =>
             nextRound();
         }
     });
+    $("#topic").css("background","pink");
 }
          
-$(".solvePuzzle").on("click", (event) =>
-{ 
-    solvePuzzleString = "";
-
-    for (let i = 0; i < currentAnswerLength; i++)
-    {
-        let correctCounter = false;
-
-        for (let j = 0; j < correctLettersGuessed.length; j++)
-        {
-            if (currentAnswerArray[0][i].toUpperCase() === correctLettersGuessed[j])
-            {
-            solvePuzzleString += correctLettersGuessed[j];
-            correctCounter = true;  
-            }
-
-            else if (currentAnswerArray[0][i] === " ")
-            {
-            solvePuzzleString += " ";
-            }
-
-            else if (((j + 1) === correctLettersGuessed.length) && (correctCounter === false))
-            {
-                solvePuzzleString += "-";
-            }    
-            
-            else
-            {
-
-            }
-        }
-    }
-
-    let $form = $(".form");
-    $($form).appendTo("#firstPlayerSpinArea")
-    $form.show();
-
-    $form.attr("placeholder",solvePuzzleString);
-    let correctAnswer = currentAnswerArray[0].toUpperCase()
-
-    $(".form").submit(function()
-    {
-        let inputText = $("#inputText");
-        if (correctAnswer === inputText.val())
-        {
-            alert("you got it right!");
-        }
-        else
-        {  
-            alert("you got it wrong");
-        }
-    })   
-})
-  
 //Step 1 - click button to runTrivia
 $( () =>
 { 
@@ -546,9 +534,13 @@ let createLetterButtons = () =>
     {
         $("#spinWheel1").prop("disabled",false);
         $("#solvePuzzle1").prop("disabled",false);
+        $("#spinWheel1").css("background","lightgreen");
+        $("#solvePuzzle1").css("background","lightgreen"); 
 
         $("#spinWheel2").prop("disabled",true);
         $("#solvePuzzle2").prop("disabled",true);
+        $("#spinWheel2").css("background","pink");
+        $("#solvePuzzle2").css("background","pink"); 
     }
     else
     {
@@ -595,7 +587,6 @@ let createLetterButtons = () =>
     $("#letterInputAreaRow").append($letterInputArea);
 
     $(".letterBox").prop("disabled",true);
-    debugger;
 
     $(".spinWheel").on("click", (event) =>
     { 
@@ -605,6 +596,93 @@ let createLetterButtons = () =>
         
         rotateWheel();
     });
+
+    $(".solvePuzzle").on("click", (event) =>
+    { 
+        solvePuzzleString = "";
+        $(".form").show();
+
+        for (let i = 0; i < currentAnswerLength; i++)
+        {
+            let correctCounter = false;
+
+            for (let j = 0; j < correctLettersGuessed.length; j++)
+            {
+                if (currentAnswerArray[0][i].toUpperCase() === correctLettersGuessed[j])
+                {
+                solvePuzzleString += correctLettersGuessed[j];
+                correctCounter = true;  
+                }
+
+                else if (currentAnswerArray[0][i] === " ")
+                {
+                solvePuzzleString += " ";
+                }
+
+                else if (((j + 1) === correctLettersGuessed.length) && (correctCounter === false))
+                {
+                    solvePuzzleString += "-";
+                }    
+                
+                else
+                {
+
+                }
+            }
+        }
+        
+        let $form = $(".form");
+        $($form).appendTo("#firstPlayerSpinArea");
+        $form.attr("placeholder",solvePuzzleString);
+
+        debugger;
+        let correctAnswer = currentAnswerArray[0].toUpperCase();
+
+        $(".form").submit(function(event)
+        {
+            debugger;
+            event.preventDefault();
+            let inputText = $("#inputText");
+            if (correctAnswer === inputText.val())
+            {
+                alert("you got it right!");
+
+                if (currentPlayer === "player1")
+                {
+                    firstPlayerArray[0] += 500;
+                    $(".firstPlayer").text(`Player 1 - $${firstPlayerArray[0]}`);
+                    
+                }
+                else
+                {
+                    secondPlayerArray[0] += 500;
+                    $(".secondPlayer").text(`Player 2 - $${secondPlayerArray[0]}`);
+                }
+
+            nextRound();
+            
+            }
+
+            else
+            {  
+                alert("you got it wrong");
+
+                if (currentPlayer === "player1")
+                {
+                    currentPlayer = "player2";
+                    otherPlayer = "player1";
+                    
+                }
+                else
+                {
+                    currentPlayer = "player1";
+                    otherPlayer = "player2";
+                }
+                $(".form").hide();
+                return;
+            } 
+        })   
+    })
 }
 
 
