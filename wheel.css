@@ -10,7 +10,7 @@
   overflow: hidden;
   transform: rotate(15deg);
   z-index: 0;
-  margin-top: -50px;
+  margin-top: -55px;
   display: none;
 }
 
@@ -279,7 +279,7 @@ height: 50px;
 font-size: 36px;
 display: flex;
 margin: 1px;
-margin-left: 950px;
+margin-left: 900px;
 margin-top: -200px;
 line-height: 50px;
 align-items: center;
@@ -306,6 +306,7 @@ width: 200px;
 height: 100px;
 background: pink;
 font-size: 24px;
+margin-right: 80px;
 }
   
 .solvePuzzle2 {
