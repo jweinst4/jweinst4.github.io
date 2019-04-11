@@ -110,7 +110,6 @@ let nextRound = () =>
     lettersGuessed = [];
     spaceBoxCounter = 0;
     solvePuzzleString = "";
-    data2.results[0] = [];
 }
 
 let rotateWheel = () =>
