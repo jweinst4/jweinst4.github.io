@@ -10,7 +10,7 @@
   overflow: hidden;
   transform: rotate(15deg);
   z-index: 0;
-  margin-top: -55px;
+  margin-top: -60px;
   display: none;
 }
 
@@ -148,6 +148,7 @@ border: 3px solid black;
 border-radius: 20%;
 text-align: center;
 line-height: 150px;
+font-family: "Ubuntu";
 }
 
 .secondPlayer
@@ -159,6 +160,7 @@ border: 3px solid black;
 border-radius: 20%;
 text-align: center;
 line-height: 150px;
+font-family: "Ubuntu";
 }
 
 .board {
@@ -176,6 +178,7 @@ flex: right;
 body {
 background-size: cover;
 background-repeat: no-repeat no-repeat;
+font-family: "Ubuntu";
 }
 
 .answerBox {
@@ -190,6 +193,7 @@ border: 2px solid black ;
 border-radius: 10%;
 align-items: center;
 justify-content: center;
+font-family: "Ubuntu";
 }
 
 .spaceBox {
@@ -231,6 +235,7 @@ border: 2px solid black;
 border-radius: 10%;
 align-items: center;
 justify-content: center;
+font-family: "Ubuntu";
 }
 
 #firstPlayerPrizePopUpArea {
@@ -266,7 +271,6 @@ height: 50px;
 font-size: 36px;
 display: flex;
 margin: 1px;
-margin-left: 50px;
 line-height: 50px;
 margin-top: -200px;
 align-items: center;
@@ -279,7 +283,7 @@ height: 50px;
 font-size: 36px;
 display: flex;
 margin: 1px;
-margin-left: 900px;
+margin-left: 65%;
 margin-top: -200px;
 line-height: 50px;
 align-items: center;
@@ -292,6 +296,7 @@ height: 100px;
 background: pink;
 font-size: 24px;
 margin-right: 20px;
+font-family: "Ubuntu";
 }
 
 .solvePuzzle {
@@ -299,6 +304,7 @@ width: 200px;
 height: 100px;
 background: pink;
 font-size: 24px;
+font-family: "Ubuntu";
 }
 
 .spinWheel2 {
@@ -307,6 +313,7 @@ height: 100px;
 background: pink;
 font-size: 24px;
 margin-right: 80px;
+font-family: "Ubuntu";
 }
   
 .solvePuzzle2 {
@@ -314,6 +321,7 @@ width: 200px;
 height: 100px;
 background: pink;
 font-size: 24px;
+font-family: "Ubuntu";
 }
 
 .form {
@@ -324,7 +332,7 @@ width: 200px;
 
 #topic {
   margin: 10px;
-  font-size: 24px;
+  font-size: 30px;
   width: 200px;
   z-index: 10;
   position: fixed;
@@ -354,14 +362,32 @@ pointer-events: none;
 /* https://css-tricks.com/the-shapes-of-css/ */
 #triangleUp
 {
-position: fixed;
+position: absolute;
 width: 0;
 height: 0;
-border-left: 15px solid transparent;
-border-right: 15px solid transparent;
-border-bottom: 30px solid red;
-margin-left: 735px;
+border-left: 30px solid transparent;
+border-right: 30px solid transparent;
+border-bottom: 60px solid red;
+margin-left: 48%;
 z-index: 2;
 margin-top: 70px;
 display: none;
+}
+
+.modal {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  opacity: 1;
+  font-weight: bold;
+  display: none;
+  font-size: 120px;
+  margin: 0 auto;
+  text-align: center;
+  line-height: 500px;
+  color: red;
+}
+
+.modal.open {
+  display: block;
 }

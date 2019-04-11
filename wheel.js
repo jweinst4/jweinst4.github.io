@@ -1,3 +1,5 @@
+
+
 let arrayID = [];
 let arrayX = [];
 let arrayID2 = [];
@@ -370,12 +372,13 @@ let updateBoard = () =>
                 $("#solvePuzzle2").css("background","pink");  
             
                 $(".firstPlayer").text(`Player 1 - $${firstPlayerArray[0]}`);
-                let $prizePopUp = $("<div>").attr("class","prizePopUp")
-                $prizePopUp.text("+$" + prizeMoney);
-                $prizePopUp.css("color","green");
-    
-                $("#firstPlayerPrizePopUpArea").append($prizePopUp);
-                $prizePopUp.show(1).delay(1000).hide(1);      
+                
+                let $modal = $(".modal");
+                $modal.text(`CORRECT: +$${prizeMoney}`);
+                $modal.css("color","green");
+
+                $modal.show();
+                $modal.show(1).delay(1000).hide(1);
             }
             else
             {
@@ -392,11 +395,13 @@ let updateBoard = () =>
                 $("#solvePuzzle1").css("background","pink");     
 
                 $(".secondPlayer").text(`Player 2 - $${secondPlayerArray[0]}`);
-                let $prizePopUp = $("<div>").attr("class","prizePopUp");
-                $prizePopUp.text("+$" + prizeMoney);
-                $prizePopUp.css("color","green");
-                $("#secondPlayerPrizePopUpArea").append($prizePopUp);
-                $prizePopUp.show(1).delay(1000).hide(1); 
+
+                let $modal = $(".modal");
+                $modal.text(`CORRECT: +$${prizeMoney}`);
+                $modal.css("color","green");
+
+                $modal.show();
+                $modal.show(1).delay(1000).hide(1);
             }
             prizeMoney = 0;
         }
@@ -430,10 +435,13 @@ let updateBoard = () =>
                 $(".firstPlayer").css("background","pink");
 
                 let $prizePopUp = $("<div>").attr("class","prizePopUp")
-                $prizePopUp.text("+$" + prizeMoney);
-                $prizePopUp.css("color","red");
-                $("#firstPlayerPrizePopUpArea").append($prizePopUp);
-                $prizePopUp.show(1).delay(1000).hide(1);
+
+                let $modal = $(".modal");
+                $modal.text(`WRONG: +$${prizeMoney}`);
+                $modal.css("color","red");
+
+                $modal.show();
+                $modal.show(1).delay(1000).hide(1);
             }
             else
             {
@@ -453,30 +461,28 @@ let updateBoard = () =>
                 $(".firstPlayer").css("background","lightgreen");
                 $(".secondPlayer").css("background","pink");
 
-                let $prizePopUp = $("<div>").attr("class","prizePopUp")
-                $prizePopUp.text("+$" + prizeMoney);
-                $prizePopUp.css("color","red");
-                $("#secondPlayerPrizePopUpArea").append($prizePopUp);
-                $prizePopUp.show(1).delay(1000).hide(1);
+                let $modal = $(".modal");
+                $modal.text(`WRONG: +$${prizeMoney}`);
+                $modal.css("color","red");
+
+                $modal.show();
+                $modal.show(1).delay(1000).hide(1);
             }
         }
         
         if ((correctGuessCounter + spaceBoxCounter) === currentAnswerLength)
         {
-            let $prizePopUp = $("<div>").attr("class","prizePopUp");
-            $prizePopUp.text("+$500");
-            $prizePopUp.css("width","50px");
-            $prizePopUp.css("height","50px");
-            $prizePopUp.css("background","lightblue");
-            $prizePopUp.css("font-size","24px");
-            $prizePopUp.css("color","green");
-            $("body").append($prizePopUp);
-            $prizePopUp.show(1).delay(1000).hide(1);
 
             let randomVictoryClipLength = victoryClip.length;
             let randomVictoryClipIndex = Math.floor(Math.random() * (randomVictoryClipLength));
             $(`audio${victoryClip[randomVictoryClipIndex]}`)[0].play()
-            alert("You solved the puzzle.  Here's an extra $500!");
+            
+            let $modal = $(".modal");
+                $modal.text("You Solved The Puzzle: +$500");
+                $modal.css("color","green");
+
+                $modal.show();
+                $modal.show(1).delay(1000).hide(1);
 
             if (currentPlayer === "player1")
             {
@@ -492,7 +498,7 @@ let updateBoard = () =>
             nextRound();
         }
     });
-    $("#topic").css("background","pink");
+
 }
          
 //Step 1 - click button to runTrivia
