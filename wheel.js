@@ -76,6 +76,8 @@ let nextRound = () =>
 
     $(".circle").hide();
 
+    $("#triangleUp").hide();
+
     $("body").css("background",eachRoundBackgroundColor[currentRound]);
     $("body").css("background-size","cover");
     $("body").css("background-repeat","no-repeat no-repeat");
@@ -223,7 +225,7 @@ let runTrivia = () =>
         }
         }).done(function(data2) 
         {
-            if ((data2.results[0].correct_answer.length > 20) || (data2.results[0].type === "boolean")  || (data2.results[0].difficulty !== "easy"))
+            if ((data2.results[0].correct_answer.length > 10) || (data2.results[0].type === "boolean")  || (data2.results[0].difficulty !== "easy"))
             {
                 runTrivia();
                 return;
@@ -271,6 +273,8 @@ let updateBoard = () =>
     let $board = $("<div>").attr("class","board");
     $("#boardRow").append($board);
 
+    $("#triangleUp").show();
+
     let $topic = $("<div>").attr("id","topic");
     $topic.text(currentQuestionArray[0]);
     $("#topic").append($topic);
@@ -302,6 +306,7 @@ let updateBoard = () =>
         let $currentBox = $(event.currentTarget);
         let $currentBoxText = $currentBox.text();
         $currentBox.prop("disabled",true);
+        $currentBox.addClass("alreadyGuessed");
          
         $(".letterBox").prop("disabled",true);
         lettersGuessed.push($currentBoxText);
@@ -330,6 +335,16 @@ let updateBoard = () =>
             correctLettersGuessed.push($currentBoxText);
             $currentBox.css("opacity",0.5);
             $currentBox.css("background","lightblue");
+
+            if (($currentBoxText === "A") ||($currentBoxText === "E") ||($currentBoxText === "I") ||($currentBoxText === "O") ||($currentBoxText === "U") ||($currentBoxText === "Y"))
+            {
+                currentLetterValue = 0;
+            }
+            else
+            {
+                currentLetterValue = 200;
+            }
+
             prizeMoney += (currentLetterValue * correctGuessesThisTurn);
 
             if ((correctGuessCounter + spaceBoxCounter) !== currentAnswerLength)
@@ -684,19 +699,3 @@ let createLetterButtons = () =>
         })   
     })
 }
-
-
-
-
-
-
-    
-
-    
-
-        
-
-    
-
-    
-    
