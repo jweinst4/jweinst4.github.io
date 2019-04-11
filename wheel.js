@@ -60,11 +60,11 @@ let url7 = "url('images/landscape7.jpg')";
 let backgroundImage = [url1,url2,url6,url7];
 let eachRoundBackgroundColor = shuffle(backgroundImage);
 
-let correctClip = ["#hitOrMiss","#thatsCorrect","#scubaSquad","#sneaky","#nibbHigh","#heyListen","#lightUpTheEyes","#brainBusters","#aintFirst","#itsEasy","#memberBerry","#youDaBest","#tfueBitCoin"];
+let correctClip = ["#hitOrMiss","#thatsCorrect","#nibbHigh","#lightUpTheEyes","#brainBusters","#aintFirst","#itsEasy","#memberBerry","#youDaBest","#tfueBitCoin","#bailando","#wannaNegotiate","#youCanDoIt"];
 
-let incorrectClip = ["#itsFrustrating","#imSorryDave","#byeFelicia","#noPoints","#wontGetFined","#burgundy","#strangeWilderness","#spareSomeCutter","#purgeSiren","#bloodSportScream","#soSayWeAll","#wario"];
+let incorrectClip = ["#itsFrustrating","#byeFelicia","#noPoints","#wontGetFined","#burgundy","#strangeWilderness","#wario","#youChosePoorly"];
 
-let victoryClip = ["#iWonDaMoney","#johnnyDramaVictory","#iWin"];
+let victoryClip = ["#iWonDaMoney","#johnnyDramaVictory"];
 
 let nextRound = () =>
 {
@@ -336,7 +336,7 @@ let updateBoard = () =>
         {
             correctLettersGuessed.push($currentBoxText);
             $currentBox.css("opacity",0.5);
-            $currentBox.css("background","lightblue");
+            $currentBox.css("background","lightgreen");
 
             if (($currentBoxText === "A") ||($currentBoxText === "E") ||($currentBoxText === "I") ||($currentBoxText === "O") ||($currentBoxText === "U") ||($currentBoxText === "Y"))
             {
@@ -353,7 +353,7 @@ let updateBoard = () =>
             {
                 let randomCorrectClipLength = correctClip.length;
                 let randomCorrectClipIndex = Math.floor(Math.random() * (randomCorrectClipLength));
-    
+                    
                 $(`audio${correctClip[randomCorrectClipIndex]}`)[0].play()
             }
 
@@ -377,7 +377,6 @@ let updateBoard = () =>
                 $modal.text(`CORRECT: +$${prizeMoney}`);
                 $modal.css("color","green");
 
-                $modal.show();
                 $modal.show(1).delay(1000).hide(1);
             }
             else
@@ -400,7 +399,6 @@ let updateBoard = () =>
                 $modal.text(`CORRECT: +$${prizeMoney}`);
                 $modal.css("color","green");
 
-                $modal.show();
                 $modal.show(1).delay(1000).hide(1);
             }
             prizeMoney = 0;
@@ -408,8 +406,8 @@ let updateBoard = () =>
         else
         {
             prizeMoney += (currentLetterValue * correctGuessesThisTurn);
-            $currentBox.css("opacity",0.5);
-            $currentBox.css("background","lightgreen");
+            $currentBox.css("opacity",0.7);
+            $currentBox.css("background","white");
 
             let randomIncorrectClipLength = incorrectClip.length;
             let randomIncorrectClipIndex = Math.floor(Math.random() * (randomIncorrectClipLength));
@@ -440,7 +438,6 @@ let updateBoard = () =>
                 $modal.text(`WRONG: +$${prizeMoney}`);
                 $modal.css("color","red");
 
-                $modal.show();
                 $modal.show(1).delay(1000).hide(1);
             }
             else
@@ -465,7 +462,6 @@ let updateBoard = () =>
                 $modal.text(`WRONG: +$${prizeMoney}`);
                 $modal.css("color","red");
 
-                $modal.show();
                 $modal.show(1).delay(1000).hide(1);
             }
         }
@@ -478,10 +474,9 @@ let updateBoard = () =>
             $(`audio${victoryClip[randomVictoryClipIndex]}`)[0].play()
             
             let $modal = $(".modal");
-                $modal.text("You Solved The Puzzle: +$500");
+                $modal.text(`You Solved It! + $500`);
                 $modal.css("color","green");
 
-                $modal.show();
                 $modal.show(1).delay(1000).hide(1);
 
             if (currentPlayer === "player1")
@@ -551,26 +546,7 @@ let createLetterButtons = () =>
     let $spinWheel2 = $("<button class = 'spinWheel' id = 'spinWheel2'>Spin Wheel</button>");
     let $solvePuzzle2 = $("<button class = 'solvePuzzle' id = 'solvePuzzle2'>Solve Puzzle - Not Finished Yet</button>");
 
-    if (currentPlayer === "player1")
-    {
-        $("#spinWheel1").prop("disabled",false);
-        $("#solvePuzzle1").prop("disabled",false);
-        $("#spinWheel1").css("background","lightgreen");
-        $("#solvePuzzle1").css("background","lightgreen"); 
-
-        $("#spinWheel2").prop("disabled",true);
-        $("#solvePuzzle2").prop("disabled",true);
-        $("#spinWheel2").css("background","pink");
-        $("#solvePuzzle2").css("background","pink"); 
-    }
-    else
-    {
-        $("#spinWheel2").prop("disabled",false);
-        $("#solvePuzzle2").prop("disabled",false);
-
-        $("#spinWheel1").prop("disabled",true);
-        $("#solvePuzzle1").prop("disabled",true);
-    }
+    
 
     $($letterInputArea).append($letterA);
     $($letterInputArea).append($letterB);
@@ -608,6 +584,33 @@ let createLetterButtons = () =>
     $("#letterInputAreaRow").append($letterInputArea);
 
     $(".letterBox").prop("disabled",true);
+
+    if (currentPlayer === "player1")
+    {
+        $("#spinWheel1").prop("disabled",false);
+        $("#solvePuzzle1").prop("disabled",false);
+        $("#spinWheel1").css("background","lightgreen");
+        $("#solvePuzzle1").css("background","lightgreen"); 
+
+        $("#spinWheel2").prop("disabled",true);
+        $("#solvePuzzle2").prop("disabled",true);
+        $("#spinWheel2").css("background","pink");
+        $("#solvePuzzle2").css("background","pink"); 
+    }
+    else
+    {
+        $("#spinWheel2").prop("disabled",false);
+        $("#solvePuzzle2").prop("disabled",false);
+        $("#spinWheel2").css("background","lightgreen");
+        $("#solvePuzzle2").css("background","lightgreen"); 
+
+        $("#spinWheel1").prop("disabled",true);
+        $("#solvePuzzle1").prop("disabled",true);
+        $("#spinWheel1").css("background","pink");
+        $("#solvePuzzle1").css("background","pink");
+    }
+
+    
 
     $(".spinWheel").on("click", (event) =>
     { 

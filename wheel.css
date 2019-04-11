@@ -293,7 +293,7 @@ justify-content: center;
 .spinWheel {
 width: 200px;
 height: 100px;
-background: pink;
+background: lightgreen;
 font-size: 24px;
 margin-right: 20px;
 font-family: "Ubuntu";
@@ -302,12 +302,12 @@ font-family: "Ubuntu";
 .solvePuzzle {
 width: 200px;
 height: 100px;
-background: pink;
+background: lightgreen;
 font-size: 24px;
 font-family: "Ubuntu";
 }
 
-.spinWheel2 {
+#spinWheel2 {
 width: 200px;
 height: 100px;
 background: pink;
@@ -316,7 +316,7 @@ margin-right: 80px;
 font-family: "Ubuntu";
 }
   
-.solvePuzzle2 {
+#solvePuzzle2 {
 width: 200px;
 height: 100px;
 background: pink;
