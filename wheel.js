@@ -40,17 +40,7 @@ function shuffle(arra1) {
 
 //https://www.shutterstock.com/video/clip-29530201-cartoon-nature-landscape-animation-loop-colorful-hills
 
-//https://visme.co/blog/simple-backgrounds/
-
 //https://pngtree.com/illustration-design
-
-//https://www.beyonddream.com/nature-beauty-landscape-oil-painting/i/0301
-
-//https://www.indiamart.com/proddetail/landscape-canvas-painting-oil-painting-knife-painting-15086286597.html
-
-//https://picclick.com/Beautiful-Vintage-Lake-Mountains-Landscape-Oil-Painting-152432073829.html
-
-//https://www.google.com/search?rlz=1C5CHFA_enUS839US839&biw=1120&bih=611&tbm=isch&sa=1&ei=NPCtXNz_CKGD5wKd9I-QDg&q=beautiful+hand+painting+landscape+sky+free&oq=beautiful+hand+painting+landscape+sky+free&gs_l=img.3...26613.27296..27457...0.0..0.261.701.1j2j1......1....1..gws-wiz-img.IvuO7Fc5Ey8#imgrc=frzP-PQo6vyukM:
 
 let url1 = "url('images/landscape1.jpg')";
 let url2 = "url('images/landscape2.jpg')";
@@ -65,10 +55,6 @@ let correctClip = ["#hitOrMiss","#thatsCorrect","#nibbHigh","#lightUpTheEyes","#
 let incorrectClip = ["#itsFrustrating","#byeFelicia","#noPoints","#wontGetFined","#burgundy","#strangeWilderness","#wario","#youChosePoorly","#nopeClip"];
 
 let victoryClip = ["#iWonDaMoney","#johnnyDramaVictory"];
-
-shuffle(correctClip);
-shuffle(incorrectClip);
-shuffle(victoryClip);
 
 let nextRound = () =>
 {
@@ -356,7 +342,12 @@ let updateBoard = () =>
             {
                 let randomCorrectClipLength = correctClip.length;
                 let randomCorrectClipIndex = Math.floor(Math.random() * (randomCorrectClipLength));
-                    
+
+
+                    shuffle(correctClip);
+                    shuffle(incorrectClip);
+                    shuffle(victoryClip);
+                                        
                 $(`audio${correctClip[randomCorrectClipIndex]}`)[0].play()
             }
 
@@ -380,7 +371,7 @@ let updateBoard = () =>
                 $modal.text(`CORRECT: +$${prizeMoney}`);
                 $modal.css("color","green");
 
-                $modal.show(1).delay(1000).hide(1);
+                $modal.show(1).delay(1500).hide(1);
             }
             else
             {
@@ -402,7 +393,7 @@ let updateBoard = () =>
                 $modal.text(`CORRECT: +$${prizeMoney}`);
                 $modal.css("color","green");
 
-                $modal.show(1).delay(1000).hide(1);
+                $modal.show(1).delay(1500).hide(1);
             }
             prizeMoney = 0;
         }
@@ -414,6 +405,10 @@ let updateBoard = () =>
 
             let randomIncorrectClipLength = incorrectClip.length;
             let randomIncorrectClipIndex = Math.floor(Math.random() * (randomIncorrectClipLength));
+
+            shuffle(correctClip);
+            shuffle(incorrectClip);
+            shuffle(victoryClip);
 
             $(`audio${incorrectClip[randomIncorrectClipIndex]}`)[0].play()
 
@@ -441,7 +436,7 @@ let updateBoard = () =>
                 $modal.text(`WRONG: +$${prizeMoney}`);
                 $modal.css("color","red");
 
-                $modal.show(1).delay(1000).hide(1);
+                $modal.show(1).delay(1500).hide(1);
             }
             else
             {
@@ -465,7 +460,7 @@ let updateBoard = () =>
                 $modal.text(`WRONG: +$${prizeMoney}`);
                 $modal.css("color","red");
 
-                $modal.show(1).delay(1000).hide(1);
+                $modal.show(1).delay(1500).hide(1);
             }
         }
         
@@ -474,13 +469,18 @@ let updateBoard = () =>
 
             let randomVictoryClipLength = victoryClip.length;
             let randomVictoryClipIndex = Math.floor(Math.random() * (randomVictoryClipLength));
+
+            shuffle(correctClip);
+            shuffle(incorrectClip);
+            shuffle(victoryClip);
+
             $(`audio${victoryClip[randomVictoryClipIndex]}`)[0].play()
             
             let $modal = $(".modal");
                 $modal.text(`You Solved It! + $500`);
                 $modal.css("color","green");
 
-                $modal.show(1).delay(1000).hide(1);
+                $modal.show(1).delay(1500).hide(1);
 
             if (currentPlayer === "player1")
             {
