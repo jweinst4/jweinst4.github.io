@@ -430,8 +430,6 @@ let updateBoard = () =>
                 $(".secondPlayer").css("background","lightgreen");
                 $(".firstPlayer").css("background","pink");
 
-                let $prizePopUp = $("<div>").attr("class","prizePopUp")
-
                 let $modal = $(".modal");
                 $modal.text(`WRONG: +$${prizeMoney}`);
                 $modal.css("color","red");
@@ -617,6 +615,7 @@ let createLetterButtons = () =>
 
     $(".spinWheel").on("click", (event) =>
     { 
+        event.preventDefault();
         $(".letterBox").prop("disabled",false);
         $(".spinWheel").prop("disabled",true);
         $(".solvePuzzle").prop("disabled",true);
