@@ -66,6 +66,10 @@ let incorrectClip = ["#itsFrustrating","#byeFelicia","#noPoints","#wontGetFined"
 
 let victoryClip = ["#iWonDaMoney","#johnnyDramaVictory"];
 
+shuffle(correctClip);
+shuffle(incorrectClip);
+shuffle(victoryClip);
+
 let nextRound = () =>
 {
     currentRound++;
