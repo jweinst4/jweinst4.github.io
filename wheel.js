@@ -62,7 +62,7 @@ let eachRoundBackgroundColor = shuffle(backgroundImage);
 
 let correctClip = ["#hitOrMiss","#thatsCorrect","#nibbHigh","#lightUpTheEyes","#brainBusters","#aintFirst","#itsEasy","#memberBerry","#youDaBest","#tfueBitCoin","#bailando","#wannaNegotiate","#youCanDoIt","#nopeClip"];
 
-let incorrectClip = ["#itsFrustrating","#byeFelicia","#noPoints","#wontGetFined","#burgundy","#strangeWilderness","#wario","#youChosePoorly","#yepClip"];
+let incorrectClip = ["#itsFrustrating","#byeFelicia","#noPoints","#wontGetFined","#burgundy","#strangeWilderness","#wario","#youChosePoorly","#yupClip"];
 
 let victoryClip = ["#iWonDaMoney","#johnnyDramaVictory"];
 
