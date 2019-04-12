@@ -60,9 +60,9 @@ let url7 = "url('images/landscape7.jpg')";
 let backgroundImage = [url1,url2,url6,url7];
 let eachRoundBackgroundColor = shuffle(backgroundImage);
 
-let correctClip = ["#hitOrMiss","#thatsCorrect","#nibbHigh","#lightUpTheEyes","#brainBusters","#aintFirst","#itsEasy","#memberBerry","#youDaBest","#tfueBitCoin","#bailando","#wannaNegotiate","#youCanDoIt"];
+let correctClip = ["#hitOrMiss","#thatsCorrect","#nibbHigh","#lightUpTheEyes","#brainBusters","#aintFirst","#itsEasy","#memberBerry","#youDaBest","#tfueBitCoin","#bailando","#wannaNegotiate","#youCanDoIt","#nopeClip"];
 
-let incorrectClip = ["#itsFrustrating","#byeFelicia","#noPoints","#wontGetFined","#burgundy","#strangeWilderness","#wario","#youChosePoorly"];
+let incorrectClip = ["#itsFrustrating","#byeFelicia","#noPoints","#wontGetFined","#burgundy","#strangeWilderness","#wario","#youChosePoorly","#yepClip"];
 
 let victoryClip = ["#iWonDaMoney","#johnnyDramaVictory"];
 
