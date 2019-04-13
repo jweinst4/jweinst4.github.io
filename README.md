@@ -3,11 +3,11 @@ please send all feedback related to your experience with my project to jweinst4@
 I would love to hear anything you have to say, good or bad.  Thanks!
 ****
 
-1) How to Play
-2) Additional Information
-3) Credits
+1 - How to Play
+2 - Additional Information
+3 - Credits
 
-1) How to Play:
+1) How to Play
 
 Click the "GET DATA" button on the top left of the screen.  You will see a question in black text on the left side of the screen.  You will also see pink boxes with no text in them, and additionally pink boxes with the individual letters A through Z.
 
@@ -27,7 +27,7 @@ Players keep going until they get it wrong, at which point it is the other playe
 Play 3 rounds, or 5 rounds, or 50 rounds, whatever you'd like!
 
 
-2 - Additional Information:
+2) Additional Information:
 
 I wanted to go with a trivia API because you can do a lot of interesting things with trivia data.  I decided to make Wheel of Fortune as a way for me to do something semi-complex.  At first, I actually spent some resource time connecting to both a Star Wars and the OMDB API, though ended up not using either of them in my project.
 
@@ -45,7 +45,7 @@ Lastly, there were 2 things that I really wanted to get working before presentat
 
 The one that got away was having a responsive wheel, meaning if the wheel lands on $100, the question would actually be worth $100.  If they land on $600, the question would be worth that much.  I wasn't able to accurately get the (x,y) coordinates of the section of the circle that lands where the red triangle is pointing.  I tried multiple processes and researched but ultimately I think that I was trying to get the (x,y) coordinates while the draw function was still executing.  However, that's just my own guess, I'm not actually sure why I wasnt able to get these points.
 
-3 - Credits and Links:
+3) Credits and Links:
 
 Thanks to multiple classmates who helped throughout all steps of development.  Thanks to General Assembly teachers who helped throughout all steps of development.
 
