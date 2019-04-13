@@ -9,7 +9,8 @@ I would love to hear anything you have to say, good or bad.  Thanks!
 
 3 - Credits
 
-1) How to Play
+
+1) How to Play:
 
 Click the "GET DATA" button on the top left of the screen.  You will see a question in black text on the left side of the screen.  You will also see pink boxes with no text in them, and additionally pink boxes with the individual letters A through Z.
 
