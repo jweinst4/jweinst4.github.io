@@ -4,7 +4,9 @@ I would love to hear anything you have to say, good or bad.  Thanks!
 ****
 
 1 - How to Play
+
 2 - Additional Information
+
 3 - Credits
 
 1) How to Play
