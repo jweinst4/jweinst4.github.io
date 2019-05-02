@@ -216,7 +216,7 @@ let runTrivia = () =>
         }
         }).done(function(data2) 
         {
-            if ((data2.results[0].correct_answer.length > 10) || (data2.results[0].type === "boolean")  || (data2.results[0].difficulty !== "easy"))
+            if ((data2.results[0].correct_answer.length > 10) || (data2.results[0].type === "boolean")  || (data2.results[0].difficulty !== "medium"))
             {
                 runTrivia();
                 return;
