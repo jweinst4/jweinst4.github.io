@@ -47,6 +47,7 @@ a:visited {
 
 .header {
   text-align: center;
+  font-size: 30px;
 }
 
 .gitPub {
@@ -134,5 +135,6 @@ margin-left: 10%;
       .aboutHeader {
         color: blue;
         text-align: center;
+        font-size: 34px;
       }
 
