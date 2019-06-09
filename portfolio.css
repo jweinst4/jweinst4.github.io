@@ -47,7 +47,11 @@ a:visited {
 
 .header {
   text-align: center;
+<<<<<<< HEAD
   font-size: 30px;
+=======
+  font-size: 50px;
+>>>>>>> 6e5c526a7e06379771cb9d2b24c861f3eec5990e
 }
 
 .gitPub {
