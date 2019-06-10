@@ -54,6 +54,7 @@ a:visited {
 .gitPub {
   display: flex;
   flex-direction: column;
+
   width: 48%;
   margin-top: 20px;
   margin-bottom: 50px;
@@ -132,6 +133,8 @@ margin-left: 10%;
         margin-left: 5%;
         color: black;
         font-size: 28px;
+        height: 50%;
+        
       }
 
       .aboutHeader {
@@ -140,3 +143,6 @@ margin-left: 10%;
         font-size: 30px !important;
       }
 
+      .gitPub > .textArea {
+        font-size: 34px;
+      }
