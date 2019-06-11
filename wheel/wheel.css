@@ -1,0 +1,392 @@
+.circle {
+  position: relative;
+  border: 1px solid black;
+  padding: 0;
+  margin: 0 auto;
+  width: 25em;
+  height: 25em;
+  border-radius: 50%;
+  list-style: none;
+  overflow: hidden;
+  transform: rotate(15deg);
+  z-index: 0;
+  margin-top: -60px;
+  display: none;
+}
+
+li {
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 50%;
+  height: 50%;
+  transform-origin: 0% 100%;
+  z-index: 1;
+}
+
+.text {
+  position: fixed;
+  left: -100%;
+  width: 200%;
+  height: 200%;
+  font-size: 48px;
+  text-align: center;
+  transform: skewY(60deg) rotate(15deg);
+  padding-top: 20px;
+}
+li:first-child {
+  transform: rotate(0deg) skewY(-60deg);
+}
+li:nth-child(2) {
+  transform: rotate(30deg) skewY(-60deg);
+}
+li:nth-child(3) {
+  transform: rotate(60deg) skewY(-60deg);
+}
+li:nth-child(4) {
+  transform: rotate(90deg) skewY(-60deg);
+}
+li:nth-child(5) {
+  transform: rotate(120deg) skewY(-60deg);
+}
+li:nth-child(6) {
+  transform: rotate(150deg) skewY(-60deg);
+}
+li:nth-child(7) {
+  transform: rotate(180deg) skewY(-60deg);
+}
+li:nth-child(8) {
+  transform: rotate(210deg) skewY(-60deg);
+}
+li:nth-child(9) {
+  transform: rotate(240deg) skewY(-60deg);
+}
+li:nth-child(10) {
+  transform: rotate(270deg) skewY(-60deg);
+}
+li:nth-child(11) {
+  transform: rotate(300deg) skewY(-60deg);
+}
+li:nth-child(12) {
+  transform: rotate(330deg) skewY(-60deg);
+}
+li:first-child .text {
+  background: green;
+}
+li:nth-child(2) .text {
+  background: tomato;
+}
+li:nth-child(3) .text {
+  background: aqua;
+}
+li:nth-child(4) .text {
+  background: yellow;
+}
+li:nth-child(5) .text {
+  background: orange;
+}
+li:nth-child(6) .text {
+  background: purple;
+}
+li:nth-child(7) .text {
+  background: cyan;
+}
+li:nth-child(8) .text {
+  background: brown;
+}
+li:nth-child(9) .text {
+  background: gray;
+}
+li:nth-child(10) .text {
+  background: pink;
+}
+li:nth-child(11) .text {
+  background: maroon;
+}
+li:nth-child(12) .text {
+  background: gold;
+}
+
+.footer
+{
+position: absolute;
+background: pink;
+display:flex;
+flex-direction: row;
+bottom: 0px;
+width: 100%;
+height: 220px;
+opacity: 1;
+z-index: 5;
+align-items: center;
+}
+
+.row
+{
+display: flex;
+flex-direction: row;
+flex-wrap: wrap;
+width: 100%;
+}
+
+.column {
+display: flex;
+flex-direction: column;
+flex-basis: 100%;
+flex-wrap: wrap;  
+flex: 1;
+}
+
+.firstPlayer
+{
+background: lightgreen;
+font-size: 24px;
+margin:  0 auto;
+width: 250px;
+border: 3px solid black;
+border-radius: 20%;
+text-align: center;
+line-height: 150px;
+font-family: "Ubuntu";
+}
+
+.secondPlayer
+{
+font-size: 24px;
+margin:  0 auto;
+width: 250px;
+border: 3px solid black;
+border-radius: 20%;
+text-align: center;
+line-height: 150px;
+font-family: "Ubuntu";
+}
+
+.board {
+width: 70%;
+margin: 0 auto;
+height: 200px;
+display: flex;
+border-radius: 2%;
+align-items: center;
+justify-content: center;
+flex-wrap: wrap;
+flex: right;
+}
+
+body {
+background-size: cover;
+background-repeat: no-repeat no-repeat;
+font-family: "Ubuntu";
+}
+
+.answerBox {
+width: 90px;
+height: 90px;
+font-size: 24px;
+display: flex;
+margin: 1px;
+background-color: pink;
+line-height: 90px;
+border: 2px solid black ;
+border-radius: 10%;
+align-items: center;
+justify-content: center;
+font-family: "Ubuntu";
+}
+
+.spaceBox {
+width: 70px;
+height: 70px;
+font-size: 24px;
+display: flex;
+margin: 1px;
+line-height: 50px;
+border: 0px solid black;
+border-radius: 10%;
+align-items: center;
+justify-content: center;
+}
+
+.letterInputArea {
+width: 60%;
+margin: 0 auto;
+height: 200px;
+flex-grow: 1;
+margin: 0 auto;
+display: flex;
+border-radius: 2%;
+align-items: center;
+justify-content: center; 
+flex-wrap: wrap; 
+}
+
+.letterBox {
+width: 69px;
+height: 69px;
+font-size: 22px;
+display: flex;
+margin: 1px;
+margin-top: 15px;
+background: pink;
+line-height: 65px;
+border: 2px solid black;
+border-radius: 10%;
+align-items: center;
+justify-content: center;
+font-family: "Ubuntu";
+}
+
+#firstPlayerPrizePopUpArea {
+width: 150px;
+height: 150px;
+font-size: 64px;
+display: flex;
+margin: 1px;
+margin-left: 250px;
+margin-top: 130px;
+line-height: 50px;
+border-radius: 10%;
+align-items: center;
+justify-content: center;
+}
+
+#secondPlayerPrizePopUpArea {
+width: 150px;
+height: 150px;
+font-size: 64px;
+display: flex;
+margin: 1px;
+margin-left: 1250px;
+line-height: 50px;
+border-radius: 10%;
+align-items: center;
+justify-content: center;
+}
+
+#firstPlayerSpinArea {
+width: 550px;
+height: 50px;
+font-size: 36px;
+display: flex;
+margin: 1px;
+line-height: 50px;
+margin-top: -200px;
+align-items: center;
+justify-content: center;
+}
+
+#secondPlayerSpinArea {
+width: 550px;
+height: 50px;
+font-size: 36px;
+display: flex;
+margin: 1px;
+margin-left: 65%;
+margin-top: -200px;
+line-height: 50px;
+align-items: center;
+justify-content: center;
+}
+
+.spinWheel {
+width: 200px;
+height: 100px;
+background: lightgreen;
+font-size: 24px;
+margin-right: 20px;
+font-family: "Ubuntu";
+}
+
+.solvePuzzle {
+width: 200px;
+height: 100px;
+background: lightgreen;
+font-size: 24px;
+font-family: "Ubuntu";
+}
+
+#spinWheel2 {
+width: 200px;
+height: 100px;
+background: pink;
+font-size: 24px;
+font-family: "Ubuntu";
+}
+  
+#solvePuzzle2 {
+width: 200px;
+height: 100px;
+background: pink;
+font-size: 24px;
+font-family: "Ubuntu";
+}
+
+.form {
+display: none;
+font-size: 36px; 
+width: 200px; 
+}
+
+#topic {
+  margin: 10px;
+  font-size: 30px;
+  width: 200px;
+  z-index: 10;
+  position: fixed;
+  color: black;
+}
+  
+.threeDivs {
+  display: flex;
+  align-items: center;
+}
+
+.logo
+{
+flex: 1;
+margin:  0 auto;
+width: 420px;
+background: url("images/logoFixed.png");
+background-repeat: no-repeat no-repeat;
+background-size: cover;
+border-radius: 20%;
+}
+
+.alreadyGuessed {
+pointer-events: none;
+}
+
+/* https://css-tricks.com/the-shapes-of-css/ */
+#triangleUp
+{
+position: absolute;
+width: 0;
+height: 0;
+border-left: 30px solid transparent;
+border-right: 30px solid transparent;
+border-bottom: 60px solid red;
+margin-left: 47.8%;
+z-index: 2;
+margin-top: 90px;
+display: none;
+}
+
+.modal {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  opacity: 1;
+  font-weight: bold;
+  display: none;
+  font-size: 120px;
+  margin: 0 auto;
+  text-align: center;
+  line-height: 500px;
+  color: red;
+}
+
+.modal.open {
+  display: block;
+}
