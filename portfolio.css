@@ -72,20 +72,19 @@ a:visited {
 .wheelOfFortune {
   display: flex;
   flex-direction: column;
-  width: 96%;
-  border-top: 5px double #e3f2fd;
+  width: 48%;
+  margin-top: 20px;
   margin-bottom: 50px;
-}
-
+  border-top: 5px double #e3f2fd;}
 
 .about {
   display: flex;
   flex-direction: column;
-  width: 96%;
-  border-top: 5px double #e3f2fd;
-  border-bottom: 5px double #e3f2fd;
+  width: 48%;
+  margin-top: 20px;
   margin-bottom: 50px;
-}
+  border-top: 5px double #e3f2fd;}
+
 
 .handPaintedScreenshot {
 width: 80%;
@@ -106,7 +105,12 @@ margin-left: 10%;
     background-size: contain;
     background-repeat: no-repeat no-repeat;
     margin-bottom: 20px;
-  
+    margin-top: -300px;
+ 
+  }
+
+  .wheelOfFortuneText {
+    font-size: 40px !important;
   }
 
 .screenshotSplitter {
